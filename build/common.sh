@@ -44,6 +44,11 @@ function clean() {
     rm -rf "$SOURCE_DIR"
 }
 
+function clean_installed() {
+    cd "$INSTALL_TARGET"
+    rm -R ./*/
+}
+
 function run_all() {
     info
     download
