@@ -1,10 +1,11 @@
 #!/bin/bash
 
 PLATFORM=${PLATFORM:-lin}
-readonly SCRIPT_DIR=$(readlink -m $(dirname $0))
-readonly SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
-readonly INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
-readonly TARGET=${1:-run_all}
+SCRIPT_DIR=$(readlink -m $(dirname $0))
+SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
+INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
+TARGET=${1:-run_all}
+MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)
 
 function eexit() {
     echo "! Error: $@"
@@ -36,8 +37,22 @@ function download() {
             || eexit "Failed to download source."
         cd "$SOURCE_DIR"
     fi
-    git checkout tags/${TAG} \
-        || eexit "Failed to checkout desired tag."
+    if [ -n "$TAG" ]; then
+       git checkout tags/$TAG \
+           || eexit "Failed to checkout desired tag."
+    fi
+}
+
+function prepare (){
+    echo "Skipping prepare"
+}
+
+function build (){
+    echo "Skipping build"
+}
+
+function install (){
+    echo "Skipping install"
 }
 
 function clean() {

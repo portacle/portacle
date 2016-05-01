@@ -1,4 +1,4 @@
 #!/bin/bash
 SCRIPT=$(dirname $(readlink -f "$0"))
-export ROOT=$SCRIPT
-$ROOT/emacs/lin/emacs.sh
+export ROOT=$SCRIPT/
+$SCRIPT/emacs/lin/emacs.sh

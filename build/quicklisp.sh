@@ -9,10 +9,6 @@ PLATFORM="."
 readonly PROGRAM=quicklisp
 source common.sh
 
-function prepare() {
-    echo ""
-}
-
 function build() {
     sbcl --script "$SOURCE_DIR/setup.lisp"
 }

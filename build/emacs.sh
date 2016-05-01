@@ -18,7 +18,7 @@ function prepare() {
 
 function build() {
     cd "$SOURCE_DIR"
-    make
+    make -j $MAXCPUS
 }
 
 function install() {
