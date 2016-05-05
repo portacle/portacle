@@ -2,7 +2,7 @@
 
 readonly TAG=emacs-25.0.93
 readonly REPOSITORY=git://git.savannah.gnu.org/emacs.git
-readonly CONFIGURE_OPTIONS="--without-all"
+readonly CONFIGURE_OPTIONS=" --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-imagemagick --without-sound"
 
 ###
 
