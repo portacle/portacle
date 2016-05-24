@@ -28,9 +28,6 @@ function build() {
     export CFLAGS="${CFLAGS} -fno-omit-frame-pointer -D_GNU_SOURCE"
     sh make.sh \
         || eexit "Failed to build SBCL."
-    cd "$SOURCE_DIR/doc/manual"
-    make \
-        || eexit "Failed to build SBCL docs."
 }
 
 function install() {
