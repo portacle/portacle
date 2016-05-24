@@ -1,6 +1,22 @@
 #!/bin/bash
 
-PLATFORM=${PLATFORM:-lin}
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    OS="lin"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="mac"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+    OS="win"
+elif [[ "$OSTYPE" == "msys" ]]; then
+    OS="win"
+elif [[ "$OSTYPE" == "win32" ]]; then
+    OS="win"
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+    OS="bsd"
+else
+    OS="any"
+fi
+
+PLATFORM=${PLATFORM:-$OS}
 SCRIPT_DIR=$(readlink -m $(dirname $0))
 SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
 INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
