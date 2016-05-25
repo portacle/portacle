@@ -1,0 +1,6 @@
+Thumbs.db
+.directory
+build/*/
+emacs/*/*/
+sbcl/*/*/
+quicklisp/
