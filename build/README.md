@@ -23,7 +23,7 @@ Now, launch the MinGW64 shell (not the MSYS shell!) and do:
     
 Adapt the version in the path for the appropriate one if necessary. Proceed with the `General Procedure` section.
 
-The `portacle.exe` file included in the root directory is created from the `portacle.bat` file using <http://battoexeconverter.com/>. This is done primarily to avoid creating a command prompt window and secondarily to allow adding an icon to the launcher. If you wish to verify its integrity, you may perform the conversion yourself by downloading the converter, loading the bat file, setting the "start invisible" option, and choosing the `portacle.ico` file for the icon.
+The `portacle.exe` file included in the root directory is created from the `portacle.bat` file using <http://www.f2ko.de/en/b2e.php>. This is done primarily to avoid creating a command prompt window and secondarily to allow adding an icon to the launcher.
 
 ## General Procedure
 Using the appropriate terminal, simply run:
