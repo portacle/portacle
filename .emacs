@@ -22,6 +22,15 @@
                                            ((eql system-type 'windows-nt)
                                             "/sbcl/win/sbcl.bat")))))))
 
+(setq ecb-source-path `("~/"
+                        ,portacl-root
+                        ,(concat portacl-root "/sbcl/sources/")))
+
+(cond ((eql system-type 'darwin)
+       (set-frame-font "Monaco-10" nil t))
+      ((eql system-type 'windows-nt)
+       (set-frame-font "Consolas-10" nil t)))
+
 ;; Load user file
 (load (concat portacl-root "config.el"))
 
