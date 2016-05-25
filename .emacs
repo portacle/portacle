@@ -17,9 +17,9 @@
 (setq slime-lisp-implementations
       `((sbcl (,(concat portacl-root (cond ((eql system-type 'gnu/linux)
                                             "/sbcl/lin/sbcl.sh")
-                                           ((eql system-type 'gnu/linux)
+                                           ((eql system-type 'darwin)
                                             "/sbcl/mac/sbcl.sh")
-                                           ((eql system-type 'gnu/linux)
+                                           ((eql system-type 'windows-nt)
                                             "/sbcl/win/sbcl.bat")))))))
 
 ;; Load user file
