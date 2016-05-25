@@ -1,6 +1,6 @@
 #!/bin/sh
 SCRIPT=$(dirname $(readlink -f "$0"))
-export ROOT=${ROOT:-$(readlink -f $SCRIPT/../../)/}
+export ROOT=${ROOT:-$(readlink -f "$SCRIPT/../../")/}
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ROOT}/emacs/lin/lib/
 export EMACSDATA=${ROOT}/emacs/share/emacs/25.0.93/etc/
@@ -34,4 +34,4 @@ ${ROOT}/emacs/share/emacs/25.0.93/lisp/vc
 
 PATH=$PATH:${ROOT}/lin/libexec/emacs/25.0.93/x86_64-unknown-linux-gnu
 
-$SCRIPT/bin/emacs --name Portacle -T Portacle -q -l "$ROOT/.emacs" $@
+"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/.emacs" $@
