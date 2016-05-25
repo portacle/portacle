@@ -45,9 +45,9 @@ function install() {
          -name "*.so" -or \
          -name "a.out" -delete
 
-    if [[ "$PLATFORM" == "win" ]]; then
-        cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/"
-    fi
+    case "$PLATFORM" in
+        win) cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/" ;;
+    esac
 }
 
 main

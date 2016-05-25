@@ -24,10 +24,10 @@ function build() {
 function install() {
     cd "$SOURCE_DIR"
     make install datadir="$SHARE_TARGET"
-    
-    if [[ "$PLATFORM" == "win" ]]; then
-        cp /mingw64/bin/libwinpthread-1.dll "$INSTALL_TARGET/bin/"
-    fi
+
+    case "$PLATFORM" in
+        win) cp /mingw64/bin/libwinpthread-1.dll "$INSTALL_TARGET/bin/" ;;
+    esac
 }
 
 main
