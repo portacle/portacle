@@ -18,8 +18,9 @@ function install (){
     echo ";; Please be patient, it should automatically close when it is done."
 
     case "$PLATFORM" in
-        lin) $SCRIPT_DIR/../emacs/$PLATFORM/emacs.sh -nw -f "kill-emacs" ;;
-        win) cmd $SCRIPT_DIR/../emacs/$PLATFORM/emacs.bat -nw -f "kill-emacs" ;;
+        lin) $SCRIPT_DIR/../emacs/lin/emacs.sh -nw -f "kill-emacs" ;;
+        win) winroot=$({ cd "$SCRIPT_DIR/.." && pwd -W; } | sed 's|/|\\|g')
+             cmd /c "$winroot\\emacs\\win\\emacs.bat -f kill-emacs" ;;
     esac
 }
 
