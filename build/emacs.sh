@@ -13,7 +13,10 @@ readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 function prepare() {
     cd "$SOURCE_DIR"
     ./autogen.sh
-    ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
+    case "$PLATFORM" in
+        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns $CONFIGURE_OPTIONS
+        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
+    esac
 }
 
 function build() {
