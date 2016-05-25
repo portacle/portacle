@@ -1,4 +1,7 @@
 #!/bin/bash
 SCRIPT=$(dirname $(readlink -f "$0"))
-export ROOT=$SCRIPT/
-$SCRIPT/emacs/lin/emacs.sh
+export ROOT="$SCRIPT/"
+## Fix the icon
+sed -i "s,Icon=.*,Icon=$ROOT/portacle.png,g" "$ROOT/portacle.desktop"
+
+"$SCRIPT/emacs/lin/emacs.sh"
