@@ -32,4 +32,4 @@ Using the appropriate terminal, simply run:
     cd portacle/build
     ./all.sh
     
-The root portacle folder should now be built for the given system. You can ZIP up all the files except for the `build` folder and be ready to go.
+The root portacle folder should now be built for the given system. You can ZIP up all the files except for the `build` folder and be ready to go. Things should be able to coexist with each other just fine, so you should be able to build for multiple systems with the same directory too.
