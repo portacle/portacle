@@ -44,6 +44,10 @@ function install() {
          -name "*.log" -or \
          -name "*.so" -or \
          -name "a.out" -delete
+
+    if [[ "$PLATFORM" == "win" ]]; then
+        cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/"
+    fi
 }
 
 main
