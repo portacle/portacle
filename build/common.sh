@@ -1,8 +1,12 @@
 #!/bin/bash
 
+function mreadlink() {
+    python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $1
+}
+
 case "$OSTYPE" in
     linux-gnu) OS="lin" ;;
-    darwin)    OS="mac" ;;
+    darwin*)   OS="mac" ;;
     cygwin)    OS="win" ;;
     msys)      OS="win" ;;
     win32)     OS="win" ;;
@@ -11,7 +15,12 @@ case "$OSTYPE" in
 esac
 
 PLATFORM=${PLATFORM:-$OS}
-SCRIPT_DIR=$(readlink -m $(dirname $0))
+
+case "$OS" in
+    mac)  SCRIPT_DIR=$(mreadlink $(dirname $0)) ;;
+    *)    SCRIPT_DIR=$(readlink -f $(dirname $0)) ;;
+esac
+
 SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
 INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
 TARGET=${1:-run_all}
