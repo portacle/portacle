@@ -21,7 +21,12 @@ SCRIPT_DIR=$(readlink -m $(dirname $0))
 SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
 INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
 TARGET=${1:-run_all}
-MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)
+
+if [[ "$OS" == "lin" ]]; then
+    MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)
+else
+    MAXCPUS=1
+fi
 
 function eexit() {
     echo "! Error: $@"
