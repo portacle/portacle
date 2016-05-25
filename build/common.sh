@@ -1,20 +1,14 @@
 #!/bin/bash
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    OS="lin"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    OS="mac"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-    OS="win"
-elif [[ "$OSTYPE" == "msys" ]]; then
-    OS="win"
-elif [[ "$OSTYPE" == "win32" ]]; then
-    OS="win"
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-    OS="bsd"
-else
-    OS="any"
-fi
+case "$OSTYPE" in
+    linux-gnu) OS="lin" ;;
+    darwin)    OS="mac" ;;
+    cygwin)    OS="win" ;;
+    msys)      OS="win" ;;
+    win32)     OS="win" ;;
+    freebsd)   OS="bsd" ;;
+    *)         OS="any" ;;
+esac
 
 PLATFORM=${PLATFORM:-$OS}
 SCRIPT_DIR=$(readlink -m $(dirname $0))
@@ -22,11 +16,10 @@ SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
 INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
 TARGET=${1:-run_all}
 
-if [[ "$OS" == "lin" ]]; then
-    MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)
-else
-    MAXCPUS=1
-fi
+case "$PLATFORM" in
+    lin) MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1) ;;
+    *)   MAXCPUS=1;;
+esac
 
 function eexit() {
     echo "! Error: $@"
