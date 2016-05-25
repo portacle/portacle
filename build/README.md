@@ -11,7 +11,7 @@ Proceed with the `General Procedure` section.
 Install the build prerequisites:
 
 1. SBCL, download and install https://sourceforge.net/projects/sbcl/files/sbcl/1.3.5/sbcl-1.3.5-x86-64-windows-binary.msi/download
-2. MINGW2, download and install http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20160205.exe
+2. MSYS2, download and install http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20160205.exe
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
