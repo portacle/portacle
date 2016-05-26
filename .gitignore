@@ -2,6 +2,6 @@ Thumbs.db
 .directory
 build/*/
 emacs/*/*/
-emacs/config/
+#emacs/config/
 sbcl/*/*/
 quicklisp/
