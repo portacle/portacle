@@ -6,7 +6,7 @@ rem // This crazy thing resolves the relative path
 FOR /F "delims=" %%F IN ("%ROOT%") DO SET "ROOT=%%~fF"
 
 rem // Find emacs version
-FOR /D %%F IN ("%ROOT%\emacs\share\emacs\*.*.*") DO SET "EMACSVER=%%~nF%%~xF" & GOTO END
+FOR /D %%F IN ("%ROOT%\emacs\share\emacs\*.*") DO SET "EMACSVER=%%~nF%%~xF" & GOTO END
 :END
 
 set PATH=%PATH%;%ROOT%\emacs\win\lib\

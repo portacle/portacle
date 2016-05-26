@@ -12,7 +12,7 @@ function find_apropriate_file() {
 readonly SCRIPT=$(dirname $(mreadlink "$0"))
 export ROOT=${ROOT:-$(mreadlink "$SCRIPT/../../")/}
 
-readonly EMACSVER=$(find_apropriate_file "$ROOT/emacs/share/emacs/*.*.*")
+readonly EMACSVER=$(find_apropriate_file "$ROOT/emacs/share/emacs/*.*")
 readonly EMACSLIBEXEC=$(find_apropriate_file "$ROOT/emacs/lin/libexec/emacs/$EMACSVER/*")
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOT/emacs/mac/lib/
