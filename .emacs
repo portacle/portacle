@@ -6,6 +6,9 @@
 ;; Fix ECB being annoying
 (custom-set-variables '(ecb-options-version "2.40"))
 
+;; Resize to a better default
+(when window-system (set-frame-size (selected-frame) 1200 786 t))
+
 (require 'shinmera-general)
 (require 'shinmera-lisp)
 (require 'shinmera-ecb)
