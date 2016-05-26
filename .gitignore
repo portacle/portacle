@@ -5,3 +5,5 @@ emacs/*/*/
 emacs/config/
 sbcl/*/*/
 quicklisp/
+bundle/
+projects/*
