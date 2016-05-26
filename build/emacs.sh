@@ -29,7 +29,7 @@ function install() {
     make install datadir="$SHARE_TARGET"
 
     case "$PLATFORM" in
-        win) cp /mingw64/bin/libwinpthread-1.dll "$INSTALL_TARGET/bin/" ;;
+        win) cp "/mingw64/bin/libwinpthread-1.dll" "$INSTALL_TARGET/bin/" ;;
     esac
 }
 

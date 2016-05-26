@@ -10,7 +10,7 @@ INSTALL_TARGET=$SCRIPT_DIR/../emacs/config/shinmera/
 
 function install (){
     mkdir -p "$INSTALL_TARGET"
-    cp -R -t "$INSTALL_TARGET" "$SOURCE_DIR/."
+    cp -R "$SOURCE_DIR/." "$INSTALL_TARGET"
     ## We don't remove the .git directory so that you can update easily.
     echo ""
     echo ";;;; Now launching emacs for the first time init."

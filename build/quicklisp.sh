@@ -15,7 +15,7 @@ function build() {
 
 function install() {
     mkdir -p "$INSTALL_TARGET"
-    cp -R -t "$INSTALL_TARGET" "$SOURCE_DIR/."
+    cp -R "$SOURCE_DIR/." "$INSTALL_TARGET"
     rm -rf "$INSTALL_TARGET/.git"
 }
 

@@ -43,7 +43,10 @@ function install() {
     INSTALL_ROOT="$INSTALL_TARGET" sh install.sh \
         || eexit "Failed to install SBCL."
     mkdir -p "$INSTALL_SOURCES" &>/dev/null
-    cp -R -t "$INSTALL_SOURCES" "$SOURCE_DIR/src" "$SOURCE_DIR/contrib"
+    ## Can't use -t because of apple.
+    # cp -R -t "$INSTALL_SOURCES" "$SOURCE_DIR/src" "$SOURCE_DIR/contrib"
+    cp -R "$SOURCE_DIR/src" "$INSTALL_SOURCES"
+    cp -R "$SOURCE_DIR/contrib" "$INSTALL_SOURCES"
     find "$INSTALL_SOURCES" \
          -name "*.fasl" -or \
          -name "*.o" -or \
