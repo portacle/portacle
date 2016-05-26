@@ -30,7 +30,7 @@ An extensive explanation of the various keychords and all that would follow here
 1. In Portacle, hit `M-x shell`
 2. Navigate to the directory by running
    1. On Windows `cd %ROOT%\emacs\config\shinmera`
-   2. Everywhere else `cd $ROOT/emacs/config/shinmer`
+   2. Everywhere else `cd $ROOT/emacs/config/shinmera`
 2. Run `git pull`
 3. Restart Portacle
 
