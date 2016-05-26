@@ -18,20 +18,6 @@ Subject: [PATCH] Fix bug #18302 with minor issues in the MSYS2/MinGW64 build.
  src/Makefile.in | 4 +++-
  4 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/ChangeLog b/ChangeLog
-index b9c2039..34bfef5 100644
---- a/ChangeLog
-+++ b/ChangeLog
-@@ -1,3 +1,9 @@
-+2014-08-23  Karol Ostrovsky  <karol.ostrovsky@gmail.com>  (tiny change)
-+
-+	* configure.ac: Accept "*-mingw*", not just "*-mingw32", as
-+	canonical name of a MinGW build, because using MSYS2 'uname'
-+	produces "MINGW64".
-+
- 2014-08-21  Ken Brown  <kbrown@cornell.edu>
- 
- 	* configure.ac (HAVE_XPM): Explain the use of CPPFLAGS in the
 diff --git a/configure.ac b/configure.ac
 index 806b1b4..ef7506e 100644
 --- a/configure.ac
@@ -63,21 +49,6 @@ index 806b1b4..ef7506e 100644
      *) C_SWITCH_SYSTEM="-mtune=pentium4" ;;
    esac
  fi
-diff --git a/src/ChangeLog b/src/ChangeLog
-index 5d2e755..90c66eb 100644
---- a/src/ChangeLog
-+++ b/src/ChangeLog
-@@ -1,3 +1,10 @@
-+2014-08-23  Karol Ostrovsky  <karol.ostrovsky@gmail.com>  (tiny change)
-+
-+	* Makefile.in (emacs$(EXEEXT)): Retry deletion of bootstrap-emacs
-+	if the initial "rm -f" fails.  This is for MinGW builds, where
-+	MS-Windows will not allow deleting the executable file of a
-+	running program.
-+
- 2014-08-20  Eli Zaretskii  <eliz@gnu.org>
- 
- 	* w32term.c (w32_scroll_bar_handle_click)
 diff --git a/src/Makefile.in b/src/Makefile.in
 index 0dc4886..3f1192f 100644
 --- a/src/Makefile.in
