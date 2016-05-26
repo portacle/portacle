@@ -14,8 +14,8 @@ function prepare() {
     cd "$SOURCE_DIR"
     ./autogen.sh
     case "$PLATFORM" in
-        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns $CONFIGURE_OPTIONS
-        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
+        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns $CONFIGURE_OPTIONS ;;
+        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS ;;
     esac
 }
 
