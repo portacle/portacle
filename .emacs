@@ -7,10 +7,12 @@
 (custom-set-variables '(ecb-options-version "2.40"))
 
 ;; Resize to a better default
-(when window-system (set-frame-size (selected-frame) 1200 786 t))
+(when window-system
+  (set-frame-size (selected-frame) 1200 786 t)
+  (set-frame-position (selected-frame) 10 10))
 
 (require 'shinmera-general)
-(require 'shinmera-ecb)
+(require 'shinmera-neotree)
 (require 'shinmera-paste)
 (require 'shinmera-keys)
 (require 'shinmera-lisp)
