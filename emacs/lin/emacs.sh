@@ -41,6 +41,6 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/textmodes:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/url:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc
 
-PATH=$PATH:$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC
+export PATH=$PATH:$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC
 
 "$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/.emacs" $@
