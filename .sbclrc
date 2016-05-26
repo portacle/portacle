@@ -23,3 +23,6 @@
 #-quicklisp
 (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp" (portacle-root))))
   (load quicklisp-init))
+
+;; Add the project folder to Quicklisp's local-projects directories.
+(pushnew (merge-pathnames "projects/" (portacle-root)) ql:*local-project-directories*)
