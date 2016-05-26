@@ -11,11 +11,9 @@ In order to launch Portacle, simply run one of the files appropriate for your sy
 
 After a bit you should be presented with a window like this:
 
-![portacle-window](https://filebox.tymoon.eu/file/TVRBMU5RPT0=)
+![portacle-window](https://filebox.tymoon.eu/file/TVRBMU9BPT0=)
 
 It might spit out some messages and notes before it looks like that. You can safely ignore those.
-
-The left-hand side of the window is taken up by the file browser. The upper section being a directory tree and the lower section being the file listing of the current directory. To the right should be the Common Lisp REPL into which you can type commands.
 
 ![portacle-repl](https://filebox.tymoon.eu/file/TVRBMU5nPT0=)
 
