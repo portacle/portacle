@@ -14,9 +14,11 @@ source common.sh
 readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 
 function prepare() {
-    git am < "$SCRIPT_DIR/fix-mingw64.patch"
-    
     cd "$SOURCE_DIR"
+    case "$TAG" in
+        emacs-24*) git am < "$SCRIPT_DIR/fix-mingw64.patch" ;;
+    esac
+    
     ./autogen.sh
     case "$PLATFORM" in
         mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained $CONFIGURE_OPTIONS ;;
