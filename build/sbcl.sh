@@ -2,8 +2,8 @@
 
 readonly TAG=sbcl-1.3.5
 readonly REPOSITORY=https://github.com/sbcl/sbcl.git
-readonly ENABLED_FEATURES=":sb-thread :sb-safepoint :sb-thruption :sb-wtimer :sb-core-compression"
 readonly DISABLED_FEATURES=":largefile :sb-ldb"
+readonly ENABLED_FEATURES=":sb-thread :sb-safepoint :sb-thruption :sb-wtimer :sb-core-compression"
 
 ###
 
@@ -13,12 +13,18 @@ readonly INSTALL_SOURCES=$SCRIPT_DIR/../$PROGRAM/sources/
 
 function prepare() {
     cd "$SOURCE_DIR"
+
+    case "$PLATFORM" in
+        mac) EXTRA_DISABLED=":sb-safepoint :sb-thruption :sb-wtimer" ;;
+        *)   EXTRA_DISABLED="" ;;
+    esac
+    
     cat >customize-target-features.lisp <<EOF
 (lambda (features)
   (flet ((enable (x) (pushnew x features))
          (disable (x) (setf features (remove x features))))
     (mapc #'enable '($ENABLED_FEATURES))
-    (mapc #'disable '($DISABLED_FEATURES)))
+    (mapc #'disable '($DISABLED_FEATURES $EXTRA_DISABLED)))
   features)
 EOF
 }
