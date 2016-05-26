@@ -10,10 +10,10 @@
 (when window-system (set-frame-size (selected-frame) 1200 786 t))
 
 (require 'shinmera-general)
-(require 'shinmera-lisp)
 (require 'shinmera-ecb)
 (require 'shinmera-paste)
 (require 'shinmera-keys)
+(require 'shinmera-lisp)
 (require 'shinmera-startup)
 
 ;; Adjust defaults to fit portable stuff
