@@ -14,6 +14,8 @@ source common.sh
 readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 
 function prepare() {
+    git am < "$SCRIPT_DIR/fix-mingw64.patch"
+    
     cd "$SOURCE_DIR"
     ./autogen.sh
     case "$PLATFORM" in
