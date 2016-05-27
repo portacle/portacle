@@ -41,4 +41,4 @@ set EMACSLOADPATH=%ROOT%\emacs\share\emacs\%EMACSVER%\site-lisp;^
 
 set PATH=%PATH%;%ROOT%\emacs\win\libexec\emacs\%EMACSVER%\x86_64-w64-mingw32
 
-%SCRIPT%\bin\emacs --name Portacle -T Portacle -q -l "%ROOT%\.emacs" %*
+"%SCRIPT%\bin\emacs" --name Portacle -T Portacle -q -l "%ROOT%\.emacs" %*
