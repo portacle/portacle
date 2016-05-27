@@ -5,15 +5,10 @@
 (setq user-emacs-directory (concat portacl-root "emacs/config/"))
 (add-to-list 'load-path (concat user-emacs-directory "shinmera/"))
 
-;; Resize to a better default
-(when window-system
-  (set-frame-size (selected-frame) 120 40)
-  (set-frame-position (selected-frame) 50 50)
-  (toggle-frame-maximized))
-
 ;; Load contribs
 (require 'shinmera-general)
 (require 'shinmera-neotree)
+(require 'shinmera-company)
 (require 'shinmera-paste)
 (require 'shinmera-keys)
 (require 'shinmera-lisp)
@@ -28,13 +23,15 @@
                                            ((eql system-type 'windows-nt)
                                             "/sbcl/win/sbcl.bat")))))))
 
-;; Pick an acceptable default font
-(cond ((eql system-type 'gnu/linux)
-       (set-frame-font "Monospace-10" nil t))
-      ((eql system-type 'darwin)
-       (set-frame-font "Monaco-10" nil t))
-      ((eql system-type 'windows-nt)
-       (set-frame-font "Consolas-10" nil t)))
+(when window-system
+  (toggle-frame-maximized)
+  ;; Pick an acceptable default font
+  (cond ((eql system-type 'gnu/linux)
+         (set-frame-font "Monospace-10" nil t))
+        ((eql system-type 'darwin)
+         (set-frame-font "Monaco-10" nil t))
+        ((eql system-type 'windows-nt)
+         (set-frame-font "Consolas-10" nil t))))
 
 ;; Open the help file
 (with-current-buffer (get-buffer-create "*portacle-help*")
