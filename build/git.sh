@@ -43,6 +43,11 @@ function install() {
                  cp "$dep" "$INSTALL_TARGET/bin/$(basename $dep)"
              done
              ;;
+        mac) local deps=( $(otool -L "$INSTALL_TARGET/bin/git" | grep -E "/opt/local/lib|/usr/local/lib" | awk -F\  '{print $1}'))
+             for dep in "${deps[@]}"; do
+                 cp "$dep" "$INSTALL_TARGET/bin/$(basename $dep)"
+             done
+             ;;
     esac
 }
 
