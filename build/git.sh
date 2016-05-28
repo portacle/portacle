@@ -13,17 +13,24 @@ source common.sh
 function prepare() {
     cd "$SOURCE_DIR"
     make configure
-    ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
+
+    ## Configure fails without this hint on windows.
+    case "$PLATFORM" in
+        win) config_opts="$CONFIGURE_OPTIONS git_cv_socklen_t_equiv=int" ;;
+        *)   config_opts="$CONFIGURE_OPTIONS" ;;
+    esac
+    
+    ./configure --prefix="$INSTALL_TARGET" $config_opts
 }
 
 function build() {
     cd "$SOURCE_DIR"
-    make all -j $MAXCPUS $MAKE_OPTIONS
+    make $MAKE_OPTIONS all -j $MAXCPUS
 }
 
 function install() {
     cd "$SOURCE_DIR"
-    make install $MAKE_OPTIONS
+    make prefix="$INSTALL_TARGET" $MAKE_OPTIONS install
 }
 
 main
