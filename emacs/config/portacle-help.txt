@@ -1,3 +1,94 @@
-# Portacle Help
+　ＰＯＲＴＡＣＬＥ　ＨＥＬＰ
 
-TBD
+If you are reading this then you either already successfully figured out how to switch buffers in Portacle, or you're sneaking through the files. Either way, great! This guide is supposed to help you find your way around this IDE, and to serve as a reference sheet in case you forget things. If you're just starting out, reading this all the way through is a good idea, as otherwise you will most likely get horribly confused about how to actually get things done.
+
+　ＴＥＲＭＩＮＯＬＯＧＹ
+
+Before we get started we need to lay down some terms so that we can actually talk about things.
+
+- Buffer
+  A buffer is what you are looking at right now. Every buffer has a name, this one is called *portacle-help*. You can see the name of the buffer at the bottom of it, right after the colon. Buffers are basically containers for things, usually text or files, but they can also be interactive in different ways, allowing you to run commands and so forth.
+  
+- Mode
+  Every buffer has something called a major mode, and zero or more minor modes. Modes define what kind of thing the buffer represents, what it looks like, how you can interact with it, what kind of actions are possible, and so forth. In the case of the *portacle-help* buffer, the major mode is Fundamental, and the only minor mode active is My-Keys. You can see the modes listed right next to the buffer name.
+
+- Mode Line
+  The thing at the bottom of a buffer where its name is written, the modes are listed, and all sorts of other things are noted is called the mode line. It is responsible for displaying current status information about the buffer it belongs to, most important of which being the buffer name, and the list of modes.
+
+- Frame
+  A frame is an operating system window, as in, the thing that displays Portacle and has a menu up top. Frames can be split up into many sections. Each of those sections is, confusingly enough, called a
+
+- Window
+  A window is what displays a buffer. Now, the reason this is called a window and a standard "window" is called a frame is due to historical artefacts. Fortunately enough you won't have to deal with frames much, so just remember that a window is the thing that actually displays a buffer, and that you can split Portacle up to display multiple windows at the same time.
+
+- Keychord / Chord
+  Portacle has its own way of denoting key press combinations, usually called keychords. We'll go into depth on how those are denoted and how you're supposed to read them later. Just keep in mind that pretty much everything you can do or even might want to do can be done by pressing the right combination of keys-- the right chord.
+
+- Minibuffer
+  At the very bottom of Portacle should be a singular, currently empty line. This isn't merely a waste of space, it's where the minibuffer is located. It displays status information and helps you out when need to perform commands or press keychords. You might have already seen it pop up and show things when you switched the buffer to this one for the first time.
+
+- Cursor
+  The cursor is the coloured rectangle in the buffer. It indicates where you would be writing or performing any kind of command at the moment. If it is filled and blinking, then it means the buffer it belongs to is currently active. The cursor in inactive buffers is merely an outline.
+
+　ＫＥＹＣＨＯＲＤ　ＮＯＴＡＴＩＯＮ
+
+In order to be able to easily talk about and read keychords we'll have to go through the way they're usually denoted. It's not difficult or convoluted, so don't worry. You'll get the hang of it easily enough.
+
+First, some keys are abbreviated for simplicity. We'll list them here:
+
+- C : Control
+
+- S : Shift
+
+- M : Meta / Command / Alt
+
+- ESC : Escape
+
+- RET : Return / Enter / ↵
+
+- DEL : Delete
+
+- TAB : Tab
+
+Everything else is either a singular letter, which corresponds to the according letter on your keyboard (with Shift if it should be uppercase), or it is a special key encased in angle brackets. Examples of the latter are <left> for the left arrow key, <home> for the Home key, and so forth.
+
+Next we need to define in which order keys should be pressed. Some keys need to be held at the same time, while others should happen one after the other. If two or more keys should be held down at the same time, they are connected by a hyphen. If they should be pressed one after the other, they are connected by a space, which is omitted if it is simply a word you should type out. Let's look at an example.
+
+  C-x b repl RET
+
+This means the following: Hold Control pressed and press x. Release both. Press b and release it. Type "repl". Press Return.
+Before you try it out though, let's look at this one too:
+
+  C-x b *portacle-help* RET
+
+This one is the same as the last, except that instead of typing "repl", you type "*protacle-help*". This is the same keychord as the one you likely used to see this buffer at the very beginning. The other keychord switches the buffer to the REPL (more on that later). You can use these two to switch between the two buffers.
+
+Here's a more complicated, imaginary chord just to see what it would denote:
+
+  C-M-t d M-a <home> C-l RET
+
+Press Control, Meta/Command/Alt, and t at the same time, then press d, then press Meta/Command/Alt and a at the same time, then press the Home key, then press Control and l at the same time, then press Return.
+
+Simple enough, right? We'll use this keychord notation from here on out.
+
+　ＢＡＳＩＣ　ＮＡＶＩＧＡＴＩＯＮ
+
+
+
+　ＭＡＮＡＧＩＮＧ　ＦＩＬＥＳ
+
+
+
+　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
+
+
+
+　ＰＡＲＥＤＩＴ
+
+
+
+　ＣＵＳＴＯＭＩＳＩＮＧ
+
+
+
+　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ
