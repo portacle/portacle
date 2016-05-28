@@ -14,13 +14,17 @@ function prepare() {
     cd "$SOURCE_DIR"
     make configure
 
-    ## Configure fails without this hint on windows.
-    case "$PLATFORM" in
-        win) config_opts="$CONFIGURE_OPTIONS git_cv_socklen_t_equiv=int" ;;
-        *)   config_opts="$CONFIGURE_OPTIONS" ;;
-    esac
+    ## Ok, so, funny story. Configure fails if we don't tell it the socklen
+    ## explicitly, but if we do specify that, it generates some new code that
+    ## then clashes with the rest of the MinGW environment.
+    ## In light of this, the current approach is to just let configure fail
+    ## its test and build anyway.
+    # case "$PLATFORM" in
+    #     win) config_opts="$CONFIGURE_OPTIONS git_cv_socklen_t_equiv=int" ;;
+    #     *)   config_opts="$CONFIGURE_OPTIONS" ;;
+    # esac
     
-    ./configure --prefix="$INSTALL_TARGET" $config_opts
+    ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
 }
 
 function build() {
