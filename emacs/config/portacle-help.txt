@@ -176,6 +176,12 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
 - C-M-m a
   Create new cursors for all occurrences of the currently selected region.
 
+- C-x d
+  Open a file tree browser on the side. Pressing RET on an entry will expand/contract directories or open the file in a new buffer.
+
+- C-x e
+  Close the file tree browser.
+
 　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
 
 
