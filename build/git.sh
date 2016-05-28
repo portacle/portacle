@@ -13,7 +13,7 @@ source common.sh
 function prepare() {
     cd "$SOURCE_DIR"
     make configure
-    ./configure --prefix="$INSTALL_TARGET"
+    ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
 }
 
 function build() {
