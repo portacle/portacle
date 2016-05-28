@@ -4,6 +4,7 @@ build/*/
 emacs/*/*/
 emacs/config/
 sbcl/*/*/
+git/*/*/
 quicklisp/
 bundle/
 projects/*
