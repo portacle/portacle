@@ -35,7 +35,7 @@
 
 ;; Open the help file
 (with-current-buffer (get-buffer-create "*portacle-help*")
-  (insert-file-contents (concat portacl-root "emacs/config/portacle-help.txt"))
+  (insert-file-contents (concat portacl-root "config/help.txt"))
   (beginning-of-buffer))
 
 ;; Customise the scratch buffer
@@ -52,7 +52,7 @@
 (setq initial-major-mode 'common-lisp-mode)
 
 ;; Load user file
-(load (concat portacl-root "config.el"))
+(load (concat portacl-root "config/user.el"))
 
 ;; Trigger contrib startup
 (startup-shinmera)
