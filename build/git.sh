@@ -35,6 +35,15 @@ function build() {
 function install() {
     cd "$SOURCE_DIR"
     make prefix="$INSTALL_TARGET" $MAKE_OPTIONS install
+
+    ## Copy MinGW dlls
+    case "$PLATFORM" in
+        win) local deps=( $(ldd "$INSTALL_TARGET/bin/git" | grep "mingw" | awk -F\  '{print $3}'))
+             for dep in "${deps[@]}"; do
+                 cp "$dep" "$INSTALL_TARGET/bin/$(basename $dep)"
+             done
+             ;;
+    esac
 }
 
 main
