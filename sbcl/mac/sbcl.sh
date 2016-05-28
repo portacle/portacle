@@ -6,4 +6,5 @@ function mreadlink() {
 SCRIPT=$(dirname $(mreadlink "$0"))
 export ROOT=${ROOT:-$(mreadlink "$SCRIPT/../../")/}
 export SBCL_HOME=$ROOT/sbcl/mac/lib/sbcl/
-"$SCRIPT/bin/sbcl" --no-sysinit --userinit "$ROOT/.sbclrc" $@
+
+"$SCRIPT/bin/sbcl" --no-sysinit --userinit "$ROOT/config/sbcl-init.lisp" $@

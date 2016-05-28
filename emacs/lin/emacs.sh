@@ -43,4 +43,4 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc
 
 export PATH=$PATH:$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC
 
-"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/.emacs" $@
+"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" $@
