@@ -42,6 +42,8 @@ First, some keys are abbreviated for simplicity. We'll list them here:
 
 - M : Meta / Command / Alt
 
+- SPC : Space bar
+
 - ESC : Escape
 
 - RET : Return / Enter / ↵
@@ -54,7 +56,7 @@ Everything else is either a singular letter, which corresponds to the according 
 
 Next we need to define in which order keys should be pressed. Some keys need to be held at the same time, while others should happen one after the other. If two or more keys should be held down at the same time, they are connected by a hyphen. If they should be pressed one after the other, they are connected by a space, which is omitted if it is simply a word you should type out. Let's look at an example.
 
-  C-x b repl RET
+  C-x b *scratch* RET
 
 This means the following: Hold Control pressed and press x. Release both. Press b and release it. Type "repl". Press Return.
 Before you try it out though, let's look at this one too:
@@ -73,11 +75,106 @@ Simple enough, right? We'll use this keychord notation from here on out.
 
 　ＢＡＳＩＣ　ＮＡＶＩＧＡＴＩＯＮ
 
+Let's get through some basic keychords to navigate around in Portacle. Try them out to see for yourself what they do. Seeing it in effect probably explains it much better than I could hope to in words. You don't need to memorise all of the chords that are listed here either, you'll pick up on the ones you need as you go along.
 
+- C-h k
+  Help on Keychords. After pressing this chord, you can press another, and a little buffer will pop up telling you what chord you pressed and what it does. If you forget what a chord does, this is a good way to get a quick reminder. You can press q in the help buffer to close it again.
 
-　ＭＡＮＡＧＩＮＧ　ＦＩＬＥＳ
+- C-h m
+  Help on Modes. After pressing this chord you'll get a large help buffer that lists all the active modes in the current buffer and what kind of chords they provide. Useful if you forget a keychord.
 
+- C-x b
+  Buffer switching. You've used this before! After hitting the keychord it will ask you for a the name of a buffer to switch to. It will suggest names in the minibuffer, and you only have to type as much of the name until shows the one you want after your cursor. You can also use the arrow keys to cycle through the suggestions. Once you have the one your want, simply hit RET to switch to it. Usually the one you were on before will be the first suggestion when you're switching again, so you can switch back and forth quite quick with just C-x b RET. You can also specify a buffer name that does not yet exist yet, which will open a new buffer with the given name.
 
+- C-x k
+  Kill (close) a buffer. Just like C-x b you get to tell it a buffer name, in this case defaulting to the current one. Hitting RET then performs the actual killing and switches the window to the next buffer in line.
+
+- C-x o
+  Other window. Essentially cycles between the open windows.
+
+- C-x 3
+  Splits the current window horizontally and places the new window to the right.
+
+- C-x 2
+  Splits the current window vertically and places the new window below.
+
+- C-x 1
+  Removes all windows but the current one, making it take up all space.
+
+- C-x 0
+  Removes the current window.
+
+- C-g
+  Usually aborts whatever you started doing. This is very useful if you accidentally started typing a chord you don't actually wanted to start, or are in some other kind of situation that you'd like to get out of.
+
+- C-s
+  Search in the current buffer. After hitting C-s you can start typing for the thing you want to look for. Hitting C-s again will jump to the next match. Hitting RET will end the search at the current position. If you press C-g the cursor will jump back to where it started and the search is aborted.
+
+- C-j
+  This acts as RET in situations where RET does something different by default. More precisely this means either inserting a newline or being the "yes, I'm absolutely sure I want to confirm" chord.
+
+- C-x C-f
+  Open a file in a new buffer. You'll get to navigate to the file you want in the minibuffer. Once you've chosen the file you want, simply press RET to open it if it exists, or C-j to create a new file if it does not yet exist.
+
+- C-x C-s
+  Saves the current file to disk. If you've made some changes and would like to save, this is it.
+
+- C-x C-w
+  Save the current buffer to a new file on disk. The file choosing works just like in C-x C-f.
+
+- C-x C-v
+  Switches the current buffer to a different file. Useful for when the file changed on disk but was not reloaded in Portacle.
+
+- C-c k
+  Kills the current buffer and deletes the corresponding file. You'll be asked for a confirmation.
+
+- C-x C-c
+  Close Portacle altogether.
+
+- C-SPC
+  Start marking a region. If you press C-SPC again, you stop marking. You can also press C-g to abort as usual.
+
+- C-q
+  Expands the selected region smartly. This is aware of the current mode and attempts to grow the selected region in an appropriate way for it. This allows you to very quickly select text.
+
+- C-w
+  Cuts the currently selected region of text from the buffer and puts it into your clipboard.
+
+- M-w
+  Copies the currently selected region of text in the buffer and puts it into your clipboard.
+
+- C-y
+  Yanks (pastes) the clipboard contents at your cursor's position.
+
+- C-_
+  Undoes your last action. For each consecutive time you press it, it performs one undo. If you press something else after undoing and then start undoing again you'll start undoing your undos after a bit. This way, you never lose any editing step. More succinctly put, the action of undoing is itself recorded and can again be undone.
+
+- C-k
+  Kill the rest of the line, which is everything after your cursor.
+
+- Arrow keys
+  Move the cursor in the direction you pressed.
+
+- <home>
+  Move the cursor to the beginning of the line.
+
+- <end>
+  Move the cursor to the end of the line.
+
+- ESC <
+  Move to the beginning of the buffer.
+
+- ESC >
+  Move to the end of the buffer.
+
+- C-M-<pgup>
+  Create a new cursor for the next region matching the currently selected region above your topmost cursor. If nothing is currently selected, it simply creates a cursor on the next line. Pretty much all commands that work with a single cursor also work with multiple ones, including cutting, pasting, etc. Press C-g to get rid of the extra cursors.
+
+- C-M-<pgdn>
+  The same as C-M-<pgup>, but going downwards.
+
+- C-M-m a
+  Create new cursors for all occurrences of the currently selected region.
 
 　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
 
