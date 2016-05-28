@@ -4,4 +4,4 @@ export ROOT="$SCRIPT/"
 ## Fix the icon
 sed -i "s,Icon=.*,Icon=$ROOT/portacle.png,g" "$ROOT/portacle.desktop"
 
-"$SCRIPT/emacs/lin/emacs.sh"
+"$ROOT/emacs/lin/emacs.sh"
