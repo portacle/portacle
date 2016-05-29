@@ -94,7 +94,8 @@
       (dolist (elt package-archive-contents)
         (when (package-installed-p (car elt))
           (package-install (car elt))))
-      (insert "===> All done\n"))))
+      (insert "===> All done\n")
+      (insert "\n Press q to close this buffer."))))
 
 ;; Load user file
 (when (file-exists-p (portacl-path "config/user.el"))
