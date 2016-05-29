@@ -39,7 +39,8 @@
 ;; Open the help file
 (with-current-buffer (get-buffer-create "*portacle-help*")
   (insert-file-contents (portacl-path "config/help.txt"))
-  (beginning-of-buffer))
+  (read-only-mode)
+  (emacs-lock-mode 'kill))
 
 ;; Customise the scratch buffer
 (setq initial-scratch-message "\
