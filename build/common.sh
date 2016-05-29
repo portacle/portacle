@@ -42,7 +42,7 @@ function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
     local fulldeps=( "${deps[@]}" )
     for dep in "${deps[@]}"; do
-        local newdeps=$(compdeps "$dep")
+        local newdeps=$(compute-dependencies "$dep")
         fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
     done
     echo "${fulldeps[@]}"
