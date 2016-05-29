@@ -4,7 +4,9 @@ Install the build prerequisites:
 1. SBCL
 2. GIT
 3. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
-4. Development files for `ncurses x11 xpm gtk2.0 zlib`.
+4. Development files for `ncurses x11 xpm gtk2.0 zlib pcre curl`.
+
+For Debian based systems, simply run: `apt-get install sbcl git build-essential libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev`
 
 Proceed with the `General Procedure` section.
 
