@@ -38,16 +38,8 @@ function install() {
 
     ## Copy MinGW dlls
     case "$PLATFORM" in
-        win) local deps=( $(ldd "$INSTALL_TARGET/bin/git" | grep "mingw" | awk -F\  '{print $3}'))
-             for dep in "${deps[@]}"; do
-                 cp "$dep" "$INSTALL_TARGET/bin/$(basename $dep)"
-             done
-             ;;
-        mac) local deps=( $(otool -L "$INSTALL_TARGET/bin/git" | grep -E "/opt/local/lib|/usr/local/lib" | awk -F\  '{print $1}'))
-             for dep in "${deps[@]}"; do
-                 cp "$dep" "$INSTALL_TARGET/bin/$(basename $dep)"
-             done
-             ;;
+        win) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
+        mac) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
     esac
 }
 

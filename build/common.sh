@@ -30,6 +30,35 @@ case "$PLATFORM" in
     *)   MAXCPUS=1;;
 esac
 
+function nonlocal-ldd() {
+    case "$PLATFORM" in
+        win) ldd "$1" | grep "mingw" | awk -F\  '{print $3}' ;;
+        mac) otool -L "$1" | grep -E "/opt/local/lib|/usr/local/lib" | awk -F\  '{print $1}' ;;
+        *) ;;
+    esac
+}
+
+function compute-dependencies() {
+    local deps=( $(nonlocal-ldd $1) )
+    local fulldeps=( "${deps[@]}" )
+    for dep in "${deps[@]}"; do
+        local newdeps=$(compdeps "$dep")
+        fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
+    done
+    echo "${fulldeps[@]}"
+}
+
+function ensure-installed() {
+    local target=$1
+    local files=( "${@:2}" )
+    for file in "${files[@]}"; do
+        local name=$(basename "$file")
+        if [ ! -f "$target/$name" ]; then
+            cp "$file" "$target/$name"
+        fi
+    done
+}
+
 function eexit() {
     echo "! Error: $@"
     exit 1
