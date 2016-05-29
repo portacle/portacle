@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readonly TAG=v2.9.0-rc0
-readonly REPOSITORY=
+#readonly REPOSITORY=https://github.com/git/git
 readonly CONFIGURE_OPTIONS="--without-python --without-tcltk"
 readonly MAKE_OPTIONS="NO_PERL=1"
 
