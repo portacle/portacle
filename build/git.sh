@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readonly TAG=v2.9.0-rc0
-readonly REPOSITORY=https://github.com/git/git
+readonly REPOSITORY=
 readonly CONFIGURE_OPTIONS="--without-python --without-tcltk"
 readonly MAKE_OPTIONS="NO_PERL=1"
 
@@ -9,6 +9,13 @@ readonly MAKE_OPTIONS="NO_PERL=1"
 
 readonly PROGRAM=git
 source common.sh
+
+if [ -z "$REPOSITORY" ]; then
+    case "$PLATFORM" in
+        win) readonly REPOSITORY=https://github.com/git-for-windows/git ;;
+        *)   readonly REPOSITORY=https://github.com/git/git ;;
+    esac
+fi
 
 function prepare() {
     cd "$SOURCE_DIR"
