@@ -36,11 +36,22 @@ function install() {
     cd "$SOURCE_DIR"
     make prefix="$INSTALL_TARGET" $MAKE_OPTIONS install
 
-    ## Copy MinGW dlls
+    ## Copy DLLs and such.
     case "$PLATFORM" in
         win) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git")
              ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "/mingw64/bin/libcurl-4.dll")
-             cp "/mingw64/bin/libcurl-4.dll" "$INSTALL_TARGET/bin/" ;;
+             cp "/mingw64/bin/libcurl-4.dll" "$INSTALL_TARGET/bin/"
+             ## It creates hardlinks which are hard to ship. We'll convert them into symlinks.
+             local links=( $(find "$INSTALL_TARGET/" -samefile "$INSTALL_TARGET/bin/git.exe") )
+             for link in "${links[@]}"; do
+                 if [ "$link" != "$INSTALL_TARGET/bin/git.exe" ];then
+                     local winpath=$(cygpath -w "$link")
+                     echo "Converting hard link $link"
+                     rm "$link"
+                     cmd /c "mklink \"$winpath\" \"..\\..\\bin\\git.exe\""
+                 fi
+             done
+             ;;
         mac) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
     esac
 }
