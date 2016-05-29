@@ -64,9 +64,37 @@
 
 ;; But just to make doubly sure we'll tell Magit explicitly
 (setq magit-git-executable
-      (portacl-path (cond ((eql system-type 'gnu/linux)  "git/lin/bin/git")
-                          ((eql system-type 'darwin)     "git/mac/bin/git")
-                          ((eql system-type 'windows-nt) "git/win/bin/git.exe"))))
+      (portacl-path (cond ((eql system-type 'gnu/linux)  "git/lin/git.sh")
+                          ((eql system-type 'darwin)     "git/mac/git.sh")
+                          ((eql system-type 'windows-nt) "git/win/git.bat"))))
+
+;; Our update command
+(defun portacle-pull-preserving-changes (place)
+  (let ((default-directory place))
+    (call-process magit-git-executable nil (current-buffer) t "stash")
+    (call-process magit-git-executable nil (current-buffer) t "pull")
+    (call-process magit-git-executable nil (current-buffer) t "stash" "pop")))
+
+(defun portacle-update ()
+  (interactive)
+  (with-help-window "*portacle-update*"
+    (with-current-buffer "*portacle-update*"
+      (switch-to-buffer (current-buffer))
+      (insert "===> Starting Portacle update\n")
+      (insert "  --> Updating root via GIT\n")
+      (portacle-pull-preserving-changes portacl-root)
+      (insert "  --> Updating config via GIT\n")
+      (portacle-pull-preserving-changes (portacl-path "emacs/config/shinmera"))
+      (insert "  --> Updating dists via QL\n")
+      (slime-eval '(ql:update-all-dists :prompt cl:nil))
+      (insert "  --> Updating client via QL\n")
+      (slime-eval '(ql:update-client :prompt cl:nil))
+      (insert "  --> Updating packages via ELPA\n")
+      (package-refresh-contents)
+      (dolist (elt package-archive-contents)
+        (when (package-installed-p (car elt))
+          (package-install (car elt))))
+      (insert "===> All done\n"))))
 
 ;; Load user file
 (when (file-exists-p (portacl-path "config/user.el"))
