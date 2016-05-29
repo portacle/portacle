@@ -1,9 +1,6 @@
 #!/bin/bash
 
-function mreadlink() {
-    python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $1
-}
-
+## Determine the OS type
 case "$OSTYPE" in
     linux-gnu) OS="lin" ;;
     darwin*)   OS="mac" ;;
@@ -14,22 +11,30 @@ case "$OSTYPE" in
     *)         OS="any" ;;
 esac
 
+## Use autodetect if unspecified
 PLATFORM=${PLATFORM:-$OS}
 
-case "$OS" in
-    mac)  SCRIPT_DIR=$(mreadlink $(dirname $0)) ;;
-    *)    SCRIPT_DIR=$(readlink -f $(dirname $0)) ;;
-esac
+## OS X' readlink does not support -f, substitute our own
+function mreadlink() {
+    case "$PLATFORM" in 
+        mac) python -c 'import os, sys; print os.path.realpath(sys.argv[1])' $1 ;;
+        *)   readlink -f $1 ;;
+    esac
+}
 
-SOURCE_DIR=$SCRIPT_DIR/$PROGRAM/
-INSTALL_TARGET=$SCRIPT_DIR/../$PROGRAM/$PLATFORM/
+## Autodetect other variables
+SCRIPT_DIR=${SCRIPT_DIR:-$(mreadlink $(dirname $0))}
+SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
+INSTALL_TARGET=${INSTALL_TARGET:-$(mreadlink $SCRIPT_DIR/../$PROGRAM/$PLATFORM/)}
 TARGET=${1:-run_all}
 
+## Determine mac cpu count
 case "$PLATFORM" in
-    lin) MAXCPUS=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1) ;;
-    *)   MAXCPUS=1;;
+    lin) MAXCPUS=${MAXCPUS:-$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)} ;;
+    *)   MAXCPUS=${MAXCPUS:-1} ;;
 esac
 
+## Find all the dynamic libraries not provided by the native OS
 function nonlocal-ldd() {
     case "$PLATFORM" in
         win) ldd "$1" | grep "mingw" | awk -F\  '{print $3}' ;;
@@ -38,6 +43,7 @@ function nonlocal-ldd() {
     esac
 }
 
+## Compute the full dependency list for the given input file
 function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
     local fulldeps=( "${deps[@]}" )
@@ -48,6 +54,7 @@ function compute-dependencies() {
     echo "${fulldeps[@]}"
 }
 
+## Ensure the given array of files is copied to the target directory
 function ensure-installed() {
     local target=$1
     local files=( "${@:2}" )
@@ -59,11 +66,13 @@ function ensure-installed() {
     done
 }
 
+## This does not need explanation
 function eexit() {
     echo "! Error: $@"
     exit 1
 }
 
+## Following here are standard implementations for the various stages
 function info() {
     echo "  Build info:
 Platform:           ${PLATFORM}
