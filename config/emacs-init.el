@@ -69,7 +69,8 @@
                           ((eql system-type 'windows-nt) "git/win/bin/git.exe"))))
 
 ;; Load user file
-(load (portacl-path "config/user.el"))
+(when (file-exists-p (portacl-path "config/user.el"))
+  (load (portacl-path "config/user.el")))
 
 ;; Trigger contrib startup
 (startup-shinmera)
