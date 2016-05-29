@@ -20,31 +20,9 @@ It might spit out some messages and notes before it looks like that. You can saf
 An extensive explanation of the various keychords and all that would follow here if I had more time at the moment.
 
 ## Updating It
+In order to update all of the configuration files and packages, simply hit `M-x portacle-update RET`.
 
-### Emacs Packages
-1. In Portacle, hit `M-x package-list-packages`
-2. Followed by `U x yes RET yes RET`
-3. Restart Portacle
-
-### Emacs Configuration
-1. In Portacle, hit `M-x shell`
-2. Navigate to the directory by running
-   1. On Windows `cd %ROOT%\emacs\config\shinmera`
-   2. Everywhere else `cd $ROOT/emacs/config/shinmera`
-2. Run `git pull`
-3. Restart Portacle
-
-### Emacs Itself
-See `Building It`
-
-### Quicklisp
-1. In the REPL, run `(ql:update-all-dists)`
-2. Hit enter when it prompts you to.
-3. Run `(ql:update-client)`
-4. Hit `,restart RET`
-
-### SBCL Itself
-See `Building It`
+However, this will not update emacs, sbcl, and git themselves, as they need to be compiled to reach a newer version. Either see if there is a [new release](https://github.com/Shinmera/portacle/releases/) or if you can build it yourself if needed. Fortunately you should not have to do this very often, if ever at all. The above `portacle-update` command should suffice for most scenarios.
 
 ## Building It
 In order to build the portacle environment yourself, please refer to the [README](https://github.com/Shinmera/portacle/tree/master/build) in the build/ directory of the repository.
