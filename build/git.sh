@@ -38,7 +38,8 @@ function install() {
 
     ## Copy MinGW dlls
     case "$PLATFORM" in
-        win) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
+        win) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git")
+             ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "/mingw64/bin/libcurl-4.dll");;
         mac) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
     esac
 }
