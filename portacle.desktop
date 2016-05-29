@@ -4,6 +4,6 @@ Version=1.0
 Name=Portacle
 Comment=Portable Common Lisp IDE
 Exec=bash -c 'cd $(dirname %k) && ./portacle.run'
-Icon=/home/linus/Projects/portacle//portacle.png
+Icon=portacle.png
 Terminal=false
 Categories=Development;Common Lisp;Lisp;Text Editor
