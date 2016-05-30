@@ -49,7 +49,7 @@ function install() {
             for link in "${links[@]}"; do
                 if [ "$link" != "$INSTALL_TARGET/bin/git.exe" ]; then
                     local winpath=$(cygpath -w "$link")
-                    &2> echo "Converting hard link $link"
+                    eecho "Converting hard link $link"
                     rm "$link"
                     cmd /c "mklink \"$winpath\" \"..\\..\\bin\\git.exe\""
                 fi
