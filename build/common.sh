@@ -37,7 +37,7 @@ esac
 ## Find all the dynamic libraries not provided by the native OS
 function nonlocal-ldd() {
     case "$PLATFORM" in
-        win) ldd "$1" | grep "mingw" | awk -F\  '{print $3}' ;;
+        win) ldd "$1" | grep -E '^/[a-z]{2,}/$' | awk -F\  '{print $3}' ;;
         mac) otool -L "$1" | grep -E "/opt/local/lib|/usr/local/lib" | awk -F\  '{print $1}' ;;
         *) ;;
     esac
