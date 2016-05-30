@@ -61,13 +61,17 @@ function ensure-installed() {
     for file in "${files[@]}"; do
         local name=$(basename "$file")
         if [ ! -f "$target/$name" ]; then
-            &2> echo "Copying $file"
+            eecho "Copying $file"
             cp "$file" "$target/$name"
         fi
     done
 }
 
 ## This does not need explanation
+function eecho() {
+    >2& echo $@
+}
+
 function eexit() {
     echo "! Error: $@"
     exit 1
