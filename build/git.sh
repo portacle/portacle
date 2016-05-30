@@ -2,8 +2,7 @@
 
 readonly TAG=v2.9.0-rc0
 #readonly REPOSITORY=https://github.com/git/git
-readonly CONFIGURE_OPTIONS="--without-python --without-tcltk"
-readonly MAKE_OPTIONS="NO_PERL=1"
+readonly MAKE_OPTIONS="NO_PERL=1 NO_GETTEXT=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1"
 
 ###
 
@@ -16,23 +15,6 @@ if [ -z "$REPOSITORY" ]; then
         *)   readonly REPOSITORY=https://github.com/git/git ;;
     esac
 fi
-
-function prepare() {
-    cd "$SOURCE_DIR"
-    make configure
-
-    ## Ok, so, funny story. Configure fails if we don't tell it the socklen
-    ## explicitly, but if we do specify that, it generates some new code that
-    ## then clashes with the rest of the MinGW environment.
-    ## In light of this, the current approach is to just let configure fail
-    ## its test and build anyway.
-    # case "$PLATFORM" in
-    #     win) config_opts="$CONFIGURE_OPTIONS git_cv_socklen_t_equiv=int" ;;
-    #     *)   config_opts="$CONFIGURE_OPTIONS" ;;
-    # esac
-    
-    ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS
-}
 
 function build() {
     cd "$SOURCE_DIR"
