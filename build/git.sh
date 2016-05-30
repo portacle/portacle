@@ -43,23 +43,35 @@ function install() {
     cd "$SOURCE_DIR"
     make prefix="$INSTALL_TARGET" $MAKE_OPTIONS install
 
-    ## Copy DLLs and such.
     case "$PLATFORM" in
-        win) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git")
-             ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "/mingw64/bin/libcurl-4.dll")
-             cp "/mingw64/bin/libcurl-4.dll" "$INSTALL_TARGET/bin/"
-             ## It creates hardlinks which are hard to ship. We'll convert them into symlinks.
-             local links=( $(find "$INSTALL_TARGET/" -samefile "$INSTALL_TARGET/bin/git.exe") )
-             for link in "${links[@]}"; do
-                 if [ "$link" != "$INSTALL_TARGET/bin/git.exe" ];then
-                     local winpath=$(cygpath -w "$link")
-                     echo "Converting hard link $link"
-                     rm "$link"
-                     cmd /c "mklink \"$winpath\" \"..\\..\\bin\\git.exe\""
-                 fi
-             done
-             ;;
-        mac) ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git") ;;
+        win) ## It creates hardlinks which are hard to ship. We'll convert them into symlinks.
+            local links=( $(find "$INSTALL_TARGET/" -samefile "$INSTALL_TARGET/bin/git.exe") )
+            for link in "${links[@]}"; do
+                if [ "$link" != "$INSTALL_TARGET/bin/git.exe" ]; then
+                    local winpath=$(cygpath -w "$link")
+                    &2> echo "Converting hard link $link"
+                    rm "$link"
+                    cmd /c "mklink \"$winpath\" \"..\\..\\bin\\git.exe\""
+                fi
+            done
+            ## Ok, now we need to copy the core utilities. This is necessary because some parts
+            ## of git are mere bash scripts, which then in turn need to run the core util programs
+            ## which means we have to ship an almost complete MSYS. How fantastic.
+            local coreutils=( $(pacman -Ql coreutils | grep "exe" | awk '{print $2}') )
+            ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" $coreutils
+            ## Ensure DLL dependencies for all.
+            local exefiles=( $(ls "$INSTALL_TARGET/bin/" | grep "exe") )
+            for exe in "${exefiles[@]}"; do
+                if [ ! -h "$exe" ]; then
+                    ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/$exe")
+                fi
+            done
+            ## Libcurl won't appear in that because it's dynamically linked. 
+            ensure-installed "$INSTALL_TARGET/bin/" "/mingw64/bin/libcurl-4.dll" $(compute-dependencies "/mingw64/bin/libcurl-4.dll")             
+            ;;
+        mac) ## Copy dylibs and such.
+            ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/git")
+            ;;
     esac
 }
 
