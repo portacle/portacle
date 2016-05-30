@@ -62,9 +62,7 @@ function install() {
             ## Ensure DLL dependencies for all.
             local exefiles=( $(ls "$INSTALL_TARGET/bin/" | grep "exe") )
             for exe in "${exefiles[@]}"; do
-                if [ ! -h "$exe" ]; then
-                    ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/$exe")
-                fi
+                ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/$exe")
             done
             ## Libcurl won't appear in that because it's dynamically linked. 
             ensure-installed "$INSTALL_TARGET/bin/" "/mingw64/bin/libcurl-4.dll" $(compute-dependencies "/mingw64/bin/libcurl-4.dll")             
