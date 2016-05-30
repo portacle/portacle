@@ -53,13 +53,11 @@ function win-convert-hardlinks() {
 
 function win-copy-coreutils() {
     local coreutils=( $(pacman -Ql coreutils | grep "exe" | awk '{print $2}') )
-    eecho "COREUTILS: ${exefiles[@]}"
-    ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" $coreutils
+    ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}"
 }
 
 function win-ensure-dlls() {
     local exefiles=( $(ls "$INSTALL_TARGET/bin/" | grep "exe") )
-    eecho "EXEFILES: ${exefiles[@]}"
     for exe in "${exefiles[@]}"; do
         ensure-installed "$INSTALL_TARGET/bin/" $(compute-dependencies "$INSTALL_TARGET/bin/$exe")
     done
