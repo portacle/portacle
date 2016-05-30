@@ -182,16 +182,99 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
 - C-x e
   Close the file tree browser.
 
+- C-M-f
+  Jump forward by a token. This should be semantically aware and jump however much is appropriate for the content in your buffer.
+
+- C-M-b
+  Jump backward by a token. See C-M-f.
+
 　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
 
+These commands are specific to lisp buffers. They'll only work in buffers in the lisp major-mode.
 
+- C-c C-c
+  Compile the form at point. This will send the form your cursor is on at the moment to the lisp process and compile it.
 
-　ＰＡＲＥＤＩＴ
+- C-c C-k
+  Compile and load the entire file in this buffer.
 
+- C-c RET
+  Macroexpands the expression at the current point once. In the buffer that appears you'll be able to further expand inner expressions by pressing C-c RET on them again. q closes the buffer as usual.
 
+- M-.
+  Jump to the definition of the symbol your cursor is currently on. This is extremely useful in order to learn how a system works and how it is implemented. Use it often.
+
+- M-,
+  Jump back to your previous location before you hit M-.
+
+- C-<right>
+  "Slurp" in the expression on the right. This means that if your cursor is currently within a list and there is an element outside to the right of the list, pressing this will pull the element onto the end of the list.
+
+- C-<left>
+  "Barf" the expression at the end. This means that if your cursor is currently within a list and there is an element at the end of it, pressing this will push the element outside the list and put it right after it.
+
+- M-<up>
+  Splice the contents upwards. This means that if your cursor is currently within a list, pressing this will delete everything from the beginning of the list up to the cursor and remove the list surrounding the remaining elements.
+
+- M-?
+  "Convolute" the surrounding expressions. This means that the current list and its parent switch positions. For example, convoluting (a (b c) d) with the cursor after the b will produce (b (a c d)), whereas if the cursor is after the c, it will produce (b c (a d)).
+
+- M-;
+  Un/comment out the marked region.
+
+The following shortcuts are useful in the REPL.
+
+- C-<up>
+  Insert the previous REPL command from your history.
+
+- C-<down>
+  Insert the next REPL command from your history.
+
+- C-c C-c
+  Interrupt the current execution.
+
+- ,restart RET
+  Restart your lisp process.
+
+The following shortcuts are useful in the SLDB debugger.
+
+- a
+  Choose the topmost ABORT restart
+
+- c
+  Choose the topmost CONTINUE restart
+
+- 0-9
+  Choose the restart corresponding to the number you pressed.
+
+- q
+  Choose the lowermost ABORT restart
+
+- v
+  With the cursor on a stack frame, show the definition of the function and highlight the region in which the error occurred.
+
+- r
+  With the cursor on a stack frame, restart the selected frame.
+
+- e
+  With the cursor on a stack frame, evaluate an expression in the frame.
 
 　ＣＵＳＴＯＭＩＳＩＮＧ
 
 
 
-　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ
+　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ ＆　ＲＥＳＯＵＲＣＥＳ
+
+- Practical Common Lisp <http://www.gigamonkeys.com/book/>
+  An introduction to common lisp using practical projects. Requires some prior knowledge and experience with programming.
+
+- Lisp Works Hyperspec <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
+  The CLHS is the primary source for when you're wondering what a function, type, variable, anything in CL is supposed to do.
+
+- L1sp.org <http://l1sp.org/html/>
+  Conveniently earch the CLHS by term.
+
+- Cliki <http://www.cliki.net/index>
+  The Common Lisp wiki contains various information about common lisp projects.
+
+- MORE STUFF
