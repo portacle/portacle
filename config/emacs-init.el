@@ -1,7 +1,7 @@
 (load-library "iso-transl")
 
 ;; Set up paths
-(setq portacle-root (concat (or (getenv "ROOT") (expand-file-name "~/")) "/"))
+(setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
 
 (defun portacle-path (path)
   (concat portacle-root path))
