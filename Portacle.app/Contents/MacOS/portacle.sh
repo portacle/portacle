@@ -4,7 +4,7 @@ function mreadlink() {
 }
 
 SCRIPT=$(dirname $(mreadlink "$0"))
-export ROOT=$(mreadlink "$SCRIPT/../../../")
+export ROOT=$(mreadlink "$SCRIPT/../../../")/
 
 "$ROOT/emacs/mac/emacs.sh"
 
