@@ -1,12 +1,12 @@
 (load-library "iso-transl")
 
 ;; Set up paths
-(setq portacl-root (or (getenv "ROOT") (expand-file-name "~/")))
+(setq portacle-root (concat (or (getenv "ROOT") (expand-file-name "~/")) "/"))
 
-(defun portacl-path (path)
-  (concat portacl-root path))
+(defun portacle-path (path)
+  (concat portacle-root path))
 
-(setq user-emacs-directory (portacl-path "emacs/config/"))
+(setq user-emacs-directory (portacle-path "emacs/config/"))
 (add-to-list 'load-path (concat user-emacs-directory "shinmera/"))
 
 ;; Load contribs
@@ -22,9 +22,9 @@
 
 ;; Make sure SLIME knows about our SBCL
 (setq slime-lisp-implementations
-      `((sbcl (,(portacl-path (cond ((eql system-type 'gnu/linux)  "sbcl/lin/sbcl.sh")
-                                    ((eql system-type 'darwin)     "sbcl/mac/sbcl.sh")
-                                    ((eql system-type 'windows-nt) "sbcl/win/sbcl.bat")))))))
+      `((sbcl (,(portacle-path (cond ((eql system-type 'gnu/linux)  "sbcl/lin/sbcl.sh")
+                                     ((eql system-type 'darwin)     "sbcl/mac/sbcl.sh")
+                                     ((eql system-type 'windows-nt) "sbcl/win/sbcl.bat")))))))
 
 (when window-system
   (toggle-frame-maximized)
@@ -38,7 +38,7 @@
 
 ;; Open the help file
 (with-current-buffer (get-buffer-create "*portacle-help*")
-  (insert-file-contents (portacl-path "config/help.txt"))
+  (insert-file-contents (portacle-path "config/help.txt"))
   (read-only-mode)
   (emacs-lock-mode 'kill))
 
@@ -56,18 +56,18 @@
 (setq initial-major-mode 'common-lisp-mode)
 
 ;; Make sure we have GIT in the path
-(add-to-path (portacl-path (cond ((eql system-type 'gnu/linux)  "git/lin/bin")
-                                 ((eql system-type 'darwin)     "git/mac/bin")
-                                 ((eql system-type 'windows-nt) "git/win/bin")))
-             (portacl-path (cond ((eql system-type 'gnu/linux)  "git/lin/libexec/git-core")
-                                 ((eql system-type 'darwin)     "git/mac/libexec/git-core")
-                                 ((eql system-type 'windows-nt) "git/win/libexec/git-core"))))
+(add-to-path (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/bin")
+                                  ((eql system-type 'darwin)     "git/mac/bin")
+                                  ((eql system-type 'windows-nt) "git/win/bin")))
+             (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/libexec/git-core")
+                                  ((eql system-type 'darwin)     "git/mac/libexec/git-core")
+                                  ((eql system-type 'windows-nt) "git/win/libexec/git-core"))))
 
 ;; But just to make doubly sure we'll tell Magit explicitly
 (setq magit-git-executable
-      (portacl-path (cond ((eql system-type 'gnu/linux)  "git/lin/git.sh")
-                          ((eql system-type 'darwin)     "git/mac/git.sh")
-                          ((eql system-type 'windows-nt) "git/win/git.bat"))))
+      (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/git.sh")
+                           ((eql system-type 'darwin)     "git/mac/git.sh")
+                           ((eql system-type 'windows-nt) "git/win/git.bat"))))
 
 ;; Our update command
 (defun portacle-pull-preserving-changes (place)
@@ -83,9 +83,9 @@
       (switch-to-buffer (current-buffer))
       (insert "===> Starting Portacle update\n")
       (insert "  --> Updating root via GIT\n")
-      (portacle-pull-preserving-changes portacl-root)
+      (portacle-pull-preserving-changes portacle-root)
       (insert "  --> Updating config via GIT\n")
-      (portacle-pull-preserving-changes (portacl-path "emacs/config/shinmera"))
+      (portacle-pull-preserving-changes (portacle-path "emacs/config/shinmera"))
       (insert "  --> Updating dists via QL\n")
       (slime-eval '(ql:update-all-dists :prompt cl:nil))
       (insert "  --> Updating client via QL\n")
@@ -99,8 +99,8 @@
       (insert "\n Press q to close this buffer."))))
 
 ;; Load user file
-(when (file-exists-p (portacl-path "config/user.el"))
-  (load (portacl-path "config/user.el")))
+(when (file-exists-p (portacle-path "config/user.el"))
+  (load (portacle-path "config/user.el")))
 
 ;; Trigger contrib startup
 (startup-shinmera)
