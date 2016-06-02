@@ -25,7 +25,9 @@ function mreadlink() {
 ## Autodetect other variables
 SCRIPT_DIR=${SCRIPT_DIR:-$(mreadlink $(dirname $0))}
 SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
-INSTALL_TARGET=${INSTALL_TARGET:-$(mreadlink $SCRIPT_DIR/../$PROGRAM/$PLATFORM/)}
+PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
+SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/shared}
+INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
 TARGET=${1:-run_all}
 
 ## Determine mac cpu count
