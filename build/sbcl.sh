@@ -56,10 +56,7 @@ function install() {
          -name "*.so" -or \
          -name "a.out" -delete
 
-    case "$PLATFORM" in
-        win) cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/" \
-                   || eexit "Failed to copy zlib1.dll" ;;
-    esac
+    ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
 }
 
 main
