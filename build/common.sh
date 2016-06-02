@@ -36,12 +36,12 @@ case "$PLATFORM" in
     *)   MAXCPUS=${MAXCPUS:-1} ;;
 esac
 
-## Find all the dynamic libraries not provided by the native OS
+## Find all the dynamic libraries we need to care about
 function nonlocal-ldd() {
     case "$PLATFORM" in
-        win) ldd "$1" | awk '{print $3}' | grep -E '^/[^/]{2,}/' ;;
-        mac) otool -L "$1" | grep -E "/opt/local/lib|/usr/local/lib" | awk -F\  '{print $1}' ;;
-        *) ;;
+        win) ldd "$1"      | awk '{print $3}' | grep -E '^/[^/]{2,}/' ;;
+        mac) otool -L "$1" | awk '{print $1}' | grep -E '/opt/local/lib|/usr/local/lib' ;;
+        lin) ldd "$1"      | awk '{print $3}' | grep -E '^/' ;;
     esac
 }
 
