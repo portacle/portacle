@@ -16,27 +16,34 @@ readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 function prepare() {
     cd "$SOURCE_DIR"
     case "$TAG" in
-        emacs-24*) git am < "$SCRIPT_DIR/fix-mingw64.patch" ;;
+        emacs-24*) git am < "$SCRIPT_DIR/fix-mingw64.patch" \
+                         || eexit "Failed to apply mingw patch." ;;
     esac
     
-    ./autogen.sh
+    ./autogen.sh \
+        || eexit "Failed to generate configure. Maybe some dependencies are missing?"
     case "$PLATFORM" in
-        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained $CONFIGURE_OPTIONS ;;
-        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS ;;
+        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained $CONFIGURE_OPTIONS \
+                   || eexit "Configure failed. Maybe some dependencies are missing?" ;;
+        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS \
+                   || eexit "Configure failed. Maybe some dependencies are missing?" ;;
     esac
 }
 
 function build() {
     cd "$SOURCE_DIR"
-    make -j $MAXCPUS
+    make -j $MAXCPUS \
+        || eexit "The build failed. Please check the output for error messages."
 }
 
 function install() {
     cd "$SOURCE_DIR"
-    make install datadir="$SHARE_TARGET"
+    make install datadir="$SHARE_TARGET" \
+        || eexit "The install failed. Please check the output for error messages."
 
     case "$PLATFORM" in
-        win) cp "/mingw64/bin/libwinpthread-1.dll" "$INSTALL_TARGET/bin/" ;;
+        win) cp "/mingw64/bin/libwinpthread-1.dll" "$INSTALL_TARGET/bin/" \
+                   || eexit "Failed to copy libwinpthread-1.dll" ;;
     esac
 }
 
