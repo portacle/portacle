@@ -69,6 +69,13 @@ function ensure-installed() {
     done
 }
 
+function ensure-dependencies() {
+    mkdir -p "$SHARED_DIR/lib/"
+    for exe in "$@"; do
+        ensure-installed "$SHARED_DIR/lib/" $(compute-dependencies "$exe")
+    done
+}
+
 ## This does not need explanation
 function eecho() {
     >2& echo $@
