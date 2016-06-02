@@ -73,6 +73,7 @@ function compute-dependencies() {
 function ensure-installed() {
     local target=$1
     local files=( "${@:2}" )
+    mkdir -p "$target"
     for file in "${files[@]}"; do
         local name=$(basename "$file")
         if [ ! -f "$target/$name" ]; then
