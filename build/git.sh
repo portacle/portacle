@@ -20,7 +20,7 @@ fi
 
 function build() {
     cd "$SOURCE_DIR"
-    make $MAKE_OPTIONS all -j $MAXCPUS \
+    make prefix="$INSTALL_TARGET" $MAKE_OPTIONS all -j $MAXCPUS \
         || eexit "The build failed. Please check the output for error messages."
 }
 
