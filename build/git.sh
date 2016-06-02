@@ -20,7 +20,7 @@ fi
 
 function build() {
     cd "$SOURCE_DIR"
-    make prefix="$INSTALL_TARGET" $MAKE_OPTIONS all -j $MAXCPUS \
+    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS all -j $MAXCPUS \
         || eexit "The build failed. Please check the output for error messages."
 }
 
@@ -33,7 +33,7 @@ function win-copy-coreutils() {
 
 function install() {
     cd "$SOURCE_DIR"
-    make prefix="$INSTALL_TARGET" $MAKE_OPTIONS install \
+    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
         || eexit "The install failed. Please check the output for error messages."
 
     case "$PLATFORM" in
