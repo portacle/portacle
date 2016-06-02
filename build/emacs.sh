@@ -41,10 +41,7 @@ function install() {
     make install datadir="$SHARE_TARGET" \
         || eexit "The install failed. Please check the output for error messages."
 
-    case "$PLATFORM" in
-        win) cp "/mingw64/bin/libwinpthread-1.dll" "$INSTALL_TARGET/bin/" \
-                   || eexit "Failed to copy libwinpthread-1.dll" ;;
-    esac
+    ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
 }
 
 main
