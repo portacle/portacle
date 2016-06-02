@@ -27,7 +27,7 @@ function build() {
 function win-copy-coreutils() {
     local coreutils=( $(pacman -Ql coreutils | grep "exe" | awk '{print $2}') )
     local openssh=( $(pacman -Ql openssh | grep "exe" | awk '{print $2}') )
-    ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}" "${openssh[@]}"
+    ensure-installed "$1" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}" "${openssh[@]}"
 }
 
 function install() {
@@ -36,11 +36,12 @@ function install() {
         || eexit "The install failed. Please check the output for error messages."
 
     case "$PLATFORM" in
-        win) win-copy-coreutils
-             ensure-installed "$SHARED_DIR" "/mingw64/bin/libcurl-4.dll"
+        win) win-copy-coreutils "$SHARED_DIR/bin/"
+             ensure-installed "$SHARED_DIR/ssl/" "/usr/ssl/certs/ca-bundle.crt"
+             ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
              ;;
-        lin) ensure-installed "$SHARED_DIR" "/usr/lib/libcurl.so"
+        lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
              ;;
     esac
