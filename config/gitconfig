@@ -1,0 +1,8 @@
+[http]
+        sslcainfo = shared/ssl/ca-bundle.crt
+[push]
+	default = simple
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
