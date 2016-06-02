@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL
 set SCRIPT=%~dp0
 set ROOT=%SCRIPT%\..\..\
 
@@ -8,3 +9,4 @@ FOR /F "delims=" %%F IN ("%ROOT%") DO SET "ROOT=%%~fF"
 set BASHPATH=%ROOT%\git\win\bin;%ROOT%\git\win\libexec\git-core;%BASHPATH%
 
 "%ROOT%git\win\bash.bat" "-c" "/git/win/bin/git.exe %*"
+ENDLOCAL

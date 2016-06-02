@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL
 set SCRIPT=%~dp0
 set ROOT=%SCRIPT%\..\..\
 
@@ -9,3 +10,4 @@ set BASHPATH=%BASHPATH%;%ROOT%\shared\lib;%ROOT%\shared\bin
 set PATH=%BASHPATH%
 
 "%ROOT%\shared\bin\chroot.exe" %ROOT% "%ROOT%\shared\bin\bash.exe" %*
+ENDLOCAL

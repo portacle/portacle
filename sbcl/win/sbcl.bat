@@ -1,4 +1,5 @@
 @echo off
+SETLOCAL
 set SCRIPT=%~dp0
 set ROOT=%SCRIPT%\..\..\
 
@@ -10,3 +11,4 @@ set SBCL_HOME=%ROOT%\sbcl\win\lib\sbcl\
 set PATH=%ROOT%\shared\lib\;%PATH%
 
 "%SCRIPT%\bin\sbcl" --no-sysinit --userinit "%ROOT%\config\sbcl-init.lisp" $@
+ENDLOCAL
