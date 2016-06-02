@@ -5,7 +5,7 @@ set ROOT=%SCRIPT%\..\..\
 rem // This crazy thing resolves the relative path
 FOR /F "delims=" %%F IN ("%ROOT%") DO SET "ROOT=%%~fF"
 
-set PATH=%ROOT%\shared\lib;%PATH%
-set PATH=%ROOT%\shared\bin;%PATH%
+set BASHPATH=%BASHPATH%;%ROOT%\shared\lib;%ROOT%\shared\bin
+set PATH=%BASHPATH%
 
 "%ROOT%\shared\bin\chroot.exe" %ROOT% "%ROOT%\shared\bin\bash.exe" %*
