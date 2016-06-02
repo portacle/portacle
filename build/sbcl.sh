@@ -45,8 +45,10 @@ function install() {
     mkdir -p "$INSTALL_SOURCES" &>/dev/null
     ## Can't use -t because of apple.
     # cp -R -t "$INSTALL_SOURCES" "$SOURCE_DIR/src" "$SOURCE_DIR/contrib"
-    cp -R "$SOURCE_DIR/src" "$INSTALL_SOURCES"
-    cp -R "$SOURCE_DIR/contrib" "$INSTALL_SOURCES"
+    cp -R "$SOURCE_DIR/src" "$INSTALL_SOURCES" \
+        || eexit "Failed to copy SBCL sources."
+    cp -R "$SOURCE_DIR/contrib" "$INSTALL_SOURCES" \
+        || eexit "Failed to copy SBCL contribs."
     find "$INSTALL_SOURCES" \
          -name "*.fasl" -or \
          -name "*.o" -or \
@@ -55,7 +57,8 @@ function install() {
          -name "a.out" -delete
 
     case "$PLATFORM" in
-        win) cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/" ;;
+        win) cp /mingw64/bin/zlib1.dll "$INSTALL_TARGET/bin/" \
+                   || eexit "Failed to copy zlib1.dll" ;;
     esac
 }
 
