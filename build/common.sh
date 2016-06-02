@@ -114,6 +114,7 @@ Downloading from:   ${REPOSITORY}
 Using tag:          ${TAG}
 Building in:        ${SOURCE_DIR}
 Installing into:    ${INSTALL_TARGET}
+Using threads:      ${MAXCPUS}
 
 "
 }
