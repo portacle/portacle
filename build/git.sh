@@ -26,7 +26,8 @@ function build() {
 
 function win-copy-coreutils() {
     local coreutils=( $(pacman -Ql coreutils | grep "exe" | awk '{print $2}') )
-    ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}"
+    local openssh=( $(pacman -Ql openssh | grep "exe" | awk '{print $2}') )
+    ensure-installed "$INSTALL_TARGET/bin/" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}" "${openssh[@]}"
 }
 
 function install() {
