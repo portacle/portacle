@@ -89,9 +89,16 @@ function ensure-dependencies() {
     done
 }
 
+function find-binaries() {
+    case "$PLATFORM" in
+        win) find "$1" -name "*.exe" -type f -executable -print;;
+        *)   find "$1" -type f -executable -exec sh -c "file -i '{}' | grep -q 'x-executable; charset=binary'" \; -print
+    esac
+}
+
 ## This does not need explanation
 function eecho() {
-    >2& echo $@
+    echo $@ >&2
 }
 
 function eexit() {
