@@ -45,15 +45,28 @@ function nonlocal-ldd() {
     esac
 }
 
+## Sort and strip all duplicates from the arguments
+function uniquify() {
+    echo "$@" | tr ' ' '\n' | sort -u | tr '\n' ' '
+}
+
+function contains () {
+  local e
+  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+  return 1
+}
+
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
-    local fulldeps=( "${deps[@]}" )
+    local fulldeps=( "${deps[@]}" "${@:2}" )
     for dep in "${deps[@]}"; do
-        local newdeps=$(compute-dependencies "$dep")
-        fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
+        if ! contains "$dep" "${fulldeps[@]}"; then
+            local newdeps=$(compute-dependencies "$dep")
+            fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
+        fi
     done
-    echo "${fulldeps[@]}"
+    uniquify "${fulldeps[@]}"
 }
 
 ## Ensure the given array of files is copied to the target directory
