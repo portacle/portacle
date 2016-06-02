@@ -1,3 +1,5 @@
+[core]
+        symlinks = true
 [http]
         sslcainfo = shared/ssl/ca-bundle.crt
 [push]
