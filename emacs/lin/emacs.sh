@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function find_apropriate_file() {
+function find-appropriate-file() {
     local files=( $1 )
     echo $(basename "${files[0]}")
 }
@@ -8,8 +8,8 @@ function find_apropriate_file() {
 readonly SCRIPT=$(dirname $(readlink -f "$0"))
 export ROOT=${ROOT:-$(readlink -f "$SCRIPT/../../")/}
 
-readonly EMACSVER=$(find_apropriate_file "$ROOT/emacs/share/emacs/*.*")
-readonly EMACSLIBEXEC=$(find_apropriate_file "$ROOT/emacs/lin/libexec/emacs/$EMACSVER/*")
+readonly EMACSVER=$(find-appropriate-file "$ROOT/emacs/share/emacs/*.*")
+readonly EMACSLIBEXEC=$(find-appropriate-file "$ROOT/emacs/lin/libexec/emacs/$EMACSVER/*")
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOT/emacs/lin/lib/
 export EMACSDATA=$ROOT/emacs/share/emacs/$EMACSVER/etc/
