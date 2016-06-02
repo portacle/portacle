@@ -5,6 +5,7 @@ set ROOT=%SCRIPT%\..\..\
 rem // This crazy thing resolves the relative path
 FOR /F "delims=" %%F IN ("%ROOT%") DO SET "ROOT=%%~fF"
 
-set PATH=%ROOT%\git\win\bin;%ROOT%\git\win\libexec\git-core;%PATH%
+set PATH=%ROOT%\shared\lib;%PATH%
+set PATH=%ROOT%\shared\bin;%PATH%
 
-"%ROOT%git\win\bash.bat" "-c" "/git/win/bin/git.exe %*"
+"%ROOT%git\win\bin\chroot.exe" %ROOT% "%ROOT%\shared\bin\bash.exe" %*
