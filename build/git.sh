@@ -45,6 +45,7 @@ function install() {
         win) win-copy-coreutils "$SHARED_DIR/bin/"
              ensure-installed "$SHARED_DIR/ssl/" "/usr/ssl/certs/ca-bundle.crt"
              ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
+             ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
