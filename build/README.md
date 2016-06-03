@@ -6,7 +6,7 @@ Install the build prerequisites:
 3. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
 4. Development files for `ncurses x11 xpm gtk2.0 zlib pcre curl`.
 
-For Debian based systems, simply run: `apt-get install sbcl git build-essential autoconf automake libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev`
+For Debian based systems, simply run: `apt-get install sbcl git build-essential autoconf automake libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev`
 
 Proceed with the `General Procedure` section.
 
@@ -34,7 +34,7 @@ Install the build prerequisites:
 
 1. XCode and the XCode command line developer tools
 2. MacPorts, Homebrew, or Fink
-3. From one of those package managers, install `autoconf automake sbcl git`, making sure they are in your `PATH`.
+3. From one of those package managers, install `autoconf automake sbcl git gettext`, making sure they are in your `PATH`.
 
 Proceed with the `General Procedure` section.
 
