@@ -1,5 +1,7 @@
 [core]
         symlinks = true
+        autocrlf = input
+        eol = lf
 [http]
         sslcainfo = shared/ssl/ca-bundle.crt
 [push]
