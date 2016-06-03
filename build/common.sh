@@ -92,8 +92,9 @@ function ensure-dependencies() {
 
 function find-binaries() {
     case "$PLATFORM" in
-        win) find "$1" -name "*.exe" -type f -executable -print;;
-        *)   find "$1" -type f -executable -exec sh -c "file -i '{}' | grep -q 'x-executable; charset=binary'" \; -print
+        win) find "$1" -name "*.exe" -type f -executable -print ;;
+        mac) find "$1" -type f -perm +111 -exec sh -c "file '{}' | grep -q '64-bit executable'" \; -print ;;
+        lin) find "$1" -type f -executable -exec sh -c "file -i '{}' | grep -q 'x-executable; charset=binary'" \; -print ;;
     esac
 }
 
