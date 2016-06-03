@@ -24,10 +24,15 @@ function build() {
         || eexit "The build failed. Please check the output for error messages."
 }
 
+function win-exes-for-package(){
+    pacman -Ql "$1" | grep "\\.exe" | awk '{print $2}'
+}
+
 function win-copy-coreutils() {
-    local coreutils=( $(pacman -Ql coreutils | grep "exe" | awk '{print $2}') )
-    local openssh=( $(pacman -Ql openssh | grep "exe" | awk '{print $2}') )
-    ensure-installed "$1" "/usr/bin/bash.exe" "/usr/bin/sh.exe" "${coreutils[@]}" "${openssh[@]}"
+    ensure-installed "$1" $(win-exes-for-package bash) \
+                     $(win-exes-for-package coreutils) \
+                     $(win-exes-for-package openssh) \
+                     $(win-exes-for-package grep)
     ensure-dependencies $(find-binaries "$1")
 }
 
