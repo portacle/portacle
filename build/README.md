@@ -20,9 +20,12 @@ Install the build prerequisites:
 5. Reopen the shell and run `pacman -Su`
 6. Install these packages: `pacman -S git base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls`
 7. Launch the MinGW64 shell (not the MSYS shell!) and do `export PATH="/c/Program Files/Steel Bank Common Lisp/1.3.5/:$PATH"`
-8. Make sure that GIT will use symlinks `git config --global core.symlinks true`
 
-Proceed with the `General Procedure` section.
+Proceed with the `General Procedure` section. After this, make sure to do the following:
+
+1. Within the portacle repository root `git config core.symlinks true`
+2. Make sure the symlinks are applied `git checkout git/*/etc/gitconfig`
+3. And finally stop git from complaining on pull `git update-index --assume-unchanged git/*/etc/gitconfig`
 
 The `portacle.exe` file included in the root directory is created from the `portacle.bat` file using <http://www.f2ko.de/en/b2e.php>. This is done primarily to avoid creating a command prompt window and secondarily to allow adding an icon to the launcher.
 
