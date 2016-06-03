@@ -5,9 +5,9 @@ readonly REPOSITORY=https://github.com/quicklisp/quicklisp-client.git
 
 ###
 
-PLATFORM="."
 readonly PROGRAM=quicklisp
 source common.sh
+INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM
 
 function build() {
     sbcl --script "$SOURCE_DIR/setup.lisp" \
