@@ -76,9 +76,9 @@ function ensure-installed() {
     mkdir -p "$target"
     for file in "${files[@]}"; do
         local name=$(basename "$file")
-        if [ ! -f "$target/$name" ]; then
+        if [ ! -e "$target/$name" ]; then
             eecho "Copying $file"
-            cp "$file" "$target/$name"
+            cp -R "$file" "$target/$name"
         fi
     done
 }
