@@ -10,5 +10,5 @@ set SBCL_HOME=%ROOT%\sbcl\win\lib\sbcl\
 
 set PATH=%ROOT%\usr\lib\;%PATH%
 
-"%SCRIPT%\bin\sbcl" --no-sysinit --userinit "%ROOT%\config\sbcl-init.lisp" $@
+"%SCRIPT%\bin\sbcl" --no-sysinit --userinit "%ROOT%\config\sbcl-init.lisp" "%*"
 ENDLOCAL

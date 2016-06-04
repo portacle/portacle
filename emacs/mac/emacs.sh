@@ -48,4 +48,4 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc
 export PATH=$ROOT/mac/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
 export DYLD_LIBRARY_PATH=$ROOT/usr/lib/:$DYLD_LIBRARY_PATH
 
-"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" $@
+"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"
