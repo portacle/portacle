@@ -92,8 +92,11 @@ function install() {
     local package="$1"
     status "[$package] Installing"
     cd "$BUILDROOT/$package" \
-        && sudo pacman -U "$BUILDROOT/$package/$package"*"x86_64"*".tar.xz" --noconfirm \
+        || eexit "Failed to install package."
+    for package in "$BUILDROOT/$package/"*"$package"*"x86_64"*".tar.xz"; do
+        sudo pacman -U "$package" --noconfirm \
             || eexit "Failed to install package."
+    done
 }
 
 function info() {
