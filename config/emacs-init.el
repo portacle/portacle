@@ -61,19 +61,14 @@
 ")
 (setq initial-major-mode 'common-lisp-mode)
 
-;; Make sure we have GIT in the path
-(add-to-path (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/bin")
-                                  ((eql system-type 'darwin)     "git/mac/bin")
-                                  ((eql system-type 'windows-nt) "git/win/bin")))
-             (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/libexec/git-core")
-                                  ((eql system-type 'darwin)     "git/mac/libexec/git-core")
-                                  ((eql system-type 'windows-nt) "git/win/libexec/git-core"))))
+;; Make sure we have our paths set up
+(add-to-path (portacle-path "usr/bin/"))
+(add-to-path (portacle-path "usr/lib/"))
+(add-to-path (portacle-app-path "git" "bin/")
+             (portacle-app-path "git" "libexec/git-core/"))
 
 ;; But just to make doubly sure we'll tell Magit explicitly
-(setq magit-git-executable
-      (portacle-path (cond ((eql system-type 'gnu/linux)  "git/lin/git.sh")
-                           ((eql system-type 'darwin)     "git/mac/git.sh")
-                           ((eql system-type 'windows-nt) "git/win/git.bat"))))
+(setq magit-git-executable (portacle-app-path "git" "bin/git"))
 
 ;; Our update command
 (defun portacle-pull-preserving-changes (place)
