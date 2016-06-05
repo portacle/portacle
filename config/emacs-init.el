@@ -27,10 +27,8 @@
 (require 'shinmera-startup)
 
 ;; Make sure SLIME knows about our SBCL
-(setq slime-lisp-implementations
-      `((sbcl (,(portacle-path (cond ((eql system-type 'gnu/linux)  "sbcl/lin/sbcl.sh")
-                                     ((eql system-type 'darwin)     "sbcl/mac/sbcl.sh")
-                                     ((eql system-type 'windows-nt) "sbcl/win/sbcl.bat")))))))
+(setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
+(setq slime-lisp-implementations `((sbcl (,(portacle-app-path "sbcl" "bin/sbcl")))))
 
 (when window-system
   (toggle-frame-maximized)
