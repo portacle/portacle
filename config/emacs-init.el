@@ -2,9 +2,15 @@
 
 ;; Set up paths
 (setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
+(setq portacle-os (cond ((eql system-type 'gnu/linux)  "lin")
+                        ((eql system-type 'darwin)     "mac")
+                        ((eql system-type 'windows-nt) "win")))
 
 (defun portacle-path (path)
   (concat portacle-root path))
+
+(defun portacle-app-path (app path)
+  (portacle-path (concat app "/" portacle-os "/" path)))
 
 (setq user-emacs-directory (portacle-path "emacs/config/"))
 (add-to-list 'load-path (concat user-emacs-directory "shinmera/"))
