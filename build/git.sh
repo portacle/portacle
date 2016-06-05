@@ -51,6 +51,11 @@ function install() {
              ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
              mkdir -p "$PORTACLE_DIR/tmp"
+             ## Fix symlinks
+             cd "$PORTACLE_DIR"
+             git config core.symlinks true
+             git checkout "git/*/etc/gitconfig"
+             git update-index --assume-unchanged "git/*/etc/gitconfig"
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
