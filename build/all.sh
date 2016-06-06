@@ -3,5 +3,5 @@
 ./sbcl.sh \
     && ./emacs.sh \
     && ./git.sh \
-    && ./emacsd.sh \
-    && ./quicklisp.sh
+    && ./quicklisp.sh \
+    && ./emacsd.sh
