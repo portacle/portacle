@@ -76,9 +76,10 @@ function ensure-installed() {
     mkdir -p "$target"
     for file in "${files[@]}"; do
         local name=$(basename "$file")
+        local realfile=$(mreadlink "$file")
         if [ ! -e "$target/$name" ]; then
             eecho "Copying $file"
-            cp -R "$file" "$target/$name"
+            cp -R "$realfile" "$target/$name"
         fi
     done
 }
