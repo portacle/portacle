@@ -261,20 +261,37 @@ The following shortcuts are useful in the SLDB debugger.
 
 　ＣＵＳＴＯＭＩＳＩＮＧ
 
+Portacle's editor, Emacs, allows you to modify it through code. Lisp code, even. It's rather similar to Common Lisp in many aspects, but yet different in some. The dialect used in Emacs is called Elisp, and through it, you can write entire programs that run within Emacs. However, we'll just limit ourselves to some simple customisation here.
 
+In order to customise the editor, you'll want to edit the file config/user.el in the Portacle directory. If it doesn't exist yet, just create it. On next launch, it should be run automatically and your changes should apply.
+
+The most common task you probably want to perform is assign a keychord to a function that you otherwise have to perform through M-x. In order to do that, you can use define-my-key. As an example, here's how to add a keychord for the magit-status command:
+
+    (define-my-key "C-?" 'magit-status)
+
+To see that the keychord works, you can either save the file and restart Portacle, or you can load the change in directly by pressing C-M-x with the cursor on the expression. Remember to use C-h k and C-h m to see what a keychord already does or what kinds of actions are available in a buffer.
+
+Since Elisp is a full programming language with a big standard library provided by Emacs, going into more depth than this would easily blow the scale on this brief section here. Usually if you have something you'd like to do in Elisp or need some kind of functionality, chances are someone else has already solved it for you. Just give it a Google.
 
 　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ ＆　ＲＥＳＯＵＲＣＥＳ
 
-- Practical Common Lisp <http://www.gigamonkeys.com/book/>
-  An introduction to common lisp using practical projects. Requires some prior knowledge and experience with programming.
+- A Gentle Introduction to Symbolic Computation <https://www.cs.cmu.edu/~dst/LispBook/book.pdf>
+  An introduction to Common Lisp for absolute beginners. Should not require much knowledge of programming.
 
-- Lisp Works Hyperspec <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
+- Practical Common Lisp <http://www.gigamonkeys.com/book/>
+  An introduction to Common Lisp using practical projects. Requires some prior knowledge and experience with programming.
+
+- LispWorks Hyperspec <http://www.lispworks.com/documentation/HyperSpec/Front/index.htm>
   The CLHS is the primary source for when you're wondering what a function, type, variable, anything in CL is supposed to do.
 
 - L1sp.org <http://l1sp.org/html/>
-  Conveniently earch the CLHS by term.
+  This site allows you to conveniently search the CLHS by term, chapter, or even abbreviation.
 
 - Cliki <http://www.cliki.net/index>
   The Common Lisp wiki contains various information about common lisp projects.
 
-- MORE STUFF
+- Quickdocs <http://quickdocs.org/>
+  With Quickdocs you can easily search and browse all the libraries available through Quicklisp.
+
+- Emacs Wiki <https://emacswiki.org/>
+  The Wiki for Emacs, the editor used in Portacle.
