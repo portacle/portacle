@@ -29,7 +29,7 @@ function create-package() {
              "/c/Program Files/7-zip/7z.exe" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
                    || eexit "Could not create package."
              ;;
-        *)   tar -cJf "$file.tar.xz" "${files[@]}" \
+        *)   tar -cJf "$file.tar.xz" -C "$PORTACLE_DIR" "${files[@]}" \
                  || eexit "Could not create package."
              ;;
     esac
