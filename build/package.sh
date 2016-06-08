@@ -16,11 +16,10 @@ function win-translate-names() {
 
 function create-package() {
     local file="$1"
-    local files=("${@:2}")
     local dir=$(dirname "$file")
     mkdir -p "$dir"
-    cd "$dir" \
-        || eexit "Could not enter packaging directory."
+    cd "$PORTACLE_DIR"
+    local files=($(discover-files "."))
 
     case "$PLATFORM" in
         win) local winfile=$(win-translate-names "$file")
@@ -29,7 +28,7 @@ function create-package() {
              "/c/Program Files/7-zip/7z.exe" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
                    || eexit "Could not create package."
              ;;
-        *)   tar -cJf "$file.tar.xz" -C "$PORTACLE_DIR" "${files[@]}" \
+        *)   tar -cJf "$file.tar.xz" "${files[@]}" \
                  || eexit "Could not create package."
              ;;
     esac
@@ -40,7 +39,7 @@ function discover-files() {
 }
 
 function package-up() {
-    create-package "$PACKAGE_DIR/$PACKAGE_FILE" $(discover-files "$PORTACLE_DIR")
+    create-package "$PACKAGE_DIR/$PACKAGE_FILE"
 }
 
 package-up
