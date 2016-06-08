@@ -6,5 +6,5 @@ emacs/config/
 sbcl/*/*/
 git/*/*/
 quicklisp/
-bundle/
+package/
 projects/*
