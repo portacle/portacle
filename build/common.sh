@@ -50,7 +50,11 @@ function uniquify() {
     echo "$@" | tr ' ' '\n' | sort -u | tr '\n' ' '
 }
 
-function contains () {
+function system-has() {
+    return hash "$1" 2>/dev/null
+}
+
+function contains() {
   local e
   for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
   return 1
