@@ -1,3 +1,4 @@
+(require 'cl)
 (load-library "iso-transl")
 
 (cl-defmacro os-case (&body cases)
