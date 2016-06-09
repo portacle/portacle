@@ -1,10 +1,14 @@
+## Build artefacts
 Thumbs.db
 .directory
 build/*/
+package/
+## Build results
 emacs/*/*/
 emacs/config/
 sbcl/*/*/
 git/*/*/
 quicklisp/
-package/
+usr/
+## Other stuff
 projects/*
