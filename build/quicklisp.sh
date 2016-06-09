@@ -17,7 +17,7 @@ function build() {
 function install() {
     mkdir -p "$INSTALL_TARGET" \
         || eexit "Failed to create $INSTALL_TARGET"
-    cp -R "$SOURCE_DIR/." "$INSTALL_TARGET" \
+    cp -Rf "$SOURCE_DIR/." "$INSTALL_TARGET" \
         || eexit "Failed to copy Quicklisp."
     rm -rf "$INSTALL_TARGET/.git"
 }

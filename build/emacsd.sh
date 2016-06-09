@@ -11,7 +11,7 @@ INSTALL_TARGET=$SCRIPT_DIR/../emacs/config/shinmera/
 function install (){
     mkdir -p "$INSTALL_TARGET" \
         || eexit "Failed to create $INSTALL_TARGET"
-    cp -R "$SOURCE_DIR/." "$INSTALL_TARGET" \
+    cp -Rf "$SOURCE_DIR/." "$INSTALL_TARGET" \
         || eexit "Failed to copy sources to $INSTALL_TARGET"
     ## We don't remove the .git directory so that you can update easily.
     echo ""
