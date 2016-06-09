@@ -4,4 +4,5 @@
     && ./emacs.sh "$@" \
     && ./git.sh "$@" \
     && ./quicklisp.sh "$@" \
-    && ./emacsd.sh "$@"
+    && ./emacsd.sh "$@" \
+    && ./package.sh
