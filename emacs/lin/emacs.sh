@@ -42,6 +42,5 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/url:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc
 
 export PATH=$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
-export LD_LIBRARY_PATH=$ROOT/usr/lib/:$LD_LIBRARY_PATH
 
-"$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"
+"$ROOT/usr/lib/ld-linux.so" --library-path "$ROOT/usr/lib/" "$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"
