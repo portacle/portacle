@@ -1,10 +1,14 @@
 (load-library "iso-transl")
 
+(cl-defmacro os-case (&body cases)
+  `(cond ,@(cl-loop for case in cases collect
+                    (if (eql (car case) t)
+                        `(t ,@(cdr case))
+                        `((eql system-type ',(car case)) ,@(cdr case))))))
+
 ;; Set up paths
 (setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
-(setq portacle-os (cond ((eql system-type 'gnu/linux)  "lin")
-                        ((eql system-type 'darwin)     "mac")
-                        ((eql system-type 'windows-nt) "win")))
+(setq portacle-os (os-case (gnu/linux "lin") (darwin "mac") (windows-nt "win")))
 
 (defun portacle-path (path)
   (concat portacle-root path))
@@ -28,17 +32,15 @@
 
 ;; Make sure SLIME knows about our SBCL
 (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
-(setq slime-lisp-implementations `((sbcl (,(portacle-app-path "sbcl" "bin/sbcl")))))
+(setq slime-lisp-implementations `((sbcl (,(os-case (gnu/linux (portacle-app-path "sbcl" "sbcl.sh"))
+                                                    (t         (portacle-app-path "sbcl" "bin/sbcl")))))))
 
 (when window-system
   (toggle-frame-maximized)
   ;; Pick an acceptable default font
-  (cond ((eql system-type 'gnu/linux)
-         (set-frame-font "Monospace-10" nil t))
-        ((eql system-type 'darwin)
-         (set-frame-font "Monaco-10" nil t))
-        ((eql system-type 'windows-nt)
-         (set-frame-font "Consolas-10" nil t))))
+  (set-frame-font (os-case (gnu/linux "Monospace-10")
+                           (darwin "Monaco-10")
+                           (windows-nt "Consolas-10")) nil t))
 
 ;; Open the help file
 (with-current-buffer (get-buffer-create "*portacle-help*")
@@ -66,7 +68,8 @@
              (portacle-app-path "git" "libexec/git-core/"))
 
 ;; But just to make doubly sure we'll tell Magit explicitly
-(setq magit-git-executable (portacle-app-path "git" "bin/git"))
+(setq magit-git-executable (os-case (gnu/linux (portacle-app-path "git" "git.sh"))
+                                    (t         (portacle-app-path "git" "bin/git"))))
 
 ;; Our update command
 (defun portacle-pull-preserving-changes (place)
