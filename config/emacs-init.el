@@ -68,6 +68,48 @@
 (setq magit-git-executable (os-case (gnu/linux (portacle-app-path "git" "git.sh"))
                                     (t         (portacle-app-path "git" "bin/git"))))
 
+;; Populate default MC lists
+(unless (file-exists-p mc/list-file)
+  (setq mc/cmds-to-run-for-all
+        '(backward-sexp
+          downcase-region
+          electric-newline-and-maybe-indent
+          end-of-buffer
+          forward-sexp
+          indent-for-tab-command
+          kill-region
+          paredit-backslash
+          paredit-backward
+          paredit-close-round
+          paredit-close-square
+          paredit-comment-dwim
+          paredit-convolute-sexp
+          paredit-doublequote
+          paredit-forward
+          paredit-forward-barf-sexp
+          paredit-forward-delete
+          paredit-forward-down
+          paredit-forward-slurp-sexp
+          paredit-kill
+          paredit-newline
+          paredit-open-round
+          paredit-open-square
+          paredit-reindent-defun
+          paredit-semicolon
+          paredit-splice-sexp-killing-backward
+          paredit-backslash
+          reindent-then-newline-and-indent
+          scroll-other-window
+          slime-autodoc-space
+          slime-space
+          switch-to-buffer
+          upcase-region
+          yank-rectangle))
+  (setq mc/cmds-to-run-once
+        '(down-list
+          ido-list-directory
+          mouse-drag-mode-line)))
+
 ;; Our update command
 (defun portacle-pull-preserving-changes (place)
   (let ((default-directory place))
