@@ -7,6 +7,11 @@
                         `(t ,@(cdr case))
                         `((eql system-type ',(car case)) ,@(cdr case))))))
 
+(defun file-contents (file)
+  (with-temp-buffer
+      (insert-file-contents file)
+    (buffer-string)))
+
 ;; Set up paths
 (setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
 (setq portacle-os (os-case (gnu/linux "lin") (darwin "mac") (windows-nt "win")))
@@ -50,16 +55,7 @@
   (emacs-lock-mode 'kill))
 
 ;; Customise the scratch buffer
-(setq initial-scratch-message "\
-;;;; Welcome to Portacle, the Portable Common Lisp Environment.
-;; For information on Portacle and how to use it, please read the website at
-;;   https://github.com/Shinmera/portacle
-;; or see the *portacle-help* buffer. You can switch to it by pressing this:
-;;   Ctrl+x b *portacle-help* Enter
-;;
-;; You can use this buffer for notes and tinkering with small pieces of code.
-
-")
+(setq initial-scratch-message (file-contents (portacle-path "config/scratch.txt")))
 (setq initial-major-mode 'common-lisp-mode)
 
 ;; Make sure we have our paths set up
