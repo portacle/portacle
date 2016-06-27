@@ -1,3 +1,9 @@
+(in-package #:cl-user)
+(defpackage #:portacle
+  (:use #:cl)
+  (:export #:portacle-root))
+(in-package #:portacle)
+
 (require 'sb-posix)
 (require 'asdf)
 
@@ -17,7 +23,7 @@
                                (lisp-implementation-version)
                                (software-type)
                                (machine-type))
-       (merge-pathnames "sbcl/asdf-cache/" (portacle-root))))
+                       (merge-pathnames "sbcl/asdf-cache/" (portacle-root))))
 
 ;; Load quicklisp
 #-quicklisp
@@ -26,3 +32,5 @@
 
 ;; Add the project folder to Quicklisp's local-projects directories.
 (pushnew (merge-pathnames "projects/" (portacle-root)) ql:*local-project-directories*)
+
+(in-package #:cl-user)
