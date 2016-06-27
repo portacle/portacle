@@ -34,6 +34,7 @@ function win-copy-coreutils() {
                      $(win-exes-for-package openssh) \
                      $(win-exes-for-package grep) \
                      $(win-exes-for-package less) \
+                     $(win-exes-for-package sed) \
                      $(win-exes-for-package msys2-runtime) \
                      $(win-exes-for-package ncurses)
     ensure-dependencies $(find-binaries "$1")
