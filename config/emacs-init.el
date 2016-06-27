@@ -36,14 +36,27 @@
 (require 'shinmera-lisp)
 (require 'shinmera-startup)
 
+;; Customise the PATH envvar
+(add-to-path (portacle-path "usr/bin/"))
+(add-to-path (portacle-path "usr/lib/"))
+(add-to-path (portacle-app-path "git" "bin/")
+             (portacle-app-path "git" "libexec/git-core/"))
+
 ;; Make sure SLIME knows about our SBCL
 (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
-(setq slime-lisp-implementations `((sbcl (,(os-case (gnu/linux (portacle-app-path "sbcl" "sbcl.sh"))
-                                                    (t         (portacle-app-path "sbcl" "bin/sbcl")))))))
+(setq slime-lisp-implementations `((sbcl ,(os-case (windows-nt (list (portacle-app-path "sbcl" "bin/sbcl")
+                                                                     "--no-sysinit"
+                                                                     "--userinit"
+                                                                     (portacle-path "config/sbcl-init.lisp")))
+                                                   (t (list (portacle-app-path "sbcl" "sbcl.sh")))))))
 
+;; Set the Magit executable explicitly
+(setq magit-git-executable (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
+                                    (t           (portacle-app-path "git" "git.sh"))))
+
+;; Customise graphic mode
 (when window-system
   (toggle-frame-maximized)
-  ;; Pick an acceptable default font
   (set-frame-font (os-case (gnu/linux "Monospace-10")
                            (darwin "Monaco-10")
                            (windows-nt "Consolas-10")) nil t))
@@ -57,16 +70,6 @@
 ;; Customise the scratch buffer
 (setq initial-scratch-message (file-contents (portacle-path "config/scratch.txt")))
 (setq initial-major-mode 'common-lisp-mode)
-
-;; Make sure we have our paths set up
-(add-to-path (portacle-path "usr/bin/"))
-(add-to-path (portacle-path "usr/lib/"))
-(add-to-path (portacle-app-path "git" "bin/")
-             (portacle-app-path "git" "libexec/git-core/"))
-
-;; But just to make doubly sure we'll tell Magit explicitly
-(setq magit-git-executable (os-case (gnu/linux (portacle-app-path "git" "git.sh"))
-                                    (t         (portacle-app-path "git" "bin/git"))))
 
 ;; Populate default MC lists
 (unless (file-exists-p mc/list-file)
