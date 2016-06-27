@@ -60,7 +60,10 @@ function prepare-for-packaging() {
     if system-has rsync; then
         rsync -avz "${files[@]}" "$target"
     else
-        cp -rfuv "${files[@]}" "$target"
+        case "$PLATFORM" in
+            mac) cp -Rfv "${files[@]}" "$target" ;;
+            *)   cp -Rfuv "${files[@]}" "$target" ;;
+        esac
     fi
 }
 
