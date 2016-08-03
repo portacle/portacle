@@ -24,10 +24,6 @@ function build() {
         || eexit "The build failed. Please check the output for error messages."
 }
 
-function win-exes-for-package(){
-    pacman -Ql "$1" | grep "\\.exe" | awk '{print $2}'
-}
-
 function win-copy-coreutils() {
     ensure-installed "$1" $(win-exes-for-package bash) \
                      $(win-exes-for-package coreutils) \
