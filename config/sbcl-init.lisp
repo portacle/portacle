@@ -5,32 +5,46 @@
 (in-package #:portacle)
 
 (require 'sb-posix)
-(require 'asdf)
 
 (defun portacle-root ()
   (pathname (or (sb-posix:getenv "ROOT") (user-homedir-pathname))))
+
+(defun portacle-path (file)
+  (merge-pathnames file (portacle-root)))
+
+(defun load-portacle-file (file)
+  (let ((file (portacle-path file)))
+    (when (probe-file file) (load file))))
 
 ;; Ensure nice debuggability
 (sb-ext:restrict-compiler-policy 'debug 3)
 
 ;; Fix up the source locations
-(sb-ext:set-sbcl-source-location (merge-pathnames "sbcl/sources/" (portacle-root)))
+(sb-ext:set-sbcl-source-location (portacle-path "sbcl/sources/"))
+
+;; Load ASDF
+#-asdf3
+(or (load-portacle-file "asdf/asdf.fasl")
+    (load-portacle-file "asdf/asdf.lisp")
+    (warn "Failed to load ASDF."))
 
 ;; Fix up the ASDF cache location
+#+asdf3
 (setf asdf:*user-cache*
       (merge-pathnames (format NIL "~a-~a-~a-~a/"
                                (lisp-implementation-type)
                                (lisp-implementation-version)
                                (software-type)
                                (machine-type))
-                       (merge-pathnames "sbcl/asdf-cache/" (portacle-root))))
+                       (portacle-path "asdf/cache/")))
 
 ;; Load quicklisp
 #-quicklisp
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp" (portacle-root))))
-  (load quicklisp-init))
+(or (load-portacle-file "quicklisp/setup.lisp")
+    (warn "Failed to load quicklisp."))
 
 ;; Add the project folder to Quicklisp's local-projects directories.
-(pushnew (merge-pathnames "projects/" (portacle-root)) ql:*local-project-directories*)
+#+quicklisp
+(pushnew (portacle-path "projects/") ql:*local-project-directories*)
 
 (in-package #:cl-user)
