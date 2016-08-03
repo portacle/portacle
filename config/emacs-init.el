@@ -1,5 +1,6 @@
 (require 'cl)
 (load-library "iso-transl")
+(setq default-buffer-file-coding-system 'utf-8-unix)
 
 (cl-defmacro os-case (&body cases)
   `(cond ,@(cl-loop for case in cases collect
