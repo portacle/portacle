@@ -73,14 +73,7 @@ function package() {
     package-portacle-dir "$PACKAGE_DIR/$PACKAGE_FILE" "$target"
 }
 
-function ensure-global-deps() {
-    case "$PLATFORM" in
-        lin) cp -fuv "$SHARED_DIR/lib/ld-linux.so" "/lib64/ld-linux-x86-64.so.2" ;;
-    esac
-}
-
 function main() {
-    ensure-global-deps
     package
 }
 
