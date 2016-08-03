@@ -60,6 +60,10 @@ function contains() {
   return 1
 }
 
+function win-exes-for-package(){
+    pacman -Ql "$1" | grep "\\.exe" | awk '{print $2}'
+}
+
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
