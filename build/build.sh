@@ -29,7 +29,7 @@ function editor() {
 function utils() {
     ./git.sh "$@" \
         && ./aspell.sh "$@" \
-        && ./aspell-dicts.sh "$@" \
+        && ./aspell-dicts.sh "$@"
 }
 
 function package() {
