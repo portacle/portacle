@@ -6,6 +6,10 @@ function reset() {
     git clean -ffxd
 }
 
+function update() {
+    git pull origin master
+}
+
 function global() {
     ./global.sh "$@"
 }
