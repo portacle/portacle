@@ -1,6 +1,13 @@
 #!/bin/bash
 
-TARGET=${1:-all}
+TARGETS=( ${@:-all} )
+
+function info() {
+    local VERSION=$(git describe --tags)
+    echo "  Portacle Build
+Version: $VERSION
+Targets: ${TARGETS[@]}"
+}
 
 function reset() {
     git clean -ffxd
@@ -36,22 +43,28 @@ function package() {
     ./package.sh "$@"
 }
 
-function all() {
+function upgrade() {
     global "$@" \
         && cl "$@" \
         && editor "$@" \
-        && utils "$@" \
+        && utils "$@"
+}
+
+function all() {
+    upgrade "$@" \
         && package "$@"
 }
 
 function fresh() {
-    reset \
-        && update \
-        && all
+    reset "$@" \
+        && update "$@" \
+        && all "$@"
 }
 
 function main() {
-    $TARGET
+    for TARGET in "${TARGETS[@]}"; do
+        $TARGET || exit 1
+    done
 }
 
 main
