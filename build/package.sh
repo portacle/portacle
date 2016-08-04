@@ -2,9 +2,9 @@
 
 source common.sh
 
-PACKAGE_DIR=$PORTACLE_DIR/package/
-PACKAGE_VERS=$(git rev-parse --short HEAD)
-PACKAGE_FILE=$PLATFORM-portacle-$PACKAGE_VERS
+PACKAGE_DIR=${PACKGE_DIR:-$PORTACLE_DIR/package/}
+PACKAGE_VERSION=${PACKAGE_VERSION:-$(git describe --tags)}
+PACKAGE_FILE=${PACKAGE_FILE:-$PLATFORM-portacle-$PACKAGE_VERSION}
 
 function win-translate-paths() {
     local result=()
@@ -73,7 +73,7 @@ function package() {
     package-portacle-dir "$PACKAGE_DIR/$PACKAGE_FILE" "$target"
 }
 
-function main() {
+function run_all() {
     package
 }
 
