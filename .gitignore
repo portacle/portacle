@@ -4,6 +4,7 @@ Thumbs.db
 build/*/
 package/
 ## Build results
+aspell/*/*/
 emacs/*/*/
 emacs/config/
 sbcl/*/*/
