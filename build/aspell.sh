@@ -10,13 +10,17 @@ readonly PROGRAM=aspell
 source common.sh
 INSTALL_DIR="$PORTACLE_DIR/$PROGRAM/"
 
+case "$PLATFORM" in
+    win) CONFIGURE="$CONFIGURE_OPTIONS --disable-nls" ;;
+    *)   CONFIGURE="$CONFIGURE_OPTIONS" ;;
+esac
 
 function prepare() {
     cd "$SOURCE_DIR"
     ./autogen
     ./configure --prefix="/$PLATFORM" --sysconfdir="/share" --datarootdir="/share" \
                 --enable-pkgdatadir="/$PLATFORM/data" --enable-pkglibdir="/$PLATFORM/data" \
-                $CONFIGURE_OPTIONS \
+                $CONFIGURE \
         || eexit "Configure failed. Maybe some dependencies are missing?"
 }
 
