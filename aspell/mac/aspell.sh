@@ -6,7 +6,8 @@ function mreadlink() {
 readonly SCRIPT=$(dirname $(mreadlink "$0"))
 export ROOT=${ROOT:-$(readlink -f "$SCRIPT/../../")/}
 
-export PATH=$ROOT/aspell/lin/bin:$PATH
-export ASPELL_CONF="conf-dir $ROOT/aspell/share;home-dir $ROOT/config;data-dir $ROOT/aspell/mac/data"
+ASPELL_SHARE="$ROOT/aspell/share"
+export PATH="$ROOT/aspell/lin/bin:$PATH"
+export ASPELL_CONF="conf-dir $ASPELL_SHARE;data-dir $ASPELL_SHARE;home-dir $ROOT/config"
 
 "$SCRIPT/bin/aspell" "$@"
