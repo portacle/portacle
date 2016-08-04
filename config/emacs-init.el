@@ -42,6 +42,7 @@
 (add-to-path (portacle-path "usr/lib/"))
 (add-to-path (portacle-app-path "git" "bin/")
              (portacle-app-path "git" "libexec/git-core/"))
+(add-to-path (portacle-app-path "aspell" "bin/"))
 
 ;; Make sure SLIME knows about our SBCL
 (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
@@ -54,6 +55,11 @@
 ;; Set the Magit executable explicitly
 (setq magit-git-executable (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
                                     (t           (portacle-app-path "git" "git.sh"))))
+
+;; Configure ispell
+(setq ispell-program-name (os-case (windows-nt (portacle-app-path "aspell" "aspell.bat"))
+                                   (t          (portacle-app-path "aspell" "aspell.sh"))))
+(setq ispell-personal-dictionary (portacle-path "config/dictionary"))
 
 ;; Customise graphic mode
 (when window-system
