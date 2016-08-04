@@ -171,7 +171,7 @@ function clean() {
     rm -rf "$SOURCE_DIR"
 }
 
-function clean_installed() {
+function clean-installed() {
     cd "$INSTALL_TARGET"
     rm -R ./*/
 }
