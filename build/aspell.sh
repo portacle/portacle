@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=0.60.6.2
+readonly TAG=0.60.6.3
 readonly REPOSITORY=https://github.com/Shinmera/aspell
 readonly CONFIGURE_OPTIONS="--disable-shared --disable-rpath"
 
