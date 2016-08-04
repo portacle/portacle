@@ -43,4 +43,23 @@ Using the appropriate terminal, simply run:
     cd portacle/build
     ./build.sh
     
-The root portacle folder should now be built for the given system. You can ZIP up all the files except for the `build` folder and be ready to go. Things should be able to coexist with each other just fine, so you should be able to build for multiple systems with the same directory too.
+This will generate a ready-to-deploy package. In case you are only doing this for your own local needs and don't want it packaged up, you can instead run:
+
+    ./build.sh upgrade
+
+You can use this again every time you'd like to upgrade the binary components of Portacle to a new version. Should you ever desire a packaged deal, this will do it for you:
+
+    ./build.sh package
+
+If you need a completely fresh start that will *delete everything that is not in a clean clone*, run the `reset` target or `fresh` if you want to build a complete package.
+
+Each component being built has its own build script that you can run individually as well. They all accept the name of a stage to run, usually one of: `clean`, `download`, `prepare`, `build`, or `install`, defaulting to running all of them in that sequence. The components are:
+
+* `asdf` -- The de-facto standard Common Lisp build system. Bundled because SBCL's internal one is not always new enough.
+* `aspell` -- A spell checker used by emacs. Mostly bundled for Windows.
+* `aspell-dicts` -- Any spell checker will need dictionaries.
+* `emacs` -- Emacs is a long-standing, massively extensible editor ideal for editing Lisp code.
+* `emacsd` -- Since Emacs is extensible, we need some sensible configuration for it.
+* `git` -- Developing anything without version control is madness. Besides it's an easy way to access other people's projects and update Portacle itself.
+* `quicklisp` -- The de-facto standard Common Lisp package manager. Bundled because getting by without it would be much less than simple.
+* `sbcl` -- The best and most simple to build open source Common Lisp implementation.
