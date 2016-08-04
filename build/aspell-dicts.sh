@@ -2,6 +2,7 @@
 
 readonly TAG=1.0.0
 readonly REPOSITORY=https://github.com/shinmera/aspell-dicts
+readonly ARCHIVES=https://github.com/Shinmera/aspell-dicts/releases/download/$TAG/
 readonly DICTS=( "en" )
 
 ###
@@ -43,5 +44,36 @@ function install() {
             || eexit "Failed to install $dict"
     done
 }
+
+## Windows gets special treatment because life is too short to figure out
+## how to get it to build the dictionary files on its own.
+case "$PLATFORM" in
+    win)
+        function download() {
+            export CURL_CA_BUNDLE=/usr/ssl/certs/ca-bundle.crt
+            for dict in "${ALLDICTS[@]}"; do
+                curl -L -o "$SOURCE_DIR/$dict.zip" "$ARCHIVES/aspell-dicts-$dict.zip" \
+                    || eexit "Failed to download $dict from $ARCHIVES/aspell-dicts-$dict.zip"
+            done
+        }
+
+        function prepare() {
+            echo "Skipping prepare"
+        }
+
+        function build() {
+            echo "Skipping build"
+        }
+
+        function install() {
+            cd "$SOURCE_DIR"
+            for dict in "${ALLDICTS[@]}"; do
+                unzip "$SOURCE_DIR/$dict.zip" -d "$INSTALL_TARGET" \
+                      || eexit "Failed to extract $dict"
+            done
+        }
+        ;;
+esac
+
 
 main
