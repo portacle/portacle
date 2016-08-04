@@ -4,6 +4,7 @@ TARGET=${1:-all}
 
 function reset() {
     git clean -ffxd
+    git reset --hard HEAD
 }
 
 function update() {
@@ -41,6 +42,12 @@ function all() {
         && editor "$@" \
         && utils "$@" \
         && package "$@"
+}
+
+function fresh() {
+    reset \
+        && update \
+        && all
 }
 
 function main() {
