@@ -131,6 +131,11 @@ Using threads:      ${MAXCPUS}
 }
 
 function download() {
+    if [ -z "$REPOSITORY" ]; then
+        echo "Skipping download"
+        return 0
+    fi
+    
     mkdir -p "$SOURCE_DIR" &> /dev/null
     if [ -d "$SOURCE_DIR/.git" ]; then
         cd "$SOURCE_DIR"
