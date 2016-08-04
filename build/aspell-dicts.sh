@@ -8,19 +8,13 @@ readonly DICTS=( "en" )
 
 readonly PROGRAM=aspell-dicts
 source common.sh
-INSTALL_TARGET=$SCRIPT_DIR/../aspell/share/
-
-case "$PLATFORM" in
-    win) ASPELL=$SCRIPT_DIR/../aspell/$PLATFORM/aspell.bat ;;
-    *)   ASPELL=$SCRIPT_DIR/../aspell/$PLATFORM/aspell.sh ;;
-esac
-
+INSTALL_TARGET=$PORTACLE_DIR/aspell/share
 
 function prepare() {
     cd "$SOURCE_DIR"
     for dict in "${DICTS[@]}"; do
         cd "$dict"
-        ./configure --vars ASPELL="$ASPELL"
+        ./configure --vars ASPELL="$SCRIPT_DIR/../aspell/$PLATFORM/aspell.sh"
     done
 }
 

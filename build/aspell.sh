@@ -19,7 +19,7 @@ function prepare() {
     cd "$SOURCE_DIR"
     ./autogen
     ./configure --prefix="/$PLATFORM" --sysconfdir="/share" --datarootdir="/share" \
-                --enable-pkgdatadir="/$PLATFORM/data" --enable-pkglibdir="/$PLATFORM/data" \
+                --enable-pkgdatadir="/share" --enable-pkglibdir="/share" \
                 $CONFIGURE \
         || eexit "Configure failed. Maybe some dependencies are missing?"
 }
