@@ -6,7 +6,7 @@ Install the build prerequisites:
 3. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
 4. Development files for `ncurses x11 xpm gtk2.0 zlib pcre curl`.
 
-For Debian based systems, simply run: `apt-get install sbcl git build-essential autoconf automake libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev`
+For Debian based systems, simply run: `apt-get install sbcl git build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libtool texinfo`
 
 Proceed with the `General Procedure` section.
 
@@ -18,7 +18,7 @@ Install the build prerequisites:
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
-6. Install these packages: `pacman -S git base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls`
+6. Install these packages: `pacman -S git base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv`
 7. Launch the MinGW64 shell (not the MSYS shell!) and do `export PATH="/c/Program Files/Steel Bank Common Lisp/1.3.5/:$PATH"`
 
 Proceed with the `General Procedure` section.
