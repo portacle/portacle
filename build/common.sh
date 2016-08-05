@@ -117,14 +117,23 @@ function eecho() {
 }
 
 function eexit() {
-    echo "! Error: $@"
+    echo "$(tput setaf 1) ! Error: $(tput sgr 0)" $@
     exit 1
+}
+
+function status() {
+    local level=$1
+    case "$level" in
+        0) echo "$(tput setaf 2) ==> $(tput sgr 0)" ${@:2};;
+        1) echo "$(tput setaf 3)   -> $(tput sgr 0)" ${@:2};;
+        *) echo "$(tput setaf 6)     > $(tput sgr 0)" ${@:2};;
+    esac
 }
 
 ## Following here are standard implementations for the various stages
 function info() {
-    echo "  Build info:
-Platform:           ${PLATFORM}
+    status 0 "${PROGRAM} build info:"
+    echo "Platform:           ${PLATFORM}
 Downloading from:   ${REPOSITORY}
 Using tag:          ${TAG}
 Building in:        ${SOURCE_DIR}
@@ -136,7 +145,7 @@ Using threads:      ${MAXCPUS}
 
 function download() {
     if [ -z "$REPOSITORY" ]; then
-        echo "Skipping download"
+        status 1 "Skipping download"
         return 0
     fi
     
@@ -160,15 +169,15 @@ function download() {
 }
 
 function prepare (){
-    echo "Skipping prepare"
+    status 1 "Skipping prepare"
 }
 
 function build (){
-    echo "Skipping build"
+    status 1 "Skipping build"
 }
 
 function install (){
-    echo "Skipping install"
+    status 1 "Skipping install"
 }
 
 function clean() {
