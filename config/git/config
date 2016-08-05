@@ -10,3 +10,6 @@
 	autosetuprebase = always
 [pull]
 	rebase = true
+[user]
+        name = Portacle-User
+        email = user@portacle
