@@ -10,7 +10,7 @@ Targets: ${TARGETS[@]}"
 }
 
 function reset() {
-    git clean -ffxd
+    git clean -fxd
     git reset --hard HEAD
 }
 
