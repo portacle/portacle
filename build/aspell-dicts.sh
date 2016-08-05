@@ -51,6 +51,7 @@ case "$PLATFORM" in
     win)
         function download() {
             export CURL_CA_BUNDLE=/usr/ssl/certs/ca-bundle.crt
+            mkdir -p "$SOURCE_DIR"
             for dict in "${ALLDICTS[@]}"; do
                 curl -L -o "$SOURCE_DIR/$dict.zip" "$ARCHIVES/aspell-dicts-$dict.zip" \
                     || eexit "Failed to download $dict from $ARCHIVES/aspell-dicts-$dict.zip"
