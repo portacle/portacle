@@ -55,7 +55,7 @@ function uniquify() {
 }
 
 function system-has() {
-    return hash "$1" 2>/dev/null
+    hash "$1" 2>/dev/null
 }
 
 function contains() {
