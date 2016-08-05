@@ -6,7 +6,7 @@ readonly REPOSITORY=https://github.com/Shinmera/portacle
 ##
 
 readonly PROGRAM=portacle
-TARGETS=( ${@:-download upgrade package} )
+DEFAULT_TARGETS=(download upgrade package)
 source common.sh
 
 SOURCE_DIR="$SCRIPT_DIR"
