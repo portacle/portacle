@@ -1,8 +1,8 @@
-　ＰＯＲＴＡＣＬＥ　ＨＥＬＰ
+* 　ＰＯＲＴＡＣＬＥ　ＨＥＬＰ
 
 If you are reading this then you either already successfully figured out how to switch buffers in Portacle, or you're sneaking through the files. Either way, great! This guide is supposed to help you find your way around this IDE, and to serve as a reference sheet in case you forget things. If you're just starting out, reading this all the way through is a good idea, as otherwise you will most likely get horribly confused about how to actually get things done.
 
-　ＴＥＲＭＩＮＯＬＯＧＹ
+* 　ＴＥＲＭＩＮＯＬＯＧＹ
 
 Before we get started we need to lay down some terms so that we can actually talk about things.
 
@@ -30,7 +30,7 @@ Before we get started we need to lay down some terms so that we can actually tal
 - Cursor
   The cursor is the coloured rectangle in the buffer. It indicates where you would be writing or performing any kind of command at the moment. If it is filled and blinking, then it means the buffer it belongs to is currently active. The cursor in inactive buffers is merely an outline.
 
-　ＫＥＹＣＨＯＲＤ　ＮＯＴＡＴＩＯＮ
+* 　ＫＥＹＣＨＯＲＤ　ＮＯＴＡＴＩＯＮ
 
 In order to be able to easily talk about and read keychords we'll have to go through the way they're usually denoted. It's not difficult or convoluted, so don't worry. You'll get the hang of it easily enough.
 
@@ -73,7 +73,7 @@ Press Control, Meta/Command/Alt, and t at the same time, then press d, then pres
 
 Simple enough, right? We'll use this keychord notation from here on out.
 
-　ＢＡＳＩＣ　ＮＡＶＩＧＡＴＩＯＮ
+* 　ＢＡＳＩＣ　ＮＡＶＩＧＡＴＩＯＮ
 
 Let's get through some basic keychords to navigate around in Portacle. Try them out to see for yourself what they do. Seeing it in effect probably explains it much better than I could hope to in words. You don't need to memorise all of the chords that are listed here either, you'll pick up on the ones you need as you go along.
 
@@ -188,7 +188,7 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
 - C-M-b
   Jump backward by a token. See C-M-f.
 
-　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
+* 　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
 
 These commands are specific to lisp buffers. They'll only work in buffers in the lisp major-mode.
 
@@ -259,7 +259,17 @@ The following shortcuts are useful in the SLDB debugger.
 - e
   With the cursor on a stack frame, evaluate an expression in the frame.
 
-　ＣＵＳＴＯＭＩＳＩＮＧ
+* 　ＧＩＴ　＆　ＭＡＧＩＴ
+
+Todo
+
+* 　ＭＡＮＡＧＩＮＧ　ＰＯＲＴＡＣＬＥ
+
+Some things like GIT require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use M-x portacle-configure . It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
+
+If you would like to update Portacle's configurations to the latest versions, you can simply use M-x portacle-update . This will however not update binary files like git, emacs, and sbcl themselves. However, those should only very seldom change or require a full upgrade.
+
+* 　ＣＵＳＴＯＭＩＳＩＮＧ
 
 Portacle's editor, Emacs, allows you to modify it through code. Lisp code, even. It's rather similar to Common Lisp in many aspects, but yet different in some. The dialect used in Emacs is called Elisp, and through it, you can write entire programs that run within Emacs. However, we'll just limit ourselves to some simple customisation here.
 
@@ -273,7 +283,7 @@ To see that the keychord works, you can either save the file and restart Portacl
 
 Since Elisp is a full programming language with a big standard library provided by Emacs, going into more depth than this would easily blow the scale on this brief section here. Usually if you have something you'd like to do in Elisp or need some kind of functionality, chances are someone else has already solved it for you. Just give it a Google.
 
-　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ ＆　ＲＥＳＯＵＲＣＥＳ
+* 　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ ＆　ＲＥＳＯＵＲＣＥＳ
 
 - A Gentle Introduction to Symbolic Computation <https://www.cs.cmu.edu/~dst/LispBook/book.pdf>
   An introduction to Common Lisp for absolute beginners. Should not require much knowledge of programming.
