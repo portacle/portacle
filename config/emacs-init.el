@@ -145,6 +145,18 @@
       (insert "===> All done\n")
       (insert "\n Press q to close this buffer."))))
 
+(defun portacle-set-user ()
+  (interactive)
+  (let ((name (read-string "Your name: " user-full-name))
+        (email (read-string "Your e-mail address: " user-mail-address)))
+    (call-process magit-git-executable nil nil t "config" "--system" "user.name" name)
+    (call-process magit-git-executable nil nil t "config" "--system" "user.email" email)
+    (write-region (prin1-to-string `(setq user-full-name ,name)) nil (portacle-path "config/user.el") 'append)
+    (write-region (prin1-to-string `(setq user-mail-address ,email)) nil (portacle-path "config/user.el") 'append)
+    (setq user-full-name name)
+    (setq user-mail-address email)
+    (message "User information set.")))
+
 ;; Other fixes
 (when (eql system-type 'windows-nt)
   ;; We hack this to never error because otherwise emacs refuses to work
