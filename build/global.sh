@@ -1,5 +1,8 @@
 #!/bin/bash
 
+readonly TAG=
+readonly REPOSITORY=
+
 ###
 
 readonly PROGRAM=global
