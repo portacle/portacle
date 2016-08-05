@@ -69,7 +69,7 @@ case "$PLATFORM" in
         function install() {
             cd "$SOURCE_DIR"
             for dict in "${ALLDICTS[@]}"; do
-                unzip "$SOURCE_DIR/$dict.zip" -d "$INSTALL_TARGET" \
+                unzip -u "$SOURCE_DIR/$dict.zip" -d "$INSTALL_TARGET" \
                       || eexit "Failed to extract $dict"
             done
         }
