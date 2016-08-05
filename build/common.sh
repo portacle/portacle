@@ -29,8 +29,9 @@ SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
 PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
 SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
 INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
-TARGETS=( ${TARGETS:-$@} )
-TARGETS=( ${TARGETS:-download prepare build install} )
+_DEFAULT_TARGETS=(download prepare build install)
+DEFAULT_TARGETS=("${DEFAULT_TARGETS[@]:-${_DEFAULT_TARGETS[@]}}")
+TARGETS=("${@:-${DEFAULT_TARGETS[@]}}")
 CFLAGS=${CFLAGS:-}
 CXXFLAGS=${CXXFLAGS:-}
 LDFLAGS=${LDFLAGS:-}
@@ -140,6 +141,7 @@ Using tag:          ${TAG}
 Building in:        ${SOURCE_DIR}
 Installing into:    ${INSTALL_TARGET}
 Using threads:      ${MAXCPUS}
+Building targets:   ${TARGETS[@]}
 "
 }
 
