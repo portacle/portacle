@@ -41,6 +41,9 @@ function package-files(){
 function package-portacle-dir() {
     local package="$1"
     local dir="$2"
+    
+    status 1 "Creating portacle package $package"
+
     mkdir -p $(dirname "$package")
     cd $(dirname "$dir")
 
@@ -55,6 +58,8 @@ function prepare-for-packaging() {
     local source="$1"
     local target="$2"
     local files=($(discover-files "$source"))
+
+    status 1 "Preparing files for packaging."
 
     mkdir -p "$target"
     if system-has rsync; then

@@ -15,10 +15,10 @@ function install (){
     cp -Rf "$SOURCE_DIR/." "$INSTALL_TARGET" \
         || eexit "Failed to copy sources to $INSTALL_TARGET"
     ## We don't remove the .git directory so that you can update easily.
-    echo ""
-    echo ";;;; Now launching emacs for the first time init."
-    echo ";; It will download the necessary libraries and compile them."
-    echo ";; Please be patient, it should automatically close when it is done."
+
+    status 2 "Now launching emacs for the first time init."
+    status 2 "It will download the necessary libraries and compile them."
+    status 2 "Please be patient, it should automatically close when it is done."
 
     case "$PLATFORM" in
         win) winroot=$({ cd "$SCRIPT_DIR/.." && pwd -W; } | sed 's|/|\\|g')

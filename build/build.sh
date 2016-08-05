@@ -1,11 +1,12 @@
 #!/bin/bash
 
 TARGETS=( ${@:-all} )
+source common.sh
 
 function info() {
     local VERSION=$(git describe --tags)
-    echo "  Portacle Build
-Version: $VERSION
+    status 0 "Portacle build info"
+    echo "Version: $VERSION
 Targets: ${TARGETS[@]}"
 }
 
