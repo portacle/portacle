@@ -1,4 +1,6 @@
 #!/bin/bash
+set -uo pipefail
+IFS=$'\n\t'
 
 ## Determine the OS type
 case "$OSTYPE" in
