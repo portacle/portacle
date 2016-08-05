@@ -29,7 +29,8 @@ SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
 PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
 SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
 INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
-TARGET=${1:-run_all}
+TARGETS=( ${TARGETS:-$@} )
+TARGETS=( ${TARGETS:-download prepare build install} )
 CFLAGS=${CFLAGS:-}
 CXXFLAGS=${CXXFLAGS:-}
 LDFLAGS=${LDFLAGS:-}
@@ -139,13 +140,12 @@ Using tag:          ${TAG}
 Building in:        ${SOURCE_DIR}
 Installing into:    ${INSTALL_TARGET}
 Using threads:      ${MAXCPUS}
-
 "
 }
 
 function download() {
     if [ -z "$REPOSITORY" ]; then
-        status 1 "Skipping download"
+        status 1 "skipping download"
         return 0
     fi
     
@@ -169,15 +169,15 @@ function download() {
 }
 
 function prepare (){
-    status 1 "Skipping prepare"
+    status 1 "skipping prepare"
 }
 
 function build (){
-    status 1 "Skipping build"
+    status 1 "skipping build"
 }
 
 function install (){
-    status 1 "Skipping install"
+    status 1 "skipping install"
 }
 
 function clean() {
@@ -189,14 +189,11 @@ function clean-installed() {
     rm -R ./*/
 }
 
-function run_all() {
-    info
-    download
-    prepare
-    build
-    install
-}
-
 function main() {
-    $TARGET
+    info
+    for TARGET in "${TARGETS[@]}"; do
+        status 1 "${TARGET}ing $PROGRAM"
+        $TARGET || exit 1
+    done
+    status 0 "$PROGRAM done"
 }

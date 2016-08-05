@@ -51,7 +51,7 @@ You can use this again every time you'd like to upgrade the binary components of
 
     ./build.sh package
 
-If you need a completely fresh start that will *delete everything that is not in a clean clone*, run the `reset` target or `fresh` if you want to build a complete package.
+If you need a completely fresh start that will *delete everything that is not in a clean clone*, run the `clean` target or `refresh` if you want to build a complete package.
 
 Each component being built has its own build script that you can run individually as well. They all accept the name of a stage to run, usually one of: `clean`, `download`, `prepare`, `build`, or `install`, defaulting to running all of them in that sequence. The components are:
 
