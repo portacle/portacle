@@ -34,9 +34,7 @@ function editor() {
 }
 
 function utils() {
-    ./git.sh "$@" # \
-        # && ./aspell.sh "$@" \
-        # && ./aspell-dicts.sh "$@"
+    ./git.sh "$@"
 }
 
 function package() {
