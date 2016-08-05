@@ -22,51 +22,51 @@ function download() {
 }
 
 function global() {
-    "$SOURCE_DIR/global.sh" "$@"
+    "$SOURCE_DIR/global.sh"
 }
 
 function sbcl() {
-    "$SOURCE_DIR//sbcl.sh" "$@"
+    "$SOURCE_DIR//sbcl.sh"
 }
 
 function asdf() {
-    "$SOURCE_DIR/asdf.sh" "$@"
+    "$SOURCE_DIR/asdf.sh"
 }
 
 function quicklisp() {
-    "$SOURCE_DIR/quicklisp.sh" "$@"
+    "$SOURCE_DIR/quicklisp.sh"
 }
 
 function emacs() {
-    "$SOURCE_DIR/emacs.sh" "$@"
+    "$SOURCE_DIR/emacs.sh"
 }
 
 function emacsd() {
-    "$SOURCE_DIR/emacsd.sh" "$@"
+    "$SOURCE_DIR/emacsd.sh"
 }
 
 function git() {
-    "$SOURCE_DIR/git.sh" "$@"
+    "$SOURCE_DIR/git.sh"
 }
 
 function package() {
-    "$SOURCE_DIR/package.sh" "$@"
+    "$SOURCE_DIR/package.sh"
 }
 
 function upgrade() {
-    global "$@" \
-        && sbcl "$@" \
-        && asdf "$@" \
-        && quicklisp "$@" \
-        && emacs "$@" \
-        && emacsd "$@" \
-        && git "$@"
+    global \
+        && sbcl \
+        && asdf \
+        && quicklisp \
+        && emacs \
+        && emacsd \
+        && git
 }
 
 function refresh() {
-    clean "$@" \
-        && update "$@" \
-        && all "$@"
+    clean \
+        && update \
+        && all
 }
 
 main
