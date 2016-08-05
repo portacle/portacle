@@ -1,69 +1,72 @@
 #!/bin/bash
 
-TARGETS=( ${@:-all} )
+readonly TAG=$(git describe --tags)
+readonly REPOSITORY=https://github.com/Shinmera/portacle
+
+##
+
+readonly PROGRAM=portacle
+TARGETS=( ${@:-download upgrade package} )
 source common.sh
 
-function info() {
-    local VERSION=$(git describe --tags)
-    status 0 "Portacle build info"
-    echo "Version: $VERSION
-Targets: ${TARGETS[@]}"
-}
+SOURCE_DIR="$SCRIPT_DIR"
+INSTALL_TARGET="$PORTACLE_DIR"
 
-function reset() {
+function clean() {
     git clean -fxd
     git reset --hard HEAD
 }
 
-function update() {
+function download() {
     git pull origin master
 }
 
 function global() {
-    ./global.sh "$@"
+    "$SOURCE_DIR/global.sh" "$@"
 }
 
-function cl() {
-    ./sbcl.sh "$@" \
-        && ./asdf.sh "$@" \
-        && ./quicklisp.sh "$@"
+function sbcl() {
+    "$SOURCE_DIR//sbcl.sh" "$@"
 }
 
-function editor() {
-    ./emacs.sh "$@" \
-        && ./emacsd.sh "$@"
+function asdf() {
+    "$SOURCE_DIR/asdf.sh" "$@"
 }
 
-function utils() {
-    ./git.sh "$@"
+function quicklisp() {
+    "$SOURCE_DIR/quicklisp.sh" "$@"
+}
+
+function emacs() {
+    "$SOURCE_DIR/emacs.sh" "$@"
+}
+
+function emacsd() {
+    "$SOURCE_DIR/emacsd.sh" "$@"
+}
+
+function git() {
+    "$SOURCE_DIR/git.sh" "$@"
 }
 
 function package() {
-    ./package.sh "$@"
+    "$SOURCE_DIR/package.sh" "$@"
 }
 
 function upgrade() {
     global "$@" \
-        && cl "$@" \
-        && editor "$@" \
-        && utils "$@"
+        && sbcl "$@" \
+        && asdf "$@" \
+        && quicklisp "$@" \
+        && emacs "$@" \
+        && emacsd "$@" \
+        && git "$@"
 }
 
-function all() {
-    upgrade "$@" \
-        && package "$@"
-}
-
-function fresh() {
-    reset "$@" \
+function refresh() {
+    clean "$@" \
         && update "$@" \
         && all "$@"
-}
-
-function main() {
-    for TARGET in "${TARGETS[@]}"; do
-        $TARGET || exit 1
-    done
 }
 
 main
