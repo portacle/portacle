@@ -145,7 +145,7 @@
       (insert "===> All done\n")
       (insert "\n Press q to close this buffer."))))
 
-(defun portacle-set-user ()
+(defun portacle-configure ()
   (interactive)
   (let ((name (read-string "Your name: " user-full-name))
         (email (read-string "Your e-mail address: " user-mail-address)))
