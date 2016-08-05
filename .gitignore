@@ -5,10 +5,12 @@ build/*/
 package/
 ## Build results
 aspell/*/*/
+aspell/share/
 emacs/*/*/
 emacs/config/
 sbcl/*/*/
 git/*/*/
+hunspell/*/*/
 asdf/*
 quicklisp/
 usr/
