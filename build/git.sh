@@ -9,14 +9,12 @@ readonly MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCL
 readonly PROGRAM=git
 source common.sh
 
-if [ -z "$REPOSITORY" ]; then
-    case "$PLATFORM" in
-        win) readonly REPOSITORY=https://github.com/git-for-windows/git
-             readonly TAG=v2.8.3.windows.1;;
-        *)   readonly REPOSITORY=https://github.com/git/git
-             readonly TAG=v2.8.3;;
-    esac
-fi
+case "$PLATFORM" in
+    win) readonly REPOSITORY=https://github.com/git-for-windows/git
+         readonly TAG=v2.8.3.windows.1;;
+    *)   readonly REPOSITORY=https://github.com/git/git
+         readonly TAG=v2.8.3;;
+esac
 
 function build() {
     cd "$SOURCE_DIR"

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+readonly TAG=
 readonly REPOSITORY=https://github.com/shinmera/.emacs
 
 ###

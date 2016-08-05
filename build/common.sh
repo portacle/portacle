@@ -1,6 +1,5 @@
 #!/bin/bash
 set -uo pipefail
-IFS=$'\n\t'
 
 ## Determine the OS type
 case "$OSTYPE" in
@@ -31,6 +30,9 @@ PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
 SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
 INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
 TARGET=${1:-run_all}
+CFLAGS=${CFLAGS:-}
+CXXFLAGS=${CXXFLAGS:-}
+LDFLAGS=${LDFLAGS:-}
 
 ## Determine mac cpu count
 case "$PLATFORM" in

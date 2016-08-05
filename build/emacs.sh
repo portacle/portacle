@@ -1,11 +1,18 @@
 #!/bin/bash
 
-## This is not the latest, but 25 breaks minibuffer completion
-## with ECB, rendering it unusable.
-## Refer to https://github.com/ecb-home/ecb/issues/10
 readonly TAG=emacs-25.0.94
 readonly REPOSITORY=git://git.savannah.gnu.org/emacs.git
-readonly CONFIGURE_OPTIONS=" --without-jpeg --without-tiff --without-gif --without-png --without-rsvg --without-imagemagick --without-sound --without-makeinfo --without-gconf --without-dbus --with-x-toolkit=gtk2"
+readonly CONFIGURE_OPTIONS=(--without-jpeg
+                            --without-tiff
+                            --without-gif
+                            --without-png
+                            --without-rsvg
+                            --without-imagemagick
+                            --without-sound
+                            --without-makeinfo
+                            --without-gconf
+                            --without-dbus
+                            --with-x-toolkit=gtk2)
 
 ###
 
