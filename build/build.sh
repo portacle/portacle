@@ -13,12 +13,12 @@ SOURCE_DIR="$SCRIPT_DIR"
 INSTALL_TARGET="$PORTACLE_DIR"
 
 function clean() {
-    git clean -fxd
-    git reset --hard HEAD
+    "$(which git)" clean -fxd
+    "$(which git)" reset --hard HEAD
 }
 
 function download() {
-    git pull origin master
+    "$(which git)" pull origin master
 }
 
 function global() {
