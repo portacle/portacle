@@ -11,11 +11,21 @@ readonly PROGRAM=sbcl
 source common.sh
 readonly INSTALL_SOURCES=$SCRIPT_DIR/../$PROGRAM/sources/
 
+function win-sbcl-path() {
+    if ! system-has "sbcl"; then
+        local sbcl_path="/c/Program Files/Steel Bank Common Lisp/"*/
+        export PATH="$sbcl_path:$PATH"
+        system-has "sbcl" \
+            || eexit "SBCL not found in your path."
+    fi
+}
+
 function prepare() {
     cd "$SOURCE_DIR"
 
     case "$PLATFORM" in
         mac) EXTRA_DISABLED=":sb-safepoint :sb-thruption :sb-wtimer" ;;
+        win) win-sbcl-path ;&
         *)   EXTRA_DISABLED="" ;;
     esac
     
@@ -32,6 +42,7 @@ EOF
 function build() {
     cd "$SOURCE_DIR"
     export CFLAGS="${CFLAGS} -fno-omit-frame-pointer -D_GNU_SOURCE"
+    
     sh make.sh \
         || eexit "Failed to build SBCL."
 }
