@@ -56,10 +56,6 @@ If you need a completely fresh start that will *delete everything that is not in
 Each component being built has its own build script that you can run individually as well. They all accept the name of a stage to run, usually one of: `clean`, `download`, `prepare`, `build`, or `install`, defaulting to running all of them in that sequence. The components are:
 
 * `asdf` -- The de-facto standard Common Lisp build system. Bundled because SBCL's internal one is not always new enough.
-* `aspell` -- A spellchecker for Emacs. Unused because I can't get it to work.
-* `aspell-dicts` -- Dictionary files for aspell. Unused.
-* `hunspell` -- An alternative spellchecker. Unused because I can't get it to work.
-* `hunspell-dicts` -- Dictionary files for hunspell. Unused.
 * `emacs` -- Emacs is a long-standing, massively extensible editor ideal for editing Lisp code.
 * `emacsd` -- Since Emacs is extensible, we need some sensible configuration for it.
 * `git` -- Developing anything without version control is madness. Besides it's an easy way to access other people's projects and update Portacle itself.
