@@ -11,24 +11,22 @@ readonly PROGRAM=sbcl
 source common.sh
 readonly INSTALL_SOURCES=$SCRIPT_DIR/../$PROGRAM/sources/
 
-function win-sbcl-path() {
-    if ! system-has "sbcl"; then
-        local sbcl_path="/c/Program Files/Steel Bank Common Lisp/"*/
-        export PATH="$sbcl_path:$PATH"
-        system-has "sbcl" \
-            || eexit "SBCL not found in your path."
-    fi
-}
-
 function prepare() {
     cd "$SOURCE_DIR"
 
     case "$PLATFORM" in
         mac) EXTRA_DISABLED=":sb-safepoint :sb-thruption :sb-wtimer" ;;
-        win) win-sbcl-path
-             EXTRA_DISABLED="" ;;
         *)   EXTRA_DISABLED="" ;;
     esac
+
+    if ! system-has "sbcl"; then
+        case "$PLATFORM" in
+            win) local sbcl_path="/c/Program Files/Steel Bank Common Lisp/"*/
+                 export PATH="$sbcl_path:$PATH" ;;
+        esac
+        system-has "sbcl" \
+            || eexit "SBCL not found in your path."
+    fi
     
     cat >customize-target-features.lisp <<EOF
 (lambda (features)
