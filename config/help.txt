@@ -259,15 +259,55 @@ The following shortcuts are useful in the SLDB debugger.
 - e
   With the cursor on a stack frame, evaluate an expression in the frame.
 
-* 　ＧＩＴ　＆　ＭＡＧＩＴ
+* 　ＶＥＲＳＩＯＮ　ＣＯＮＴＲＯＬ　＆　ＧＩＴ
 
-Todo
+In modern software development, version control is something of vital importance. It is responsible for keeping track of the changes you make to your code, and preserving them for posterity. It also takes on the task of synchronising changes between users and machines. An overwhelming majority of all software projects nowadays use some version control system, and a very significant chunk of those use Git. Portacle ships Git as it in itself is version controlled through it and uses it to update itself. As an additional benefit you can also use Git for your own projects.
+
+This won't be an in-depth explanation or tutorial on Git, and instead only the very basics of it all are covered in the hopes that it'll be enough to get you started if you've never used Git before. First off, we'll need to explain some concepts:
+
+- Change: the record that a file was deleted, renamed, created, or that its contents changed.
+
+- Hunk: the representation of a change within a file.
+
+- Commit: a record of one or more changes. A commit will usually also have a message, time, and other information accompanying it to give you a better idea about when it was created or what is contained within it.
+
+- Branch: a sequence of commits under a given name. Often you'll only deal with the main branch, which by convention is called "master".
+
+- Repository: a database that holds all files, changes, commits, branches, and other information about a project.
+
+- Remote: a copy of the repository at another location, be it somewhere else on the same machine, or on a server. If you do have a remote server, it is usually called the "origin".
+
+These concepts will remain pretty much the same no matter which version control system you use. Now, in addition to this, Git introduces the idea of a "staging area." Before you can create a commit for your changes --in short "commit" them-- you must stage your changes. What this does is tell Git to remember the changes you made and "ready" them for committing. Once everything you want is staged, a commit can be created along with a message that should give you an idea about what the changes in the commit actually do. When the changes are committed, they are stored in the repository's database and attached to the current branch.
+
+The repository gives you the power to look through all the commits you or anyone else has ever made, see all the changes that were done, and go back in time to any point you want. This is tremendously helpful as it prevents you from accidentally deleting or losing anything important. Once you get further into development it can also help you uncover regressions-- reappearances of problems that you though you fixed. By going back in time, you can pinpoint the exact time at which the bug was reintroduced, which should give you a much better angle at figuring out what happened.
+
+Using remotes, it also allows you to very easily synchronise your work with other machines or people and provides you with free backups to boot.
+
+* 　ＭＡＧＩＴ
+
+Magit allows you to manage you Git repositories easily and quickly. To run Magit, use M-x magit-status . This will present you with an overview of the repository next to the directory your buffer is currently in, or will ask you for a path if the buffer isn't in a repository.
+
+- Staging: from here on out you can see changes that have been made, which you can stage by hitting s on the entry. You can also stage everything at once by hitting s on the section title. By hitting tab on an entry you can expand it and see the actual diff of the change. If there are multiple hunks you can also stage individual ones by hitting s with the cursor on the appropriate one. Analogously if you want to unstage, simply use u instead of s .
+
+- Committing: once all your changes have been staged, you can hit c c which will perform a commit. It should open up a new buffer that lets you enter a commit message. In case you realise you messed up, you can avoid the commit from there with C-x k. Once you're sure your commit message is all nice and pretty, hit C-c C-c. If you should want to add changes to the previous commit because you forgot to include some files, simply stage them and press c a . This will also allow you to edit your commit message, should you have messed up with that.
+
+- Pushing: if your repository has a remote server that you can synchronise with, you can push your new commits to it with P p . It might ask you for the branch to use if you do this for the first time on an uninitialised repository. If git complains about unmerged changes, make sure to pull first.
+
+- Pulling: in order to fetch and merge in commits from the remote server, use F p . You can only do this if you have no changed files that aren't staged yet. Since merging commits in can also result in conflicts, you should always make sure to commit all of your changes before you pull.
+
+- Branching: if you need to check out another branch, you can do so with b b . Creating a new branch and switching to it is simply b c . And finally, deleting branches is done by b k .
+
+- Remotes: when you first create a repository you might want to configure a remote server for it. You can do this in Magit as well. To do this, press M a . It will then ask for a name followed by the address. You can also remove, rename, or update remotes by M k, M r, and M u respectively.
+
+- Browsing: if you want to view the log of all the commits in your repository, use l l . This will bring up magit's log window. By hitting return on any entry, you can view the changes associated with the commit.
+
+- Cloning: if you need to clone a repository, you can use M-x magit-clone . It'll ask you for the remote URL and a location to save the repository to.
 
 * 　ＭＡＮＡＧＩＮＧ　ＰＯＲＴＡＣＬＥ
 
-Some things like GIT require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use M-x portacle-configure . It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
+Some things like Git require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use M-x portacle-configure . It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
 
-If you would like to update Portacle's configurations to the latest versions, you can simply use M-x portacle-update . This will however not update binary files like git, emacs, and sbcl themselves. However, those should only very seldom change or require a full upgrade.
+If you would like to update Portacle's configurations to the latest versions, you can simply use M-x portacle-update . This will however not update binary files like Git, emacs, and sbcl themselves. However, those should only very seldom change or require a full upgrade.
 
 * 　ＣＵＳＴＯＭＩＳＩＮＧ
 
@@ -275,9 +315,9 @@ Portacle's editor, Emacs, allows you to modify it through code. Lisp code, even.
 
 In order to customise the editor, you'll want to edit the file config/user.el in the Portacle directory. If it doesn't exist yet, just create it. On next launch, it should be run automatically and your changes should apply.
 
-The most common task you probably want to perform is assign a keychord to a function that you otherwise have to perform through M-x. In order to do that, you can use define-my-key. As an example, here's how to add a keychord for the magit-status command:
+The most common task you probably want to perform is assign a keychord to a function that you otherwise have to perform through M-x. In order to do that, you can use define-my-key. As an example, here's how to add a keychord for the Magit-status command:
 
-    (define-my-key "C-?" 'magit-status)
+    (define-my-key "C-?" 'Magit-status)
 
 To see that the keychord works, you can either save the file and restart Portacle, or you can load the change in directly by pressing C-M-x with the cursor on the expression. Remember to use C-h k and C-h m to see what a keychord already does or what kinds of actions are available in a buffer.
 
@@ -305,3 +345,9 @@ Since Elisp is a full programming language with a big standard library provided 
 
 - Emacs Wiki <https://emacswiki.org/>
   The Wiki for Emacs, the editor used in Portacle.
+
+- Git <https://git-scm.com/>
+  The official Git website with heaps of documentation. Note though that the site will refer to the command-line usage of Git rather than the magit one.
+
+- Magit User Manual <https://magit.vc/manual/2.6/magit/>
+  This is the documentation on how to use Magit. It'll probably contain everything you ever might want to know and more.
