@@ -147,7 +147,7 @@ Building targets:   ${TARGETS[@]}
 
 function download() {
     if [ -z "$REPOSITORY" ]; then
-        status 1 "skipping download"
+        status 2 "skipping download"
         return 0
     fi
     
@@ -171,15 +171,15 @@ function download() {
 }
 
 function prepare (){
-    status 1 "skipping prepare"
+    status 2 "skipping prepare"
 }
 
 function build (){
-    status 1 "skipping build"
+    status 2 "skipping build"
 }
 
 function install (){
-    status 1 "skipping install"
+    status 2 "skipping install"
 }
 
 function clean() {
