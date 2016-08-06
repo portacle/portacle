@@ -30,9 +30,9 @@ function prepare() {
     ./autogen.sh \
         || eexit "Failed to generate configure. Maybe some dependencies are missing?"
     case "$PLATFORM" in
-        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained $CONFIGURE_OPTIONS \
+        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained "${CONFIGURE_OPTIONS[@]}" \
                    || eexit "Configure failed. Maybe some dependencies are missing?" ;;
-        *)   ./configure --prefix="$INSTALL_TARGET" $CONFIGURE_OPTIONS \
+        *)   ./configure --prefix="$INSTALL_TARGET" "${CONFIGURE_OPTIONS[@]}" \
                    || eexit "Configure failed. Maybe some dependencies are missing?" ;;
     esac
 }
