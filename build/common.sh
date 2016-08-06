@@ -73,14 +73,14 @@ function win-exes-for-package(){
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
-    local fulldeps=( "${deps[@]}" "${@:2}" )
-    for dep in "${deps[@]}"; do
+    local fulldeps=( "${deps[@]+${deps[@]}}" "${@:2}" )
+    for dep in "${deps[@]+${deps[@]}}"; do
         if ! contains "$dep" "${fulldeps[@]}"; then
             local newdeps=$(compute-dependencies "$dep")
             fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
         fi
     done
-    uniquify "${fulldeps[@]}"
+    uniquify "${fulldeps[@]+${fulldeps[@]}}"
 }
 
 ## Ensure the given array of files is copied to the target directory
@@ -88,7 +88,7 @@ function ensure-installed() {
     local target=$1
     local files=( "${@:2}" )
     mkdir -p "$target"
-    for file in "${files[@]}"; do
+    for file in "${files[@]+${files[@]}}"; do
         local name=$(basename "$file")
         local realfile=$(mreadlink "$file")
         if [ ! -e "$target/$name" ]; then
