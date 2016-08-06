@@ -2,7 +2,7 @@
 
 readonly TAG=${PACKAGE_VERSION:-$(git describe --tags)}
 readonly REPOSITORY=
-readonly 7Z="/c/Program Files/7-zip/7z.exe"
+readonly W7Z="/c/Program Files/7-zip/7z.exe"
 
 ##
 
@@ -50,7 +50,7 @@ function install() {
     case "$PLATFORM" in
         win) local winfile=$(win-translate-paths "$package")
              local winfiles=($(win-translate-paths "$files"))
-             "$7Z" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
+             "$W7Z" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
                  || eexit "Could not create package."
              ;;
         *)   tar -cJf "$package.tar.xz" "${files[@]}" \
