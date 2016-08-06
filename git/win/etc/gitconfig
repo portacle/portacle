@@ -1,0 +1,2 @@
+[http]
+        sslcainfo = usr/ssl/ca-bundle.crt

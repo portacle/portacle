@@ -53,7 +53,6 @@
                                                    (t (list (portacle-app-path "sbcl" "sbcl.sh")))))))
 
 ;; Set the Magit executable explicitly
-(setenv "GIT_CONFIG_NOSYSTEM" "true")
 (setenv "XDG_CONFIG_HOME" (portacle-path "config"))
 (setq magit-git-executable (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
                                     (t           (portacle-app-path "git" "git.sh"))))

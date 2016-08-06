@@ -2,8 +2,6 @@
         symlinks = true
         autocrlf = input
         eol = lf
-[http]
-        sslcainfo = usr/ssl/ca-bundle.crt
 [push]
 	default = simple
 [branch]
