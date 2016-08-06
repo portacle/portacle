@@ -65,8 +65,9 @@ function upgrade() {
 
 function refresh() {
     clean \
-        && update \
-        && all
+        && download \
+        && upgrade \
+        && package
 }
 
 main
