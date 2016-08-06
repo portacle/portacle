@@ -25,6 +25,7 @@
 
 (setq user-emacs-directory (portacle-path "emacs/config/"))
 (add-to-list 'load-path (concat user-emacs-directory "shinmera/"))
+(cd portacle-root)
 
 ;; Load contribs
 (require 'shinmera-general)
