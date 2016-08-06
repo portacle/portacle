@@ -55,6 +55,7 @@ function install() {
     mkdir -p "$INSTALL_SOURCES" &>/dev/null
     ## Can't use -t because of apple.
     # cp -R -t "$INSTALL_SOURCES" "$SOURCE_DIR/src" "$SOURCE_DIR/contrib"
+    status 2 "Installing SBCL sources"
     cp -R "$SOURCE_DIR/src" "$INSTALL_SOURCES" \
         || eexit "Failed to copy SBCL sources."
     cp -R "$SOURCE_DIR/contrib" "$INSTALL_SOURCES" \
@@ -66,6 +67,7 @@ function install() {
          -name "*.so" -or \
          -name "a.out" -delete
 
+    status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
 }
 

@@ -48,6 +48,7 @@ function install() {
     make install datadir="$SHARE_TARGET" \
         || eexit "The install failed. Please check the output for error messages."
 
+    status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
 }
 

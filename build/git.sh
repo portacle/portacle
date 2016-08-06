@@ -39,6 +39,7 @@ function install() {
     make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
         || eexit "The install failed. Please check the output for error messages."
 
+    status 2 "Copying platform"
     case "$PLATFORM" in
         win) win-copy-coreutils "$SHARED_DIR/bin/"
              ensure-installed "$SHARED_DIR/ssl/" "/usr/ssl/certs/ca-bundle.crt"
@@ -56,7 +57,8 @@ function install() {
              ensure-dependencies "/usr/lib/libcurl.so"
              ;;
     esac
-    
+
+    status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
 }
 
