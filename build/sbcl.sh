@@ -25,7 +25,8 @@ function prepare() {
 
     case "$PLATFORM" in
         mac) EXTRA_DISABLED=":sb-safepoint :sb-thruption :sb-wtimer" ;;
-        win) win-sbcl-path ;&
+        win) win-sbcl-path
+             EXTRA_DISABLED="" ;;
         *)   EXTRA_DISABLED="" ;;
     esac
     
