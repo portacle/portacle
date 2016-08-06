@@ -19,7 +19,7 @@ Install the build prerequisites:
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
 6. Install these packages: `pacman -S unzip git base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv`
-7. Launch the MinGW64 shell (not the MSYS shell!) and do `export PATH="/c/Program Files/Steel Bank Common Lisp/1.3.5/:$PATH"`
+7. Launch the MinGW64 shell (not the MSYS shell!)
 
 Proceed with the `General Procedure` section.
 
