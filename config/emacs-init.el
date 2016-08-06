@@ -163,7 +163,7 @@
   ;; as a server on Windows due to requiring the dir being fixed to a
   ;; "safe" directory, which we cannot ensure in our portable environment.
   (defun server-ensure-safe-dir (dir)
-    nil))
+    (make-directory dir)))
 
 ;; Load user file
 (when (file-exists-p (portacle-path "config/user.el"))
