@@ -42,16 +42,10 @@ function install() {
     status 2 "Copying platform"
     case "$PLATFORM" in
         win) win-copy-coreutils "$SHARED_DIR/bin/"
-             ensure-installed "$SHARED_DIR/ssl/" "/usr/ssl/certs/ca-bundle.crt"
              ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
              ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
              mkdir -p "$PORTACLE_DIR/tmp"
-             ## Fix symlinks
-             cd "$PORTACLE_DIR"
-             git config core.symlinks true
-             git checkout "git/*/etc/gitconfig"
-             git update-index --assume-unchanged "git/*/etc/gitconfig"
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
