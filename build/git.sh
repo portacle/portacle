@@ -49,6 +49,7 @@ function install() {
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
+             ensure-dependencies "/usr/bin/ssh"
              ;;
     esac
 
