@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+static int (*o_execv)(const char *filename, char *const argv[]) = NULL;
 static int (*o_execve)(const char *filename, char *const argv[], char *const envp[]) = NULL;
 
 char **ld_wrap_argv(const char *filename, char *const argv[]){
@@ -16,17 +17,17 @@ char **ld_wrap_argv(const char *filename, char *const argv[]){
   return argv_t;
 }
 
-int execve(const char *filename, char *const argv[], char *const envp[]){
+int execv(const char *filename, char *const argv[]){
   char **argv_t = ld_wrap_argv(filename, argv);
-  o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "execve");
-  int status = o_execve(getenv("LW_LOADER_PATH"), argv_t, envp);
+  o_execv = o_execv ? o_execv : dlsym(RTLD_NEXT, "execv");
+  int status = o_execv(getenv("LW_LOADER_PATH"), argv_t);
   free(argv_t);
   return status;
 }
 
-int __execve(const char *filename, char *const argv[], char *const envp[]){
+int execve(const char *filename, char *const argv[], char *const envp[]){
   char **argv_t = ld_wrap_argv(filename, argv);
-  o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "__execve");
+  o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "execve");
   int status = o_execve(getenv("LW_LOADER_PATH"), argv_t, envp);
   free(argv_t);
   return status;
