@@ -13,8 +13,10 @@ INSTALL_TARGET="$SHARED_DIR/lib"
 function build() {
     mkdir -p "$SOURCE_DIR"
     case "$PLATFORM" in
-        lin) gcc -fPIC -shared -o "$SOURCE_DIR/ld-wrap.so" "$SOURCE_DIR/ld-wrap.c" -ldl
-             cp -fuv "/usr/lib/ld-linux-x86-64.so.2" "$SOURCE_DIR/ld-linux.so"
+        lin) gcc -std=c99 -fPIC -shared -o "$SOURCE_DIR/ld-wrap.so" "$SOURCE_DIR/ld-wrap.c" -ldl \
+                   || eexit "Failed to build ld-wrap.so"
+             cp -fuv "/usr/lib/ld-linux-x86-64.so.2" "$SOURCE_DIR/ld-linux.so" \
+                 || eexit "Failed to copy ld-linux.so"
              ;;
     esac
 }
