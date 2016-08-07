@@ -15,7 +15,7 @@ function build() {
     case "$PLATFORM" in
         lin) gcc -std=c99 -fPIC -shared -o "$SOURCE_DIR/ld-wrap.so" "$SOURCE_DIR/ld-wrap.c" -ldl \
                    || eexit "Failed to build ld-wrap.so"
-             cp -fuv "/usr/lib/ld-linux-x86-64.so.2" "$SOURCE_DIR/ld-linux.so" \
+             cp -fuv "/lib64/ld-linux-x86-64.so.2" "$SOURCE_DIR/ld-linux.so" \
                  || eexit "Failed to copy ld-linux.so"
              ;;
     esac
