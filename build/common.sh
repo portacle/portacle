@@ -85,7 +85,7 @@ function compute-dependencies() {
 
 function ucp() {
     if system-has rsync; then
-        rsync -avz "$@"
+        rsync -aqz "$@"
     else
         case "$PLATFORM" in
             mac) cp -Rf "$@" ;;
