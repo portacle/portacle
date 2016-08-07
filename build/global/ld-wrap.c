@@ -68,8 +68,8 @@ char *ld_wrap_resolv(const char *filename){
     
     if(current_path != NULL){
       size_t j=0;
-      for(size_t i=0; i<pathlen; ++i){
-        if(path[i] == ':'){
+      for(size_t i=0; i<=pathlen; ++i){
+        if(path[i] == 0 || path[i] == ':'){
           current_path[j] = '/';
           for(int k=0; k<filelen; ++k) current_path[j+1+k]=filename[k];
           current_path[j+filelen+1] = 0;
