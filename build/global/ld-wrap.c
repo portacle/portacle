@@ -18,6 +18,7 @@ char **ld_wrap_argv(const char *filename, char *const argv[]){
 }
 
 int execv(const char *filename, char *const argv[]){
+  printf("ld-wrap execv delegate hit\n");
   char **argv_t = ld_wrap_argv(filename, argv);
   o_execv = o_execv ? o_execv : dlsym(RTLD_NEXT, "execv");
   int status = o_execv(getenv("LW_LOADER_PATH"), argv_t);
@@ -26,6 +27,7 @@ int execv(const char *filename, char *const argv[]){
 }
 
 int execve(const char *filename, char *const argv[], char *const envp[]){
+  printf("ld-wrap execve delegate hit\n");
   char **argv_t = ld_wrap_argv(filename, argv);
   o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "execve");
   int status = o_execve(getenv("LW_LOADER_PATH"), argv_t, envp);
