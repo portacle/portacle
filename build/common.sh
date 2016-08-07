@@ -83,6 +83,17 @@ function compute-dependencies() {
     uniquify "${fulldeps[@]+${fulldeps[@]}}"
 }
 
+function ucp() {
+    if system-has rsync; then
+        rsync -avz "$@"
+    else
+        case "$PLATFORM" in
+            mac) cp -Rf "$@" ;;
+            *)   cp -Rfu "$@" ;;
+        esac
+    fi
+}
+
 ## Ensure the given array of files is copied to the target directory
 function ensure-installed() {
     local target=$1
@@ -91,10 +102,8 @@ function ensure-installed() {
     for file in "${files[@]+${files[@]}}"; do
         local name=$(basename "$file")
         local realfile=$(mreadlink "$file")
-        if [ ! -e "$target/$name" ]; then
-            eecho "Copying $file"
-            cp -R "$realfile" "$target/$name"
-        fi
+        eecho "Copying $file"
+        ucp "$realfile" "$target/$name"
     done
 }
 
