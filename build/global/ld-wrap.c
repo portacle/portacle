@@ -1,8 +1,9 @@
 #define _GNU_SOURCE
 #include <dlfcn.h>
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <string.h>
 #include <sys/stat.h>
 
@@ -64,7 +65,7 @@ char *ld_wrap_resolv(const char *filename){
     char *path = ld_wrap_path();
     size_t pathlen = strlen(path);
     size_t filelen = strlen(filename);
-    char *current_path = calloc(pathlen+filelen+2, sizeof(char));
+    char current_path[pathlen+filelen+2];
     
     if(current_path != NULL){
       size_t j=0;
@@ -74,7 +75,7 @@ char *ld_wrap_resolv(const char *filename){
           for(int k=0; k<filelen; ++k) current_path[j+1+k]=filename[k];
           current_path[j+filelen+1] = 0;
           if(ld_wrap_exe_p(current_path)){
-            resolved = current_path;
+            resolved = strdup(current_path);
             break;
           }else{
             j=0;
@@ -85,7 +86,6 @@ char *ld_wrap_resolv(const char *filename){
         }
       }
     }
-    free(path);
   }
   return resolved;
 }
@@ -94,7 +94,7 @@ int execve(const char *filename, char *const argv[], char *const envp[]){
   o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "execve");
   const char *loader = getenv("LW_LOADER_PATH");
   char **argv_t = ld_wrap_argv(filename, argv);
-  ld_wrap_log(loader, argv_t);
+  //ld_wrap_log(loader, argv_t);
   int status = o_execve(loader, argv_t, envp);
   free(argv_t);
   return status;
@@ -115,4 +115,59 @@ int execvpe(const char *filename, char *const argv[], char *const envp[]){
 int execvp(const char *filename, char *const argv[]){
   char *const envp[] = {};
   return execvpe(filename, argv, envp);
+}
+
+int execl(const char *filename, const char *arg, ...){
+  size_t argc;
+  va_list args;
+  va_start(args, arg);
+  for(argc=1; va_arg(args, const char*); ++argc);
+  va_end(args);
+  
+  char *argv[argc + 1];
+  va_start(args, arg);
+  argv[0] = (char *)arg;
+  for (size_t i=1; i<=argc; ++i)
+    argv[i] = va_arg(args, char *);
+  va_end(args);
+
+  return execv(filename, argv);
+}
+
+int execlp(const char *filename, const char *arg, ...){
+  size_t argc;
+  va_list args;
+  va_start(args, arg);
+  for(argc=1; va_arg(args, const char*); ++argc);
+  va_end(args);
+  
+  char *argv[argc + 1];
+  va_start(args, arg);
+  argv[0] = (char *)arg;
+  for (size_t i=1; i<=argc; ++i)
+    argv[i] = va_arg(args, char *);
+  va_end(args);
+
+  return execvp(filename, argv);
+}
+
+int execle(const char *filename, const char *arg, ...){
+  size_t argc;
+  va_list args;
+  va_start(args, arg);
+  for(argc=1; va_arg(args, const char*); ++argc);
+  va_end(args);
+  
+  char *argv[argc + 1];
+  va_start(args, arg);
+  argv[0] = (char *)arg;
+  for (size_t i=1; i<=argc; ++i)
+    argv[i] = va_arg(args, char *);
+  // I don't really think this is correct, but the original glibc source
+  // seems to do the same kind of thing? Let's just hope nobody uses the
+  // variadic variants of these anyway.
+  const char *const *envp = va_arg(args, const char *const *);
+  va_end(args);
+
+  return execve(filename, argv, (char *const *)envp);
 }
