@@ -7,7 +7,12 @@
 #include <string.h>
 #include <sys/stat.h>
 
-static int (*o_execve)(const char *filename, char *const argv[], char *const envp[]) = NULL;
+int (*o_execve)(const char *filename, char *const argv[], char *const envp[]) = NULL;
+FILE *ld_wrap_logfile = NULL;
+
+void init(){
+  o_execve = dlsym(RTLD_NEXT, "execve");
+}
 
 // Returns a fresh array of strings to use as the proper argv
 // to our ld-linux.so call.
@@ -28,10 +33,12 @@ char **ld_wrap_argv(const char *filename, char *const argv[]){
 
 // Simply prints a debug message for the filename and args.
 void ld_wrap_log(const char *filename, char *const argv[]){
-  fprintf(stderr, "LD_WRAP: %s", filename);
+  if(ld_wrap_logfile == NULL) ld_wrap_logfile = fopen("/tmp/ld-wrap.log", "w");
+  fprintf(ld_wrap_logfile, "LD_WRAP: %s", filename);
   for(int i=1; argv[i]; ++i)
-    fprintf(stderr, " %s", argv[i]);
-  fprintf(stderr, "\n");
+    fprintf(ld_wrap_logfile, " %s", argv[i]);
+  fprintf(ld_wrap_logfile, "\n");
+  fflush(ld_wrap_logfile);
 }
 
 // Returns a fresh copy of the search path to use.
@@ -91,10 +98,11 @@ char *ld_wrap_resolv(const char *filename){
 }
 
 int execve(const char *filename, char *const argv[], char *const envp[]){
-  o_execve = o_execve ? o_execve : dlsym(RTLD_NEXT, "execve");
   const char *loader = getenv("LW_LOADER_PATH");
   char **argv_t = ld_wrap_argv(filename, argv);
-  //ld_wrap_log(loader, argv_t);
+#if(DEBUG)
+  ld_wrap_log(loader, argv_t);
+#endif
   int status = o_execve(loader, argv_t, envp);
   free(argv_t);
   return status;
