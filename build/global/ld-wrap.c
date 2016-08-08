@@ -100,12 +100,26 @@ char *ld_wrap_resolv(const char *filename){
   return resolved;
 }
 
+int ld_wrap_elf_p(char *filename){
+  FILE *ldfile = fopen(filename, "rb");
+  if(ldfile != NULL){
+    char header[4];
+    char magic[4] = {0x7f, 0x45, 0x4c, 0x46};
+    fread(&header, sizeof(char), 4, ldfile);
+    fclose(ldfile);
+    for(int i=0; i<4; ++i){
+      if(magic[i] != header[i])
+        return 0;
+    }
+    return 1;
+  }
+  return 0;
+}
+
 int execve(const char *filename, char *const argv[], char *const envp[]){
   const char *loader = getenv("LW_LOADER_PATH");
   char **argv_t = ld_wrap_argv(filename, argv);
-#if(DEBUG)
   ld_wrap_log(loader, argv_t);
-#endif
   int status = o_execve(loader, argv_t, envp);
   free(argv_t);
   return status;
@@ -118,19 +132,21 @@ int execv(const char *filename, char *const argv[]){
 
 int execvpe(const char *filename, char *const argv[], char *const envp[]){
   char *resolved = ld_wrap_resolv(filename);
-  int status = execve(resolved, argv, envp);
+  int status;
   // execvp* have the "interesting" feature that they relaunch the command
-  // using a shell if the first execve fails with ENOEXEC.
-  if(status == ENOEXEC){
+  // using a shell if the first execve fails with ENOEXEC. Since we can't
+  // do that here with out ld wrapper, we have to test for ELF ourselves.
+  if(ld_wrap_elf_p(resolved)){
+    status = execve(resolved, argv, envp);
+  }else{
     int len;
     for(len=0; argv[len]; ++len);
     char *argv_t[len+2];
     argv_t[0] = (char *)_PATH_BSHELL;
     argv_t[1] = resolved;
-    for(int i=1; argv[i]; ++i)
+    for(int i=len; 0<i; --i)
       argv_t[i+1] = argv[i];
-    argv_t[len+1] = 0;
-    status = execve((char *) _PATH_BSHELL, argv_t, envp);
+    status = execve((char *)_PATH_BSHELL, argv_t, envp);
   }
   free(resolved);
   return status;
