@@ -126,8 +126,7 @@ int execve(const char *filename, char *const argv[], char *const envp[]){
 }
 
 int execv(const char *filename, char *const argv[]){
-  char *const envp[] = {};
-  return execve(filename, argv, envp);
+  return execve(filename, argv, environ);
 }
 
 int execvpe(const char *filename, char *const argv[], char *const envp[]){
@@ -153,8 +152,7 @@ int execvpe(const char *filename, char *const argv[], char *const envp[]){
 }
 
 int execvp(const char *filename, char *const argv[]){
-  char *const envp[] = {};
-  return execvpe(filename, argv, envp);
+  return execvpe(filename, argv, environ);
 }
 
 int execl(const char *filename, const char *arg, ...){
