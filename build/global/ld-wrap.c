@@ -20,7 +20,7 @@ char **ld_wrap_argv(const char *filename, char *const argv[]){
   int len;
   for(len=0; argv[len]; ++len);
   
-  char **argv_t = calloc(3+len, sizeof(char *));
+  char **argv_t = calloc(4+len, sizeof(char *));
   argv_t[0] = "ld-linux.so";
   argv_t[1] = "--library-path";
   argv_t[2] = getenv("LW_LIBRARY_PATH");
@@ -28,6 +28,7 @@ char **ld_wrap_argv(const char *filename, char *const argv[]){
   for(int i=1; argv[i]; ++i){
     argv_t[i+3] = argv[i];
   }
+  argv_t[len+3] = 0;
   return argv_t;
 }
 
