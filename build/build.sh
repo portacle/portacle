@@ -54,7 +54,8 @@ function package() {
 }
 
 function upgrade() {
-    global \
+    download \
+        && global \
         && sbcl \
         && asdf \
         && quicklisp \
@@ -65,7 +66,6 @@ function upgrade() {
 
 function refresh() {
     clean \
-        && download \
         && upgrade \
         && package
 }
