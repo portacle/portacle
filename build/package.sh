@@ -24,6 +24,7 @@ function discover-files() {
 
 function prepare() {
     mkdir -p "$INSTALL_TARGET"
+    git gc
 }
 
 function build() {
