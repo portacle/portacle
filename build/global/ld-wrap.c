@@ -6,6 +6,8 @@
 #include <stdarg.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <errno.h>
+#include <paths.h>
 
 int (*o_execve)(const char *filename, char *const argv[], char *const envp[]) = NULL;
 FILE *ld_wrap_logfile = NULL;
@@ -117,6 +119,19 @@ int execv(const char *filename, char *const argv[]){
 int execvpe(const char *filename, char *const argv[], char *const envp[]){
   char *resolved = ld_wrap_resolv(filename);
   int status = execve(resolved, argv, envp);
+  // execvp* have the "interesting" feature that they relaunch the command
+  // using a shell if the first execve fails with ENOEXEC.
+  if(status == ENOEXEC){
+    int len;
+    for(len=0; argv[len]; ++len);
+    char *argv_t[len+2];
+    argv_t[0] = (char *)_PATH_BSHELL;
+    argv_t[1] = resolved;
+    for(int i=1; argv[i]; ++i)
+      argv_t[i+1] = argv[i];
+    argv_t[len+1] = 0;
+    status = execve((char *) _PATH_BSHELL, argv_t, envp);
+  }
   free(resolved);
   return status;
 }
