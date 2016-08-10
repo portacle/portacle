@@ -2,7 +2,7 @@ language: generic
 sudo: true
 
 os:
-  - linux
+#  - linux
   - osx
 
 addons:
@@ -27,8 +27,7 @@ addons:
     - texinfo
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install sbcl; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; export LISP=sbcl; curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | bash; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install sbcl gettext; fi
 
 script:
   - cd build/
