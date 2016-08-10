@@ -27,7 +27,7 @@ addons:
     - texinfo
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install sbcl gettext; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install autoconf automake sbcl git gettext; fi
 
 script:
   - cd build/
