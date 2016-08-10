@@ -1,0 +1,37 @@
+language: generic
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    packages:
+    - sbcl
+    - git
+    - build-essential
+    - autoconf
+    - automake
+    - autogen
+    - autopoint
+    - libncurses-dev
+    - libx11-dev
+    - libxpm-dev
+    - libgtk2.0-dev
+    - zlib1g-dev
+    - libpcre-dev
+    - libcurl4-gnutls-dev
+    - libssl-dev
+    - libtool
+    - texinfo
+
+before install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sbcl    ; fi
+
+script:
+  - cd build/
+  - ./build.sh
