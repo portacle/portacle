@@ -1,11 +1,9 @@
 language: generic
+sudo: true
 
 os:
   - linux
   - osx
-
-compiler:
-  - gcc
 
 addons:
   apt:
@@ -28,10 +26,10 @@ addons:
     - libtool
     - texinfo
 
-before_install:
+install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install sbcl; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; export LISP=sbcl; curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | bash; fi
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./.travis-sbcl.sh; fi
   - cd build/
   - ./build.sh
