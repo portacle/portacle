@@ -29,8 +29,18 @@ addons:
     - texinfo
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sbcl    ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+      brew install sbcl
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      mkdir -p "$HOME/.prep"
+      cd "$HOME/.prep"
+      curl -o "sbcl.tar.bz2" -L http://prdownloads.sourceforge.net/sbcl/sbcl-1.2.13-x86-64-linux-binary.tar.bz2
+      tar -C "." --strip-components=1 -j -xf "sbcl.tar.bz2"
+      INSTALL_ROOT="$HOME/.sbcl" bash install.sh
+      export PATH="$HOME/.sbcl/bin/:$PATH"
+    fi
 
 script:
   - cd build/
