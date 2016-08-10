@@ -30,8 +30,8 @@ addons:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install sbcl; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fi
 
 script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./.travis-sbcl.sh; fi
   - cd build/
   - ./build.sh
