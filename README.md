@@ -7,6 +7,9 @@ One of the major annoyances when coming to lisp is that you have to go through a
 
 Aside from this, I've often wanted to be able to put my environment onto a USB stick so that I can work on things at any particular machine without having to set it up every time.
 
+## Getting It
+You can get the latest release from [GitHub](https://github.com/Shinmera/portacle/releases/). Simply download the archive that matches your platform, namely `lin-portacle` for Linux, `mac-portacle` for OS X, and `win-portacle` for Windows. You can extract that wherever you want, and even put it onto a USB drive to take with you wherever you go.
+
 ## Using It
 In order to launch Portacle, simply run one of the files appropriate for your system from the root directory. Namely `portacle.exe` for Windows, `portacle.desktop` for Linux, and `Portacle.app` for OS X.
 
