@@ -37,6 +37,9 @@
 (require 'shinmera-magit)
 (require 'shinmera-lisp)
 (require 'shinmera-startup)
+(os-case
+ (windows-nt)
+ (T (require 'shinmera-spell)))
 
 ;; Customise the PATH envvar
 (add-to-path (portacle-path "usr/bin/"))
