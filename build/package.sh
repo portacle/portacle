@@ -2,7 +2,8 @@
 
 readonly TAG=${PACKAGE_VERSION:-$(git describe --tags)}
 readonly REPOSITORY=
-readonly W7Z="/c/Program Files/7-zip/7z.exe"
+readonly W7Z="/c/Program Files/7-zip/"
+readonly W7ZSFX="7zsd_LZMA2.sfx"
 
 ##
 
@@ -10,7 +11,8 @@ readonly PROGRAM=package
 source common.sh
 readonly PACKAGE_FILE=${PACKAGE_FILE:-$PLATFORM-portacle-$TAG}
 INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
-PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "exe" || echo "xz")
+PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
+W7ZCONF=$SCRIPT_DIR/7zsfx.conf
 
 function win-translate-paths() {
     local result=()
@@ -51,11 +53,14 @@ function install() {
     
     cd $(dirname "$INSTALL_TARGET")
     case "$PACKAGE_FORMAT" in
-        exe)
+        sfx)
             local winfile=$(win-translate-paths "$package")
             local winfiles=($(win-translate-paths "$files"))
-            "$W7Z" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
+            local winconfig=$(win-translate-paths "$W7ZCONF")
+            "$W7Z/7z.exe" a -t7z "$winfile.7z" -m0=LZMA2 -mmt2 -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
                 || eexit "Could not create package."
+            cat "$W7Z/$W7ZSFX" "$W7ZCONF" "$package.7z" > "$package.exe"
+            rm "$winfile.7z"
             ;;
         zip)
             zip -ry9 "$package.zip" "${files[@]}" \
