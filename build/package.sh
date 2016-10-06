@@ -9,6 +9,8 @@ readonly W7Z="/c/Program Files/7-zip/7z.exe"
 readonly PROGRAM=package
 source common.sh
 readonly PACKAGE_FILE=${PACKAGE_FILE:-$PLATFORM-portacle-$TAG}
+INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
+PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "exe" || echo "xz")
 
 function win-translate-paths() {
     local result=()
@@ -48,15 +50,21 @@ function install() {
     local files=$(basename "$INSTALL_TARGET")
     
     cd $(dirname "$INSTALL_TARGET")
-    case "$PLATFORM" in
-        win) local winfile=$(win-translate-paths "$package")
-             local winfiles=($(win-translate-paths "$files"))
-             "$W7Z" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
-                 || eexit "Could not create package."
-             ;;
-        *)   tar -cJf "$package.tar.xz" "${files[@]}" \
-                 || eexit "Could not create package."
-             ;;
+    case "$PACKAGE_FORMAT" in
+        exe)
+            local winfile=$(win-translate-paths "$package")
+            local winfiles=($(win-translate-paths "$files"))
+            "$W7Z" a -t7z "$winfile.exe" -m0=LZMA2 -mmt2 -sfx7z.sfx -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
+                || eexit "Could not create package."
+            ;;
+        zip)
+            zip -ry9 "$package.zip" "${files[@]}" \
+                || eexit "Could not create package."
+            ;;
+        xz)
+            tar -cJf "$package.tar.xz" "${files[@]}" \
+                || eexit "Could not create package."
+            ;;
     esac
 }
 
