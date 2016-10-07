@@ -9,7 +9,7 @@ readonly W7ZSFX="7zsd_LZMA2.sfx"
 
 readonly PROGRAM=package
 source common.sh
-readonly PACKAGE_FILE=${PACKAGE_FILE:-$PLATFORM-portacle-$TAG}
+PACKAGE_FILE=${PACKAGE_FILE:-$TAG/$PLATFORM-portacle}
 INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
 PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
 W7ZCONF=$SCRIPT_DIR/7zsfx.conf
@@ -50,7 +50,8 @@ function build() {
 function install() {
     local package="$PORTACLE_DIR/$PROGRAM/$PACKAGE_FILE"
     local files=$(basename "$INSTALL_TARGET")
-    
+
+    mkdir -p $(dirname "$package")
     cd $(dirname "$INSTALL_TARGET")
     case "$PACKAGE_FORMAT" in
         sfx)
