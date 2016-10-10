@@ -2,6 +2,7 @@
 Thumbs.db
 .directory
 build/*/
+build/.portacle-finished-fragments
 package/
 ## Build results
 aspell/*/*/

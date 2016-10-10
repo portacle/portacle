@@ -28,6 +28,7 @@ SCRIPT_DIR=${SCRIPT_DIR:-$(mreadlink $(dirname $0))}
 SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
 PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
 SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
+FRAGMENT_FILE=${FRAGMENT_FILE:-$SCRIPT_DIR/.portacle-finished-fragments}
 INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
 _DEFAULT_TARGETS=(download prepare build install)
 DEFAULT_TARGETS=("${DEFAULT_TARGETS[@]:-${_DEFAULT_TARGETS[@]}}")
@@ -35,6 +36,12 @@ TARGETS=("${@:-${DEFAULT_TARGETS[@]}}")
 CFLAGS=${CFLAGS:-}
 CXXFLAGS=${CXXFLAGS:-}
 LDFLAGS=${LDFLAGS:-}
+FORCE=${FORCE:-}
+
+## Automatically force if we explicitly specified ops.
+if [ "$#" -ne 0 ]; then
+    FORCE=1
+fi
 
 ## Determine mac cpu count
 case "$PLATFORM" in
@@ -92,6 +99,19 @@ function ucp() {
             *)   cp -Rfu "$@" ;;
         esac
     fi
+}
+
+## To avoid recompilation of finished components
+function finish-stage() {
+    echo "$PROGRAM $TAG $1" >> "$FRAGMENT_FILE"
+}
+
+function stage-finished() {
+    grep -qF "$PROGRAM $TAG $1" "$FRAGMENT_FILE" 2>/dev/null
+}
+
+function clean-fragments() {
+    sed -i'' "/$PROGRAM $TAG/d" "$FRAGMENT_FILE"
 }
 
 ## Ensure the given array of files is copied to the target directory
@@ -177,6 +197,7 @@ function download() {
        git checkout tags/$TAG \
            || eexit "Failed to checkout desired tag."
     fi
+    finish-stage download
 }
 
 function prepare (){
@@ -193,6 +214,7 @@ function install (){
 
 function clean() {
     rm -rf "$SOURCE_DIR"
+    clean-fragments
 }
 
 function clean-installed() {
@@ -202,9 +224,18 @@ function clean-installed() {
 
 function main() {
     info
+    if [ ! -z "$FORCE" ]; then
+       clean-fragments
+    fi
+    
     for TARGET in "${TARGETS[@]}"; do
-        status 1 "${TARGET}ing $PROGRAM"
-        $TARGET || exit 1
+            status 1 "${TARGET}ing $PROGRAM"
+        if stage-finished "$TARGET"; then
+            status 2 "skipping $TARGET, already completed."
+        else
+            $TARGET || exit 1
+            finish-stage "$TARGET"
+        fi
     done
     status 0 "$PROGRAM done"
 }
