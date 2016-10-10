@@ -194,13 +194,15 @@
 (defun --copy-project-internal (from to)
   (make-directory to t)
   (dolist (template (directory-files from))
-    (let ((srcfile (concat from "/" template))
-          (destfile (concat to "/" (replace-project-variables template))))
-      (cond ((file-directory-p srcfile)
-             (--copy-project-internal srcfile destfile))
-            (t
-             (write-file-contents (replace-project-variables (file-contents srcfile))
-                                  destfile))))))
+    (unless (or (string= template ".")
+                (string= template ".."))
+      (let ((srcfile (concat from "/" template))
+            (destfile (concat to "/" (replace-project-variables template))))
+        (cond ((file-directory-p srcfile)
+               (--copy-project-internal srcfile destfile))
+              (t
+               (write-file-contents (replace-project-variables (file-contents srcfile))
+                                    destfile)))))))
 
 (cl-defun create-project (&key name description licence)
   (interactive)
