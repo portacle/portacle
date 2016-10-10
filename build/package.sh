@@ -14,14 +14,6 @@ INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
 PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
 W7ZCONF=$SCRIPT_DIR/7zsfx.conf
 
-function win-translate-paths() {
-    local result=()
-    for file in "$@"; do
-        result+=($(cygpath -w "$file"))
-    done
-    echo "${result[@]}"
-}
-
 function discover-files() {
     ls -rt -d -1 "$1/"{*,.*} | egrep -v "build|$PROGRAM|/\\.{1,2}\$"
 }
@@ -55,9 +47,9 @@ function install() {
     cd $(dirname "$INSTALL_TARGET")
     case "$PACKAGE_FORMAT" in
         sfx)
-            local winfile=$(win-translate-paths "$package")
-            local winfiles=($(win-translate-paths "$files"))
-            local winconfig=$(win-translate-paths "$W7ZCONF")
+            local winfile=$(to-win-path "$package")
+            local winfiles=($(to-win-path "$files"))
+            local winconfig=$(to-win-path "$W7ZCONF")
             "$W7Z/7z.exe" a -t7z "$winfile.7z" -m0=LZMA2 -mmt2 -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
                 || eexit "Could not create package."
             cat "$W7Z/$W7ZSFX" "$W7ZCONF" "$package.7z" > "$package.exe"

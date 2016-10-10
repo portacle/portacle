@@ -77,6 +77,22 @@ function win-exes-for-package(){
     pacman -Ql "$1" | grep "\\.exe" | awk '{print $2}'
 }
 
+function to-win-path() {
+    local result=()
+    for file in "$@"; do
+        result+=($(cygpath -w "$file"))
+    done
+    echo "${result[@]}"
+}
+
+function from-win-path() {
+    local result=()
+    for file in "$@"; do
+        result+=($(cygpath -u "$file"))
+    done
+    echo "${result[@]}"
+}
+
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
     local deps=( $(nonlocal-ldd $1) )
