@@ -33,7 +33,7 @@
 
 (defun portacle-recompile (&optional force)
   (byte-recompile-directory (portacle-path "config/") 0 force)
-  (byte-recompile-directory (portacle-path "emacs/config/shinmera") 0 force))
+  (byte-recompile-directory (portacle-path "emacs/config/shinmera/") 0 force))
 
 (defun portacle-update ()
   (interactive)
