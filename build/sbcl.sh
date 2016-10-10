@@ -21,8 +21,8 @@ function prepare() {
 
     if ! system-has "sbcl"; then
         case "$PLATFORM" in
-            win) local sbcl_path="/c/Program Files/Steel Bank Common Lisp/"*/
-                 export PATH="$sbcl_path:$PATH" ;;
+            win) local sbcl_path=( "/c/Program Files/Steel Bank Common Lisp/"*/ )
+                 export PATH="${sbcl_path[0]}:$PATH" ;;
         esac
         system-has "sbcl" \
             || eexit "SBCL not found in your path."
