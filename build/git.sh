@@ -34,13 +34,8 @@ function win-copy-coreutils() {
     ensure-dependencies $(find-binaries "$1")
 }
 
-function install() {
+function fix-git-libexec() {
     local exepaths=( )
-    cd "$SOURCE_DIR"
-    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
-        || eexit "The install failed. Please check the output for error messages."
-
-    status 2 "Fixing hardlinks"
     case "$PLATFORM" in
         win) local gitexepath=$(to-win-path "$INSTALL_TARGET/bin/git.exe")
              local winexepaths=$(fsutil.exe hardlink list $gitexepath)
@@ -57,8 +52,9 @@ function install() {
             ln -s "../../bin/git.exe" "$file"
         fi
     done
+}
 
-    status 2 "Copying platform"
+function ensure-git-platform() {
     case "$PLATFORM" in
         win) win-copy-coreutils "$SHARED_DIR/bin/"
              ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
@@ -73,6 +69,18 @@ function install() {
              ensure-dependencies "/usr/bin/ssh"
              ;;
     esac
+}
+
+function install() {
+    cd "$SOURCE_DIR"
+    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
+        || eexit "The install failed. Please check the output for error messages."
+
+    status 2 "Fixing hardlinks"
+    fix-git-libexec
+
+    status 2 "Copying platform"
+    ensure-git-platform
 
     status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
