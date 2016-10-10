@@ -1,4 +1,4 @@
-(require 'cl)
+(require 'cl-lib)
 (load-library "iso-transl")
 (setq default-buffer-file-coding-system 'utf-8-unix)
 
@@ -8,22 +8,22 @@
                         `(t ,@(cdr case))
                         `((eql system-type ',(car case)) ,@(cdr case))))))
 
-(defun file-contents (file)
+(cl-defun file-contents (file)
   (with-temp-buffer
       (insert-file-contents file)
     (buffer-string)))
 
-(defun write-file-contents (contents file &optional append)
+(cl-defun write-file-contents (contents file &optional append)
   (write-region contents nil file append))
 
 ;; Set up paths
 (setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
 (setq portacle-os (os-case (gnu/linux "lin") (darwin "mac") (windows-nt "win")))
 
-(defun portacle-path (path)
+(cl-defun portacle-path (path)
   (concat portacle-root path))
 
-(defun portacle-app-path (app path)
+(cl-defun portacle-app-path (app path)
   (portacle-path (concat app "/" portacle-os "/" path)))
 
 (setq user-emacs-directory (portacle-path "emacs/config/"))
@@ -106,7 +106,7 @@
           paredit-newline
           paredit-open-round
           paredit-open-square
-          paredit-reindent-defun
+          paredit-reindent-cl-defun
           paredit-semicolon
           paredit-splice-sexp-killing-backward
           paredit-backslash
@@ -123,13 +123,13 @@
           mouse-drag-mode-line)))
 
 ;; Our update command
-(defun portacle-pull-preserving-changes (place)
+(cl-defun portacle-pull-preserving-changes (place)
   (let ((default-directory place))
     (call-process magit-git-executable nil (current-buffer) t "stash")
     (call-process magit-git-executable nil (current-buffer) t "pull")
     (call-process magit-git-executable nil (current-buffer) t "stash" "pop")))
 
-(defun portacle-update ()
+(cl-defun portacle-update ()
   (interactive)
   (with-help-window "*portacle-update*"
     (with-current-buffer "*portacle-update*"
@@ -151,7 +151,7 @@
       (insert "===> All done\n")
       (insert "\n Press q to close this buffer."))))
 
-(defun portacle-configure (&key name email licence)
+(cl-defun portacle-configure (&key name email licence)
   (interactive)
   (let ((name (or name (read-string "Your name: " user-full-name)))
         (email (or email (read-string "Your e-mail address: " user-mail-address)))
@@ -165,7 +165,7 @@
     (setq user-mail-address email)
     (message "User information set.")))
 
-(defun replace-project-variables (string &optional vars)
+(cl-defun replace-project-variables (string &optional vars)
   (let ((vars '(user-full-name user-mail-address
                 project-name project-description
                 project-licence year month day))
@@ -177,7 +177,7 @@
     (dolist (var vars string)
       (setq string (replace-regexp-in-string (upcase (symbol-name var)) (symbol-value var) string t t)))))
 
-(defun maybe-update-quicklisp-db ()
+(cl-defun maybe-update-quicklisp-db ()
   (interactive)
   (cond ((slime-connected-p)
          (message "Updating Quicklisp DB...")
@@ -186,7 +186,7 @@
         (t
          (message "Slime not connected, cannot update."))))
 
-(defun create-project (&key name description licence)
+(cl-defun create-project (&key name description licence)
   (interactive)
   (let* ((project-name (or name (read-string "Project name: ")))
          (project-description (or description (read-string "Project description: ")))
@@ -212,7 +212,7 @@
            (maybe-update-quicklisp-db)
            (message "Project created.")))))
 
-(defun clone-project (url &optional name)
+(cl-defun clone-project (url &optional name)
   (interactive)
   (let ((url (or url (read-string "Project URL: ")))
         (path (url-filename (url-generic-parse-url url)))
@@ -226,7 +226,7 @@
            (maybe-update-quicklisp-db)
            (message "Project cloned.")))))
 
-(defun remove-project (&optional name)
+(cl-defun remove-project (&optional name)
   (interactive)
   (let* ((name (or name (read-string "Project name: ")))
          (dir (portacle-path (concat "projects/" name))))
@@ -243,7 +243,7 @@
   ;; We hack this to never error because otherwise emacs refuses to work
   ;; as a server on Windows due to requiring the dir being fixed to a
   ;; "safe" directory, which we cannot ensure in our portable environment.
-  (defun server-ensure-safe-dir (dir)
+  (cl-defun server-ensure-safe-dir (dir)
     (unless (file-exists-p dir)
       (make-directory dir t))))
 
