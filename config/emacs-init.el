@@ -1,7 +1,5 @@
-(require 'portacle)
-
 (load-library "iso-transl")
-(setq default-buffer-file-coding-system 'utf-8-unix)
+(load-library "portacle")
 
 ;; Set up paths
 (setq user-emacs-directory (portacle-path "emacs/config/"))
