@@ -215,10 +215,10 @@
 
 (cl-defun clone-project (&optional url name)
   (interactive)
-  (let ((url (or url (read-string "Project URL: ")))
-        (path (url-filename (url-generic-parse-url url)))
-        (name (or name (car (last (split-string path "/")))))
-        (dir (portacle-path (concat "projects/" name))))
+  (let* ((url (or url (read-string "Project URL: ")))
+         (path (url-filename (url-generic-parse-url url)))
+         (name (or name (car (last (split-string path "/")))))
+         (dir (portacle-path (concat "projects/" name))))
     (cond ((file-exists-p dir)
            (message "A project with that name already exists."))
           (t
