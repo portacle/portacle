@@ -1,2 +1,2 @@
 [http]
-        sslcainfo = usr/ssl/ca-bundle.crt
+        sslcainfo = /etc/ca-bundle.crt

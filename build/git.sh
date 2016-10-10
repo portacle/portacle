@@ -45,6 +45,7 @@ function install() {
              ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
              ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
+             cp "$SHARED_DIR/ssl/ca-bundle.crt" "$INSTALL_TARGET/etc/ca-bundle.crt"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
