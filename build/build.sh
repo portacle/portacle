@@ -27,6 +27,7 @@ function global() {
 
 function sbcl() {
     "$SOURCE_DIR/sbcl.sh"
+}
 
 function asdf() {
     "$SOURCE_DIR/asdf.sh"
