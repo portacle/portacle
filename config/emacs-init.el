@@ -1,31 +1,9 @@
-(require 'cl-lib)
+(require 'portacle)
+
 (load-library "iso-transl")
 (setq default-buffer-file-coding-system 'utf-8-unix)
 
-(cl-defmacro os-case (&body cases)
-  `(cond ,@(cl-loop for case in cases collect
-                    (if (eql (car case) t)
-                        `(t ,@(cdr case))
-                        `((eql system-type ',(car case)) ,@(cdr case))))))
-
-(cl-defun file-contents (file)
-  (with-temp-buffer
-      (insert-file-contents file)
-    (buffer-string)))
-
-(cl-defun write-file-contents (contents file &optional append)
-  (write-region contents nil file append))
-
 ;; Set up paths
-(setq portacle-root (or (getenv "ROOT") (expand-file-name "~/")))
-(setq portacle-os (os-case (gnu/linux "lin") (darwin "mac") (windows-nt "win")))
-
-(cl-defun portacle-path (path)
-  (concat portacle-root path))
-
-(cl-defun portacle-app-path (app path)
-  (portacle-path (concat app "/" portacle-os "/" path)))
-
 (setq user-emacs-directory (portacle-path "emacs/config/"))
 (add-to-list 'load-path (concat user-emacs-directory "shinmera/"))
 (cd portacle-root)
@@ -52,16 +30,18 @@
 
 ;; Make sure SLIME knows about our SBCL
 (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
-(setq slime-lisp-implementations `((sbcl ,(os-case (windows-nt (list (portacle-app-path "sbcl" "bin/sbcl")
-                                                                     "--no-sysinit"
-                                                                     "--userinit"
-                                                                     (portacle-path "config/sbcl-init.lisp")))
-                                                   (t (list (portacle-app-path "sbcl" "sbcl.sh")))))))
+(setq slime-lisp-implementations
+      `((sbcl ,(os-case (windows-nt (list (portacle-app-path "sbcl" "bin/sbcl")
+                                          "--no-sysinit"
+                                          "--userinit"
+                                          (portacle-path "config/sbcl-init.lisp")))
+                        (t (list (portacle-app-path "sbcl" "sbcl.sh")))))))
 
 ;; Set the Magit executable explicitly
 (setenv "XDG_CONFIG_HOME" (portacle-path "config"))
-(setq magit-git-executable (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
-                                    (t           (portacle-app-path "git" "git.sh"))))
+(setq magit-git-executable
+      (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
+               (t           (portacle-app-path "git" "git.sh"))))
 
 ;; Customise graphic mode
 (when window-system
@@ -77,7 +57,7 @@
   (emacs-lock-mode 'kill))
 
 ;; Customise the scratch buffer
-(setq initial-scratch-message (file-contents (portacle-path "config/scratch.txt")))
+(setq initial-scratch-message (portacle-fread (portacle-path "config/scratch.txt")))
 (setq initial-major-mode 'common-lisp-mode)
 
 ;; Populate default MC lists
@@ -121,130 +101,6 @@
         '(down-list
           ido-list-directory
           mouse-drag-mode-line)))
-
-;; Our update command
-(cl-defun portacle-pull-preserving-changes (place)
-  (let ((default-directory place))
-    (call-process magit-git-executable nil (current-buffer) t "stash")
-    (call-process magit-git-executable nil (current-buffer) t "pull")
-    (call-process magit-git-executable nil (current-buffer) t "stash" "pop")))
-
-(cl-defun portacle-update ()
-  (interactive)
-  (with-help-window "*portacle-update*"
-    (with-current-buffer "*portacle-update*"
-      (switch-to-buffer (current-buffer))
-      (insert "===> Starting Portacle update\n")
-      (insert "  --> Updating root via GIT\n")
-      (portacle-pull-preserving-changes portacle-root)
-      (insert "  --> Updating config via GIT\n")
-      (portacle-pull-preserving-changes (portacle-path "emacs/config/shinmera"))
-      (insert "  --> Updating dists via QL\n")
-      (slime-eval '(ql:update-all-dists :prompt cl:nil))
-      (insert "  --> Updating client via QL\n")
-      (slime-eval '(ql:update-client :prompt cl:nil))
-      (insert "  --> Updating packages via ELPA\n")
-      (package-refresh-contents)
-      (dolist (elt package-archive-contents)
-        (when (package-installed-p (car elt))
-          (package-install (car elt))))
-      (insert "===> All done\n")
-      (insert "\n Please restart Portacle for the changes to take full effect.\n")
-      (insert "\n Press q to close this buffer."))))
-
-;; Configuration of user variables
-(setq project-default-licence "BSD-3")
-
-(cl-defun portacle-configure (&key name email licence)
-  (interactive)
-  (let ((name (or name (read-string "Your name: " user-full-name)))
-        (email (or email (read-string "Your e-mail address: " user-mail-address)))
-        (licence (or licence (read-string "Default project licence: " project-default-licence))))
-    (call-process magit-git-executable nil nil t "config" "--file" (portacle-path "config/git/config") "user.name" name)
-    (call-process magit-git-executable nil nil t "config" "--file" (portacle-path "config/git/config") "user.email" email)
-    (write-file-contents (prin1-to-string `(setq user-full-name ,name)) (portacle-path "config/user.el") t)
-    (write-file-contents (prin1-to-string `(setq user-mail-address ,email)) (portacle-path "config/user.el") t)
-    (write-file-contents (prin1-to-string `(setq project-default-licence ,email)) (portacle-path "config/user.el") t)
-    (setq user-full-name name)
-    (setq user-mail-address email)
-    (message "User information set.")))
-
-;; Project management
-(cl-defun replace-project-variables (string &optional vars)
-  (let ((vars '(user-full-name user-mail-address
-                project-name project-description
-                project-licence year month day))
-        (year (format-time-string "%Y"))
-        (month (format-time-string "%m"))
-        (day (format-time-string "%d"))
-        ;; Case-sensitive regexp mathcing
-        (case-fold-search nil))
-    (dolist (var vars string)
-      (setq string (replace-regexp-in-string (upcase (symbol-name var)) (symbol-value var) string t t)))))
-
-(cl-defun maybe-update-quicklisp-db ()
-  (interactive)
-  (cond ((slime-connected-p)
-         (message "Updating Quicklisp DB...")
-         (slime-eval '(ql:register-local-projects))
-         (message "Quicklisp DB updated."))
-        (t
-         (message "Slime not connected, cannot update."))))
-
-(defun --copy-project-internal (from to)
-  (make-directory to t)
-  (dolist (template (directory-files from))
-    (unless (or (string= template ".")
-                (string= template ".."))
-      (let ((srcfile (concat from "/" template))
-            (destfile (concat to "/" (replace-project-variables template))))
-        (cond ((file-directory-p srcfile)
-               (--copy-project-internal srcfile destfile))
-              (t
-               (write-file-contents (replace-project-variables (file-contents srcfile))
-                                    destfile)))))))
-
-(cl-defun create-project (&key name description licence)
-  (interactive)
-  (let* ((project-name (or name (read-string "Project name: ")))
-         (project-description (or description (read-string "Project description: ")))
-         (project-licence (or licence (read-string "Project licence: " project-default-licence)))
-         (dir (portacle-path (concat "projects/" project-name)))
-         (skeleton (portacle-path "config/skeleton/")))
-    (cond ((file-exists-p dir)
-           (message "A project with that name already exists."))
-          (t
-           (message "Creating project skeleton...")
-           (--copy-project-internal skeleton dir)
-           (magit-init dir)
-           (maybe-update-quicklisp-db)
-           (message "Project created.")))))
-
-(cl-defun clone-project (&optional url name)
-  (interactive)
-  (let* ((url (or url (read-string "Project URL: ")))
-         (path (url-filename (url-generic-parse-url url)))
-         (name (or name (car (last (split-string path "/")))))
-         (dir (portacle-path (concat "projects/" name))))
-    (cond ((file-exists-p dir)
-           (message "A project with that name already exists."))
-          (t
-           (message "Cloning project...")
-           (magit-clone url dir)
-           (maybe-update-quicklisp-db)
-           (message "Project cloned.")))))
-
-(cl-defun remove-project (&optional name)
-  (interactive)
-  (let* ((name (or name (read-string "Project name: ")))
-         (dir (portacle-path (concat "projects/" name))))
-    (cond ((file-exists-p dir)
-           (message "Deleting project directory...")
-           (delete-directory dir t)
-           (maybe-update-quicklisp-db)
-           (message "Project removed."))
-          (t
-           (message "No such project found.")))))
 
 ;; Other fixes
 (when (eql system-type 'windows-nt)
