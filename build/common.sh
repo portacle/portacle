@@ -45,6 +45,7 @@ fi
 
 ## Determine mac cpu count
 case "$PLATFORM" in
+    win) MAXCPUS=$NUMBER_OF_PROCESSORS ;;
     lin) MAXCPUS=${MAXCPUS:-$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)} ;;
     *)   MAXCPUS=${MAXCPUS:-1} ;;
 esac
