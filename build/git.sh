@@ -2,7 +2,7 @@
 
 #readonly TAG=v2.8.3
 #readonly REPOSITORY=https://github.com/git/git
-readonly MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1"
+readonly MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1"
 
 ###
 
@@ -48,6 +48,17 @@ function install() {
              mkdir -p "$INSTALL_TARGET/share/ssl"
              cp "$SHARED_DIR/ssl/ca-bundle.crt" "$INSTALL_TARGET/share/ssl/ca-bundle.crt"
              mkdir -p "$PORTACLE_DIR/tmp"
+             ## Fix hardlinks
+             local gitexepath=$(to-win-path "$INSTALL_TARGET/bin/git.exe")
+             local winexepaths=$(fsutil.exe hardlink list $gitexepath)
+             local exepaths=$(from-win-path "${winexepaths[@]}")
+             for file in "${exepaths[@]+${exepaths[@]}}"; do
+                 if [ basename "$file" != "git.exe" ]; then
+                     echo "Replacing $file with a symlink to git.exe ..."
+                     rm "$file"
+                     ln -s "$INSTALL_TARGET/bin/git.exe" "$file"
+                 fi
+             done
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
