@@ -149,6 +149,7 @@
         (when (package-installed-p (car elt))
           (package-install (car elt))))
       (insert "===> All done\n")
+      (insert "\n Please restart Portacle for the changes to take full effect.\n")
       (insert "\n Press q to close this buffer."))))
 
 (cl-defun portacle-configure (&key name email licence)
