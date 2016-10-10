@@ -42,7 +42,7 @@
 (require 'shinmera-startup)
 (os-case
  (windows-nt)
- (T (require 'shinmera-spell)))
+ (t (require 'shinmera-spell)))
 
 ;; Customise the PATH envvar
 (add-to-path (portacle-path "usr/bin/"))
@@ -233,7 +233,7 @@
          (dir (portacle-path (concat "projects/" name))))
     (cond ((file-exists-p dir)
            (message "Deleting project directory...")
-           (delete-directory dir T)
+           (delete-directory dir t)
            (maybe-update-quicklisp-db)
            (message "Project removed."))
           (t
