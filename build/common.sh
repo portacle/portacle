@@ -205,11 +205,14 @@ function download() {
         git checkout master
         git pull \
             || eexit "Failed to download source."
-    else
-        git clone "$REPOSITORY" "$SOURCE_DIR" \
+    elif [ -n "$TAG" ]; then
+        git clone "$REPOSITORY" "$SOURCE_DIR" --branch="$TAG" --depth=1 \
             || eexit "Failed to download source."
-        cd "$SOURCE_DIR"
+    else
+        git clone "$REPOSITORY" "$SOURCE_DIR" --depth=1 \
+            || eexit "Failed to download source."
     fi
+    cd "$SOURCE_DIR"
     if [ -n "$TAG" ]; then
        git checkout tags/$TAG \
            || eexit "Failed to checkout desired tag."
