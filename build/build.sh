@@ -13,7 +13,7 @@ SOURCE_DIR="$SCRIPT_DIR"
 INSTALL_TARGET="$PORTACLE_DIR"
 
 function clean() {
-    "$(which git)" clean -fxd
+    "$(which git)" clean -ffxd
     "$(which git)" reset --hard HEAD
 }
 
@@ -26,8 +26,7 @@ function global() {
 }
 
 function sbcl() {
-    "$SOURCE_DIR//sbcl.sh"
-}
+    "$SOURCE_DIR/sbcl.sh"
 
 function asdf() {
     "$SOURCE_DIR/asdf.sh"
