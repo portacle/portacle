@@ -46,7 +46,7 @@ function fix-git-libexec() {
     esac
     
     for file in "${exepaths[@]+${exepaths[@]}}"; do
-        if [ basename "$file" != "git.exe" ]; then
+        if [ $(basename "$file") != "git.exe" ]; then
             echo "Replacing $file with a symlink to ../../bin/git.exe"
             rm "$file"
             ln -s "../../bin/git.exe" "$file"
