@@ -152,11 +152,14 @@
       (insert "\n Please restart Portacle for the changes to take full effect.\n")
       (insert "\n Press q to close this buffer."))))
 
+;; Configuration of user variables
+(setq project-default-licence "BSD-3")
+
 (cl-defun portacle-configure (&key name email licence)
   (interactive)
   (let ((name (or name (read-string "Your name: " user-full-name)))
         (email (or email (read-string "Your e-mail address: " user-mail-address)))
-        (licence (or licence (read-string "Default project licence: " (or project-default-licence "3-clause BSD")))))
+        (licence (or licence (read-string "Default project licence: " project-default-licence))))
     (call-process magit-git-executable nil nil t "config" "--file" (portacle-path "config/git/config") "user.name" name)
     (call-process magit-git-executable nil nil t "config" "--file" (portacle-path "config/git/config") "user.email" email)
     (write-file-contents (prin1-to-string `(setq user-full-name ,name)) (portacle-path "config/user.el") t)
@@ -166,6 +169,7 @@
     (setq user-mail-address email)
     (message "User information set.")))
 
+;; Project management
 (cl-defun replace-project-variables (string &optional vars)
   (let ((vars '(user-full-name user-mail-address
                 project-name project-description
