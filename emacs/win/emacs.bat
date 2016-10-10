@@ -39,7 +39,8 @@ set EMACSLOADPATH=%ROOT%\emacs\share\emacs\%EMACSVER%\site-lisp;^
 %ROOT%\emacs\share\emacs\%EMACSVER%\lisp\term;^
 %ROOT%\emacs\share\emacs\%EMACSVER%\lisp\textmodes;^
 %ROOT%\emacs\share\emacs\%EMACSVER%\lisp\url;^
-%ROOT%\emacs\share\emacs\%EMACSVER%\lisp\vc
+%ROOT%\emacs\share\emacs\%EMACSVER%\lisp\vc;^
+%ROOT%\config
 
 set PATH=%ROOT%\emacs\win\libexec\emacs\%EMACSVER%\x86_64-w64-mingw32;%PATH%
 set PATH=%ROOT%\usr\lib\;%PATH%
