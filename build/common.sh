@@ -201,15 +201,15 @@ function download() {
 }
 
 function prepare (){
-    status 2 "skipping prepare"
+    status 2 "skipping prepare, not needed"
 }
 
 function build (){
-    status 2 "skipping build"
+    status 2 "skipping build, not needed"
 }
 
 function install (){
-    status 2 "skipping install"
+    status 2 "skipping install, not needed"
 }
 
 function clean() {
@@ -231,7 +231,7 @@ function main() {
     for TARGET in "${TARGETS[@]}"; do
             status 1 "${TARGET}ing $PROGRAM"
         if stage-finished "$TARGET"; then
-            status 2 "skipping $TARGET, already completed."
+            status 2 "skipping $TARGET, already completed"
         else
             $TARGET || exit 1
             finish-stage "$TARGET"
