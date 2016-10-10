@@ -22,8 +22,8 @@ function install (){
 
     case "$PLATFORM" in
         win) winroot=$({ cd "$SCRIPT_DIR/.." && pwd -W; } | sed 's|/|\\|g')
-             cmd /c "$winroot\\emacs\\win\\emacs.bat -f kill-emacs" ;;
-        *)   $SCRIPT_DIR/../emacs/$PLATFORM/emacs.sh -nw -f "kill-emacs" \
+             cmd /c "$winroot\\emacs\\win\\emacs.bat -f portacle-recompile -f kill-emacs" ;;
+        *)   $SCRIPT_DIR/../emacs/$PLATFORM/emacs.sh -nw -f "portacle-recompile" -f "kill-emacs" \
                  || eexit "Failed to perform first-launch." ;;
     esac
 }
