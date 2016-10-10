@@ -43,7 +43,8 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/progmodes:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/term:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/textmodes:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/url:\
-$ROOT/emacs/share/emacs/$EMACSVER/lisp/vc
+$ROOT/emacs/share/emacs/$EMACSVER/lisp/vc:\
+$ROOT/config
 
 export PATH=$ROOT/mac/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
 export DYLD_LIBRARY_PATH=$ROOT/usr/lib/:$DYLD_LIBRARY_PATH
