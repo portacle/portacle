@@ -9,8 +9,13 @@ readonly PROGRAM=quicklisp
 source common.sh
 INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM
 
+case "$PLATFORM" in
+    win) readonly SBCL="$PORTACLE_DIR/sbcl/win/sbcl.bat" ;;
+    *)   readonly SBCL="$PORTACLE_DIR/sbcl/$PLATFORM/sbcl.sh" ;;
+esac
+
 function build() {
-    sbcl --script "$SOURCE_DIR/setup.lisp" \
+    "$SBCL" --script "$SOURCE_DIR/setup.lisp" \
         || eexit "Failed to set up quicklisp first-time init."
 }
 
