@@ -212,7 +212,7 @@
            (maybe-update-quicklisp-db)
            (message "Project created.")))))
 
-(cl-defun clone-project (url &optional name)
+(cl-defun clone-project (&optional url name)
   (interactive)
   (let ((url (or url (read-string "Project URL: ")))
         (path (url-filename (url-generic-parse-url url)))
