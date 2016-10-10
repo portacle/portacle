@@ -35,9 +35,28 @@ function win-copy-coreutils() {
 }
 
 function install() {
+    local exepaths=( )
     cd "$SOURCE_DIR"
     make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
         || eexit "The install failed. Please check the output for error messages."
+
+    status 2 "Fixing hardlinks"
+    case "$PLATFORM" in
+        win) local gitexepath=$(to-win-path "$INSTALL_TARGET/bin/git.exe")
+             local winexepaths=$(fsutil.exe hardlink list $gitexepath)
+             exepaths=$(from-win-path "${winexepaths[@]}")
+             ;;
+        *)   exepaths=$(find "$INSTALL_TARGET" -type f -samefile "$INSTALL_TARGET/bin/git.exe")
+             ;;
+    esac
+    
+    for file in "${exepaths[@]+${exepaths[@]}}"; do
+        if [ basename "$file" != "git.exe" ]; then
+            echo "Replacing $file with a symlink to ../../bin/git.exe"
+            rm "$file"
+            ln -s "../../bin/git.exe" "$file"
+        fi
+    done
 
     status 2 "Copying platform"
     case "$PLATFORM" in
@@ -48,17 +67,6 @@ function install() {
              mkdir -p "$INSTALL_TARGET/share/ssl"
              cp "$SHARED_DIR/ssl/ca-bundle.crt" "$INSTALL_TARGET/share/ssl/ca-bundle.crt"
              mkdir -p "$PORTACLE_DIR/tmp"
-             ## Fix hardlinks
-             local gitexepath=$(to-win-path "$INSTALL_TARGET/bin/git.exe")
-             local winexepaths=$(fsutil.exe hardlink list $gitexepath)
-             local exepaths=$(from-win-path "${winexepaths[@]}")
-             for file in "${exepaths[@]+${exepaths[@]}}"; do
-                 if [ basename "$file" != "git.exe" ]; then
-                     echo "Replacing $file with a symlink to git.exe ..."
-                     rm "$file"
-                     ln -s "$INSTALL_TARGET/bin/git.exe" "$file"
-                 fi
-             done
              ;;
         lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
