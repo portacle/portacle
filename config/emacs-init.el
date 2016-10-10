@@ -191,6 +191,17 @@
         (t
          (message "Slime not connected, cannot update."))))
 
+(defun --copy-project-internal (from to)
+  (make-directory to t)
+  (dolist (template (directory-files from))
+    (let ((srcfile (concat from "/" template))
+          (destfile (concat to "/" (replace-project-variables template))))
+      (cond ((file-directory-p srcfile)
+             (--copy-project-internal srcfile destfile))
+            (t
+             (write-file-contents (replace-project-variables (file-contents srcfile))
+                                  destfile))))))
+
 (cl-defun create-project (&key name description licence)
   (interactive)
   (let* ((project-name (or name (read-string "Project name: ")))
@@ -202,17 +213,7 @@
            (message "A project with that name already exists."))
           (t
            (message "Creating project skeleton...")
-           (labels ((rcopy (from to)
-                      (make-directory to t)
-                      (dolist (template (directory-files from))
-                        (let ((file (concat from "/" template))
-                              (destfile (concat to "/" (replace-project-variables template))))
-                          (cond ((file-directory-p file)
-                                 (rcopy file destfile))
-                                (t
-                                 (write-file-contents (replace-project-variables (file-contents file))
-                                                      destfile)))))))
-             (rcopy skeleton dir))
+           (--copy-project-internal skeleton dir)
            (magit-init dir)
            (maybe-update-quicklisp-db)
            (message "Project created.")))))
