@@ -50,7 +50,7 @@ function install() {
             local winfile=$(to-win-path "$package")
             local winfiles=($(to-win-path "$files"))
             local winconfig=$(to-win-path "$W7ZCONF")
-            "$W7Z/7z.exe" a -t7z "$winfile.7z" -m0=LZMA2 -mmt2 -aoa -r -snh -snl -ssw -y "${winfiles[@]}" \
+            "$W7Z/7z.exe" a "$winfile.7z" -t7z -m0=LZMA2 -mx9 "-mmt$MAXCPUS" -aoa -r -snh -snl -ssw -y -- "${winfiles[@]}" \
                 || eexit "Could not create package."
             cat "$W7Z/$W7ZSFX" "$W7ZCONF" "$package.7z" > "$package.exe"
             rm "$winfile.7z"
