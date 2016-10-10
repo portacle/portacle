@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#readonly TAG=v2.8.3
-#readonly REPOSITORY=https://github.com/git/git
 readonly MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1"
 
 ###
@@ -11,9 +9,9 @@ source common.sh
 
 case "$PLATFORM" in
     win) readonly REPOSITORY=https://github.com/git-for-windows/git
-         readonly TAG=v2.10.1.windows.1;;
+         readonly TAG=v2.9.3.windows.1;;
     *)   readonly REPOSITORY=https://github.com/git/git
-         readonly TAG=v2.10.1;;
+         readonly TAG=v2.9.3;;
 esac
 
 function build() {
