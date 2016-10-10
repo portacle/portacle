@@ -34,26 +34,6 @@ function win-copy-coreutils() {
     ensure-dependencies $(find-binaries "$1")
 }
 
-function fix-git-libexec() {
-    local exepaths=( )
-    case "$PLATFORM" in
-        win) local gitexepath=$(to-win-path "$INSTALL_TARGET/bin/git.exe")
-             local winexepaths=$(fsutil.exe hardlink list $gitexepath)
-             exepaths=$(from-win-path "${winexepaths[@]}")
-             ;;
-        *)   exepaths=$(find "$INSTALL_TARGET" -type f -samefile "$INSTALL_TARGET/bin/git.exe")
-             ;;
-    esac
-    
-    for file in "${exepaths[@]+${exepaths[@]}}"; do
-        if [ $(basename "$file") != "git.exe" ]; then
-            echo "Replacing $file with a symlink to ../../bin/git.exe"
-            rm "$file"
-            ln -s "../../bin/git.exe" "$file"
-        fi
-    done
-}
-
 function ensure-git-platform() {
     case "$PLATFORM" in
         win) win-copy-coreutils "$SHARED_DIR/bin/"
@@ -75,9 +55,6 @@ function install() {
     cd "$SOURCE_DIR"
     make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
         || eexit "The install failed. Please check the output for error messages."
-
-    status 2 "Fixing hardlinks"
-    fix-git-libexec
 
     status 2 "Copying platform"
     ensure-git-platform
