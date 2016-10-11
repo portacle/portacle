@@ -60,7 +60,7 @@ function install() {
                 || eexit "Could not create package."
             ;;
         xz)
-            tar -cJf "$package.tar.xz" "${files[@]}" \
+            XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package.tar.xz" "${files[@]}" \
                 || eexit "Could not create package."
             ;;
     esac
