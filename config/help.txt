@@ -63,7 +63,7 @@ Before you try it out though, let's look at this one too:
 
   C-x b *portacle-help* RET
 
-This one is the same as the last, except that instead of typing "repl", you type "*protacle-help*". This is the same keychord as the one you likely used to see this buffer at the very beginning. The other keychord switches the buffer to the REPL (more on that later). You can use these two to switch between the two buffers.
+This one is the same as the last, except that instead of typing "repl", you type "*protacle-help*". The other keychord switches the buffer to the REPL (more on that later), while this one switches to this help file. You can use these two to switch between the two buffers.
 
 Here's a more complicated, imaginary chord just to see what it would denote:
 
