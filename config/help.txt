@@ -303,6 +303,19 @@ Magit allows you to manage you Git repositories easily and quickly. To run Magit
 
 - Cloning: if you need to clone a repository, you can use M-x magit-clone . It'll ask you for the remote URL and a location to save the repository to.
 
+* 　ＭＡＮＡＧＩＮＧ　ＰＲＯＪＥＣＴＳ
+
+Portacle includes some convenience functions to manage projects for you. You can execute them through M-x as usual.
+
+- create-project
+  This creates a new directory in the projects/ directory and populates it with a project skeleton. The files that will be copied and adapted can be found in the config/skeleton/ directory. If you'd like to change what the default project skeleton looks like, this is where you can do that.
+
+- clone-project
+  This clones/copies a project from a remote Git URL like on github.
+
+- remove-project
+  This removes a project that you created or cloned again, permanently. There is no trash bin, so only use this if you're sure you don't need it anymore.
+
 * 　ＭＡＮＡＧＩＮＧ　ＰＯＲＴＡＣＬＥ
 
 Some things like Git require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use M-x portacle-configure . It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
