@@ -54,6 +54,12 @@
   (read-only-mode)
   (emacs-lock-mode 'kill))
 
+(defun portacle-help ()
+  (interactive)
+  (switch-to-buffer (get-buffer "*portacle-help*")))
+
+(define-my-key "C-h h" 'portacle-help)
+
 ;; Customise the scratch buffer
 (setq initial-scratch-message (portacle-fread (portacle-path "config/scratch.txt")))
 (setq initial-major-mode 'common-lisp-mode)
