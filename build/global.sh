@@ -25,13 +25,13 @@ function build() {
     mkdir -p "$SOURCE_DIR"
     case "$PLATFORM" in
         lin)
-            gcc -o "$SOURCE_DIR/ld-wrap.so" -std=c99 -fPIC -shared -ldl -Wl,-init,init "$SOURCE_DIR/ld-wrap.c" \
+            gcc -o "$SOURCE_DIR/ld-wrap.so" -Wall -std=c99 -fPIC -shared -ldl -Wl,-init,init "$SOURCE_DIR/ld-wrap.c" \
                 || eexit "Failed to build ld-wrap.so"
             cp -fuv "/lib64/ld-linux-x86-64.so.2" "$SOURCE_DIR/ld-linux.so" \
                 || eexit "Failed to copy ld-linux.so"
             ;;
         win)
-            gcc -o "$SOURCE_DIR/fontreg.exe" -std=c99 -mwindows "$SOURCE_DIR/fontreg.c" \
+            gcc -o "$SOURCE_DIR/fontreg.exe" -Wall -std=c99 -mwindows "$SOURCE_DIR/fontreg.c" \
                 || eexit "Failed to build fontreg.exe"
     esac   
 }
