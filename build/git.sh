@@ -34,15 +34,15 @@ function win-copy-coreutils() {
 
 function ensure-git-platform() {
     case "$PLATFORM" in
-        win) win-copy-coreutils "$SHARED_DIR/bin/"
-             ensure-installed "$SHARED_DIR/lib/" "/mingw64/bin/libcurl-4.dll"
-             ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
+        win) win-copy-coreutils "$SHARED_BIN_DIR/"
+             ensure-installed "$SHARED_LIB_DIR/" "/mingw64/bin/libcurl-4.dll"
+             ensure-installed "$SHARED_DIR/$PLATFORM/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
              mkdir -p "$INSTALL_TARGET/share/ssl"
              cp "$SHARED_DIR/ssl/ca-bundle.crt" "$INSTALL_TARGET/share/ssl/ca-bundle.crt"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
-        lin) ensure-installed "$SHARED_DIR/lib/" "/usr/lib/libcurl.so"
+        lin) ensure-installed "$SHARED_LIB_DIR/" "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/lib/libcurl.so"
              ensure-dependencies "/usr/bin/ssh"
              ;;

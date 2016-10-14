@@ -10,7 +10,6 @@ readonly INCONSOLATA_DL=https://github.com/google/fonts/blob/master/ofl/inconsol
 
 readonly PROGRAM=global
 source common.sh
-INSTALL_TARGET="$SHARED_DIR/lib"
 
 function download() {
     mkdir -p "$SOURCE_DIR/fonts"
@@ -37,10 +36,12 @@ function build() {
 }
 
 function install() {
-    mkdir -p "$INSTALL_TARGET/"
+    mkdir -p "$SHARED_LIB_DIR/"
+    mkdir -p "$SHARED_BIN_DIR/"
+    
     case "$PLATFORM" in
-        lin) ensure-installed "$INSTALL_TARGET/" "$SOURCE_DIR/ld-wrap.so" "$SOURCE_DIR/ld-linux.so" ;;
-        win) ensure-installed "$SHARED_DIR/bin/" "$SOURCE_DIR/fontreg.exe" ;;
+        lin) ensure-installed "$SHARED_LIB_DIR/" "$SOURCE_DIR/ld-wrap.so" "$SOURCE_DIR/ld-linux.so" ;;
+        win) ensure-installed "$SHARED_BIN_DIR/" "$SOURCE_DIR/fontreg.exe" ;;
     esac
 
     mkdir -p "$SHARED_DIR/ssl"

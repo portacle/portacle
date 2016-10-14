@@ -44,4 +44,7 @@ $ROOT/config
 
 export PATH=$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
 
-"$ROOT/usr/lib/ld-linux.so" --library-path "$ROOT/usr/lib/" "$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"
+## We do /not/ want ld-wrap.so here as processes launched by emacs
+## likely have to use other libraries outside of our control and
+## thus should not be confined to our ld wrapping.
+"$ROOT/usr/lin/lib/ld-linux.so" --library-path "$ROOT/usr/lin/lib/" "$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"
