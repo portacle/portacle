@@ -28,6 +28,8 @@ SCRIPT_DIR=${SCRIPT_DIR:-$(mreadlink $(dirname $0))}
 SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
 PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
 SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
+SHARED_BIN_DIR=${SHARED_BIN_DIR:-$SHARED_DIR/$PLATFORM/bin}
+SHARED_LIB_DIR=${SHARED_LIB_DIR:-$SHARED_DIR/$PLATFORM/lib}
 FRAGMENT_FILE=${FRAGMENT_FILE:-$SCRIPT_DIR/.portacle-finished-fragments}
 INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
 _DEFAULT_TARGETS=(download prepare build install)
@@ -145,9 +147,9 @@ function ensure-installed() {
 }
 
 function ensure-dependencies() {
-    mkdir -p "$SHARED_DIR/lib/"
-    for exe in "$@"; do
-        ensure-installed "$SHARED_DIR/lib/" $(compute-dependencies "$exe")
+    mkdir -p "$SHARED_LIB_DIR/"
+    for file in "$@"; do
+        ensure-installed "$SHARED_LIB_DIR/" $(compute-dependencies "$file")
     done
 }
 
