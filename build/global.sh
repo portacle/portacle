@@ -18,6 +18,7 @@ function download() {
     unzip "$SOURCE_DIR/noto.zip" -d "$SOURCE_DIR/fonts/"
     curl -o "$SOURCE_DIR/fonts/Inconsolata-Bold.ttf" "$INCONSOLATA_DL/Inconsolata-Bold.ttf"
     curl -o "$SOURCE_DIR/fonts/Inconsolata-Regular.ttf" "$INCONSOLATA_DL/Inconsolata-Regular.ttf"
+    curl -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA"
 }
 
 function build() {
@@ -30,11 +31,9 @@ function build() {
                 || eexit "Failed to copy ld-linux.so"
             ;;
         win)
-            gcc -o "$SOURCE_DIR/fontreg.exe" -std=c99 -mwindows \
+            gcc -o "$SOURCE_DIR/fontreg.exe" -std=c99 -mwindows "$SOURCE_DIR/fontreg.c" \
                 || eexit "Failed to build fontreg.exe"
-    esac
-    
-    curl -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA"
+    esac   
 }
 
 function install() {
