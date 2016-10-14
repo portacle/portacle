@@ -7,8 +7,8 @@ set ROOT=%SCRIPT%\..\..\
 rem // This crazy thing resolves the relative path
 FOR /F "delims=" %%F IN ("%ROOT%") DO SET "ROOT=%%~fF"
 
-set BASHPATH=%BASHPATH%;%ROOT%\usr\lib;%ROOT%\usr\bin
+set BASHPATH=%BASHPATH%;%ROOT%\usr\win\lib;%ROOT%\usr\win\bin
 set PATH=%BASHPATH%
 
-"%ROOT%\usr\bin\chroot.exe" "--skip-chdir" %ROOT% "/usr/bin/bash.exe" %*
+"%ROOT%\usr\win\bin\chroot.exe" "--skip-chdir" %ROOT% "/usr/bin/bash.exe" %*
 ENDLOCAL

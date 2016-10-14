@@ -11,7 +11,6 @@ export ROOT=${ROOT:-$(readlink -f "$SCRIPT/../../")/}
 readonly EMACSVER=$(find-appropriate-file "$ROOT/emacs/share/emacs/*.*")
 readonly EMACSLIBEXEC=$(find-appropriate-file "$ROOT/emacs/lin/libexec/emacs/$EMACSVER/*")
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOT/emacs/lin/lib/
 export EMACSDATA=$ROOT/emacs/share/emacs/$EMACSVER/etc/
 export EMACSDOC=$ROOT/emacs/share/emacs/$EMACSVER/etc/
 export EMACSLOADPATH=$ROOT/emacs/share/emacs/$EMACSVER/site-lisp:\
@@ -43,6 +42,7 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc:\
 $ROOT/config
 
 export PATH=$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
+export LD_LIBRARY_PATH=$ROOT/usr/lin/lib/:$LD_LIBRARY_PATH
 
 ## We do /not/ want ld-wrap.so here as processes launched by emacs
 ## likely have to use other libraries outside of our control and

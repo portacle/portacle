@@ -7,7 +7,7 @@ readonly SCRIPT=$(dirname $(mreadlink "$0"))
 export ROOT=${ROOT:-$(mreadlink "$SCRIPT/../../")/}
 
 export PATH=$ROOT/git/mac/libexec/git-core:$PATH
-export DYLD_LIBRARY_PATH=$ROOT/usr/lib/:$DYLD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$ROOT/usr/mac/lib/:$DYLD_LIBRARY_PATH
 export XDG_CONFIG_HOME=$ROOT/config
 
 "$SCRIPT/bin/git" "$@"
