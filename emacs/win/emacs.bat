@@ -11,7 +11,6 @@ rem // Find emacs version
 FOR /D %%F IN ("%ROOT%\emacs\share\emacs\*.*") DO SET "EMACSVER=%%~nF%%~xF" & GOTO END
 :END
 
-set PATH=%PATH%;%ROOT%\emacs\win\lib\
 set EMACSDATA=%ROOT%\emacs\share\emacs\%EMACSVER%\etc\
 set EMACSDOC=%ROOT%\emacs\share\emacs\%EMACSVER%\etc\
 set EMACSLOADPATH=%ROOT%\emacs\share\emacs\%EMACSVER%\site-lisp;^
@@ -43,7 +42,7 @@ set EMACSLOADPATH=%ROOT%\emacs\share\emacs\%EMACSVER%\site-lisp;^
 %ROOT%\config
 
 set PATH=%ROOT%\emacs\win\libexec\emacs\%EMACSVER%\x86_64-w64-mingw32;%PATH%
-set PATH=%ROOT%\usr\lib\;%PATH%
+set PATH=%ROOT%\usr\win\lib\;%PATH%
 
 "%SCRIPT%\bin\emacs" --name Portacle -T Portacle -q -l "%ROOT%\config\emacs-init.el" %*
 ENDLOCAL

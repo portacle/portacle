@@ -15,7 +15,6 @@ export ROOT=${ROOT:-$(mreadlink "$SCRIPT/../../")/}
 readonly EMACSVER=$(find_apropriate_file "$ROOT/emacs/share/emacs/*.*")
 readonly EMACSLIBEXEC=$(find_apropriate_file "$ROOT/emacs/lin/libexec/emacs/$EMACSVER/*")
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOT/emacs/mac/lib/
 export EMACSDATA=$ROOT/emacs/share/emacs/$EMACSVER/etc/
 export EMACSDOC=$ROOT/emacs/share/emacs/$EMACSVER/etc/
 export EMACSLOADPATH=$ROOT/emacs/share/emacs/$EMACSVER/site-lisp:\
@@ -47,6 +46,6 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc:\
 $ROOT/config
 
 export PATH=$ROOT/mac/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
-export DYLD_LIBRARY_PATH=$ROOT/usr/lib/:$DYLD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$ROOT/usr/mac/lib/:$DYLD_LIBRARY_PATH
 
 "$SCRIPT/bin/emacs" --name Portacle -T Portacle -q -l "$ROOT/config/emacs-init.el" "$@"

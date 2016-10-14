@@ -2,6 +2,7 @@
 SCRIPT=$(dirname $(readlink -f "$0"))
 export ROOT=${ROOT:-$(readlink -f "$SCRIPT/../../")/}
 export SBCL_HOME=$ROOT/sbcl/lin/lib/sbcl/
+export LD_LIBRARY_PATH=$ROOT/usr/lin/lib/:$LD_LIBRARY_PATH
 
 ## The following does not work because ???
 ## ld-linux.so just seems to sweep past the sbcl binary argument
