@@ -114,7 +114,7 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   This acts as RET in situations where RET does something different by default. More precisely this means either inserting a newline or being the "yes, I'm absolutely sure I want to confirm" chord.
 
 - C-x C-f
-  Open a file in a new buffer. You'll get to navigate to the file you want in the minibuffer. Once you've chosen the file you want, simply press RET to open it if it exists, or C-j to create a new file if it does not yet exist.
+  Open a file in a new buffer. You'll get to navigate to the file you want in the minibuffer. Once you've chosen the file you want, simply press RET to open it if it exists, or C-j to create a new file if it does not yet exist. The auto-completion can sometimes try a bit too hard to find the right file for you. If it's interfering with you wanting to find the file on your own, then simply press C-f again and it will stop auto-completion.
 
 - C-x C-s
   Saves the current file to disk. If you've made some changes and would like to save, this is it.
