@@ -12,7 +12,7 @@ source common.sh
 PACKAGE_FILE=${PACKAGE_FILE:-$TAG/$PLATFORM-portacle}
 INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
 PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
-W7ZCONF=$SCRIPT_DIR/7zsfx.conf
+W7ZCONF=$SCRIPT_DIR/src/7zsfx.conf
 
 function discover-files() {
     ls -rt -d -1 "$1/"{*,.*} | egrep -v "build|$PROGRAM|/\\.{1,2}\$"

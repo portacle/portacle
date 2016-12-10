@@ -1,0 +1,25 @@
+0 ICON "portacle.ico"
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904E4"
+    BEGIN
+      VALUE "CompanyName", "Shirakumo"
+      VALUE "FileDescription", "Portable Common Lisp IDE"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "portacle"
+      VALUE "LegalCopyright", "Shirakumo"
+      VALUE "OriginalFilename", "portacle.exe"
+      VALUE "ProductName", "Portacle"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1252
+  END
+END
