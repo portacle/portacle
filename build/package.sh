@@ -36,7 +36,10 @@ function build() {
     fi
 
     ## Clean out known artefacts
-    rm -rf "$INSTALL_TARGET/asdf/cache" "$INSTALL_TARGET/projects/"*/ "$INSTALL_TARGET/package"
+    rm -rf "$INSTALL_TARGET/asdf/cache" \
+       "$INSTALL_TARGET/projects/"*/ \
+       "$INSTALL_TARGET/projects/system-index.txt" \
+       "$INSTALL_TARGET/package"
 }
 
 function install() {
