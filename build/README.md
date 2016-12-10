@@ -25,8 +25,6 @@ Install the build prerequisites:
 
 Proceed with the `General Procedure` section.
 
-The `portacle.exe` file included in the root directory is created from the `portacle.bat` file using <http://www.f2ko.de/en/b2e.php>. This is done primarily to avoid creating a command prompt window and secondarily to allow adding an icon to the launcher.
-
 ## Mac OS X
 Install the build prerequisites:
 

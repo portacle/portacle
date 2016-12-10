@@ -23,7 +23,7 @@ readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 function prepare() {
     cd "$SOURCE_DIR"
     case "$TAG" in
-        emacs-24*) git am < "$SCRIPT_DIR/fix-mingw64.patch" \
+        emacs-24*) git am < "$SCRIPT_DIR/src/fix-mingw64.patch" \
                          || eexit "Failed to apply mingw patch." ;;
     esac
     
