@@ -41,6 +41,7 @@ $ROOT/emacs/share/emacs/$EMACSVER/lisp/url:\
 $ROOT/emacs/share/emacs/$EMACSVER/lisp/vc:\
 $ROOT/config
 
+unset GTK_MODULES
 export PATH=$ROOT/lin/libexec/emacs/$EMACSVER/$EMACSLIBEXEC:$PATH
 export LD_LIBRARY_PATH=$ROOT/usr/lin/lib/:$LD_LIBRARY_PATH
 
