@@ -10,7 +10,7 @@ source common.sh
 INSTALL_DIR=$PORTACLE_DIR/all/$PROGRAM
 
 function build() {
-    "SHARED_BIN_DIR/sbcl" --script "$SOURCE_DIR/setup.lisp" \
+    "$SHARED_BIN_DIR/sbcl" --script "$SOURCE_DIR/setup.lisp" \
         || eexit "Failed to set up quicklisp first-time init."
 }
 
