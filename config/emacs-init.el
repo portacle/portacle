@@ -28,8 +28,8 @@
   ;; Customise the PATH envvar
   (add-to-path (portacle-app-path "bin"))
   (add-to-path (portacle-app-path "lib"))
-  (add-to-path (portacle-app-path "git" "bin/")
-               (portacle-app-path "git" "libexec/git-core/"))
+  (add-to-path (portacle-app-path "git" "bin/"))
+  (add-to-path (portacle-app-path "git" "libexec/git-core/"))
 
   ;; Make sure SLIME knows about our SBCL
   (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
