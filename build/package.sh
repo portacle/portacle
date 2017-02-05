@@ -20,8 +20,9 @@ function prepare() {
 }
 
 function build() {
-    local files=("$PORTACLE_DIR/all"
-                 "$PORTACLE_DIR/$PLATFORM"
+    local files=("$PORTACLE_DIR/$PLATFORM"
+                 "$PORTACLE_DIR/all"
+                 "$PORTACLE_DIR/config"
                  "$PORTACLE_DIR/.git"
                  "$PORTACLE_DIR/.gitignore"
                  "$PORTACLE_DIR/.portacle_root"
