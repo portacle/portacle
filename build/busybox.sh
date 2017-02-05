@@ -7,7 +7,7 @@ readonly REPOSITORY=git://busybox.net/busybox.git
 
 readonly PROGRAM=busybox
 source common.sh
-INSTALL_DIR="$SHARED_DIR/$PLATFORM"
+INSTALL_DIR="$SHARED_DIR"
 
 function prepare() {
     cd "$SOURCE_DIR"

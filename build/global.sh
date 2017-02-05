@@ -24,9 +24,9 @@ function install() {
     mkdir -p "$SHARED_LIB_DIR/"
     mkdir -p "$SHARED_BIN_DIR/"
 
-    mkdir -p "$SHARED_DIR/ssl"
-    ensure-installed "$SHARED_DIR/ssl/" "$SOURCE_DIR/ca-bundle.crt"
-    ensure-installed "$SHARED_DIR/fonts/" "$SOURCE_DIR/fonts"/*
+    mkdir -p "$PORTACLE_DIR/all/ssl"
+    ensure-installed "$PORTACLE_DIR/all/ssl/" "$SOURCE_DIR/ca-bundle.crt"
+    ensure-installed "$PORTACLE_DIR/all/fonts/" "$SOURCE_DIR/fonts"/*
 }
 
 function clean() {
