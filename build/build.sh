@@ -56,6 +56,7 @@ function package() {
 function upgrade() {
     download \
         && global \
+        && launcher \
         && sbcl \
         && asdf \
         && quicklisp \

@@ -7,7 +7,6 @@ readonly REPOSITORY=https://gitlab.common-lisp.net/asdf/asdf.git
 
 readonly PROGRAM=asdf
 source common.sh
-INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM
 
 function build() {
     cd "$SOURCE_DIR"
@@ -15,17 +14,14 @@ function build() {
     cd "$SOURCE_DIR/build/"
     cat >compile.lisp <<EOF
 (cl:compile-file "asdf.lisp" :output-file "asdf.fasl")
-(sb-ext:exit)
+(sb-ext:exit :code 0)
 EOF
-    case "$PLATFORM" in
-        win) winroot=$({ cd "$SCRIPT_DIR/.." && pwd -W; } | sed 's|/|\\|g')
-             cmd /c "$winroot\\sbcl\\win\\sbcl.bat --script compile.lisp" ;;
-        *)   $SCRIPT_DIR/../sbcl/$PLATFORM/sbcl.sh --script compile.lisp;;
-    esac
+    "$SHARED_BIN_DIR/sbcl" --script compile.lisp \
+        || eexit "Failed to compile ASDF."
 }
 
 function install() {
-    ensure-installed "$INSTALL_TARGET" "$SOURCE_DIR/build/asdf.lisp" "$SOURCE_DIR/build/asdf.fasl" \
+    ensure-installed "$INSTALL_DIR" "$SOURCE_DIR/build/asdf.lisp" "$SOURCE_DIR/build/asdf.fasl" \
         || eexit "Failed to copy ASDF sources."
 }
 

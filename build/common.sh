@@ -27,11 +27,11 @@ function mreadlink() {
 SCRIPT_DIR=${SCRIPT_DIR:-$(mreadlink $(dirname $0))}
 SOURCE_DIR=${SOURCE_DIR:-$SCRIPT_DIR/$PROGRAM/}
 PORTACLE_DIR=${PORTACLE_DIR:-$(mreadlink $SCRIPT_DIR/../)}
-SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/usr}
-SHARED_BIN_DIR=${SHARED_BIN_DIR:-$SHARED_DIR/$PLATFORM/bin}
-SHARED_LIB_DIR=${SHARED_LIB_DIR:-$SHARED_DIR/$PLATFORM/lib}
+SHARED_DIR=${SHARED_DIR:-$PORTACLE_DIR/$PLATFORM}
+SHARED_BIN_DIR=${SHARED_BIN_DIR:-$SHARED_DIR/bin}
+SHARED_LIB_DIR=${SHARED_LIB_DIR:-$SHARED_DIR/lib}
+INSTALL_DIR=${INSTALL_DIR:-$PORTACLE_DIR/$PLATFORM/${PROGRAM}/}
 FRAGMENT_FILE=${FRAGMENT_FILE:-$SCRIPT_DIR/.portacle-finished-fragments}
-INSTALL_TARGET=${INSTALL_TARGET:-$PORTACLE_DIR/$PROGRAM/$PLATFORM/}
 _DEFAULT_TARGETS=(download prepare build install)
 DEFAULT_TARGETS=("${DEFAULT_TARGETS[@]:-${_DEFAULT_TARGETS[@]}}")
 TARGETS=("${@:-${DEFAULT_TARGETS[@]}}")
@@ -187,7 +187,7 @@ function info() {
 Downloading from:   ${REPOSITORY}
 Using tag:          ${TAG}
 Building in:        ${SOURCE_DIR}
-Installing into:    ${INSTALL_TARGET}
+Installing into:    ${INSTALL_DIR}
 Using threads:      ${MAXCPUS}
 Building targets:   ${TARGETS[@]}
 "
@@ -240,7 +240,7 @@ function clean() {
 }
 
 function clean-installed() {
-    cd "$INSTALL_TARGET"
+    cd "$INSTALL_DIR"
     rm -R ./*/
 }
 

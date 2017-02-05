@@ -5,15 +5,9 @@ build/*/
 build/.portacle-finished-fragments
 package/
 ## Build results
-aspell/*/*/
-aspell/share/
-emacs/*/*/
-emacs/config/
-sbcl/*/*/
-git/*/*/
-hunspell/*/*/
-asdf/*
-quicklisp/
-usr/
+lin/
+win/
+mac/
+all/
 ## Other stuff
 projects/*

@@ -7,24 +7,19 @@ readonly REPOSITORY=https://github.com/quicklisp/quicklisp-client.git
 
 readonly PROGRAM=quicklisp
 source common.sh
-INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM
-
-case "$PLATFORM" in
-    win) readonly SBCL="$PORTACLE_DIR/sbcl/win/sbcl.bat" ;;
-    *)   readonly SBCL="$PORTACLE_DIR/sbcl/$PLATFORM/sbcl.sh" ;;
-esac
+INSTALL_DIR=$PORTACLE_DIR/all/$PROGRAM
 
 function build() {
-    "$SBCL" --script "$SOURCE_DIR/setup.lisp" \
+    "SHARED_BIN_DIR/sbcl" --script "$SOURCE_DIR/setup.lisp" \
         || eexit "Failed to set up quicklisp first-time init."
 }
 
 function install() {
-    mkdir -p "$INSTALL_TARGET" \
-        || eexit "Failed to create $INSTALL_TARGET"
-    cp -Rf "$SOURCE_DIR/." "$INSTALL_TARGET" \
+    mkdir -p "$INSTALL_DIR" \
+        || eexit "Failed to create $INSTALL_DIR"
+    cp -Rf "$SOURCE_DIR/." "$INSTALL_DIR" \
         || eexit "Failed to copy Quicklisp."
-    rm -rf "$INSTALL_TARGET/.git"
+    rm -rf "$INSTALL_DIR/.git"
 }
 
 main
