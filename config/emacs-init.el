@@ -38,9 +38,7 @@
 
   ;; Set the Magit executable explicitly
   (setenv "XDG_CONFIG_HOME" (portacle-path "config"))
-  (setq magit-git-executable
-        (os-case (windows-nt  (portacle-app-path "git" "bin/git"))
-                 (t           (portacle-app-path "git" "git.sh"))))
+  (setq magit-git-executable (portacle-os-path "bin/git"))
 
   ;; Customise graphic mode
   (when window-system
