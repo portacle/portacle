@@ -22,9 +22,9 @@ function install() {
         *)   cp "portacle" "$INSTALL_DIR/" ;;
     esac
     cd "$SHARED_BIN_DIR"
-    ln -frs "../$PROGRAM/portacle" "sbcl"
-    ln -frs "../$PROGRAM/portacle" "git"
-    ln -frs "../$PROGRAM/portacle" "emacs"
+    ln -fs "../$PROGRAM/portacle" "sbcl"
+    ln -fs "../$PROGRAM/portacle" "git"
+    ln -fs "../$PROGRAM/portacle" "emacs"
 }
 
 main
