@@ -10,44 +10,46 @@ readonly W7ZSFX="7zsd_LZMA2.sfx"
 readonly PROGRAM=package
 source common.sh
 PACKAGE_FILE=${PACKAGE_FILE:-$TAG/$PLATFORM-portacle}
-INSTALL_TARGET=$PORTACLE_DIR/$PROGRAM/portacle
+INSTALL_DIR=$PORTACLE_DIR/$PROGRAM/portacle
 PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
 W7ZCONF=$SCRIPT_DIR/src/7zsfx.conf
 
-function discover-files() {
-    ls -rt -d -1 "$1/"{*,.*} | egrep -v "build|$PROGRAM|/\\.{1,2}\$"
-}
-
 function prepare() {
-    mkdir -p "$INSTALL_TARGET"
+    mkdir -p "$INSTALL_DIR"
     git gc
 }
 
 function build() {
-    local files=($(discover-files "$PORTACLE_DIR"))
+    local files=("$PORTACLE_DIR/all/"
+                 "$PORTACLE_DIR/$PLATFORM/"
+                 "$PORTACLE_DIR/.git"
+                 "$PORTACLE_DIR/.gitignore"
+                 "$PORTACLE_DIR/.portacle_root"
+                 "$PORTACLE_DIR/portacle.svg")
     
     if system-has rsync; then
-        rsync -avz "${files[@]}" "$INSTALL_TARGET"
+        rsync -avz "${files[@]}" "$INSTALL_DIR"
     else
         case "$PLATFORM" in
-            mac) cp -Rfv "${files[@]}" "$INSTALL_TARGET" ;;
-            *)   cp -Rfuv "${files[@]}" "$INSTALL_TARGET" ;;
+            mac) cp -Rfv "${files[@]}" "$INSTALL_DIR" ;;
+            *)   cp -Rfuv "${files[@]}" "$INSTALL_DIR" ;;
         esac
     fi
 
-    ## Clean out known artefacts
-    rm -rf "$INSTALL_TARGET/asdf/cache" \
-       "$INSTALL_TARGET/projects/"*/ \
-       "$INSTALL_TARGET/projects/system-index.txt" \
-       "$INSTALL_TARGET/package"
+    # Copy launcher
+    case "$PLATFORM" in
+        win) cp -fv "$PORTACLE_DIR/win/launcher/portacle" "$INSTALL_DIR/" ;;
+        lin) cp -fv "$PORTACLE_DIR/portacle.desktop" "$PORTACLE_DIR/portacle.run" "$INSTALL_DIR/";;
+        mac) cp -Rfv "$PORTACLE_DIR/Portacle.app" "$INSTALL_DIR/" ;;
+    esac
 }
 
 function install() {
     local package="$PORTACLE_DIR/$PROGRAM/$PACKAGE_FILE"
-    local files=$(basename "$INSTALL_TARGET")
+    local files=$(basename "$INSTALL_DIR")
 
     mkdir -p $(dirname "$package")
-    cd $(dirname "$INSTALL_TARGET")
+    cd $(dirname "$INSTALL_DIR")
     case "$PACKAGE_FORMAT" in
         sfx)
             local winfile=$(to-win-path "$package")
