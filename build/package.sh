@@ -28,11 +28,11 @@ function build() {
                  "$PORTACLE_DIR/portacle.svg")
     
     if system-has rsync; then
-        rsync -avz --delete "${files[@]}" "$INSTALL_DIR"
+        rsync -Havz --delete "${files[@]}" "$INSTALL_DIR"
     else
         rm -rf "$INSTALL_DIR"
         mkdir -p "$INSTALL_DIR"
-        cp -Rfv "${files[@]}" "$INSTALL_DIR"
+        cp -Rfva "${files[@]}" "$INSTALL_DIR"
     fi
 
     # Copy launcher
