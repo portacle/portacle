@@ -29,6 +29,10 @@ function launcher() {
     "$SOURCE_DIR/launcher.sh"
 }
 
+function busybox() {
+    "$SOURCE_DIR/busybox.sh"
+}
+
 function sbcl() {
     "$SOURCE_DIR/sbcl.sh"
 }
