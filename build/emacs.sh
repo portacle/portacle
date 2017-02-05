@@ -49,6 +49,12 @@ function install() {
 
     status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_DIR/")
+
+    case "$PLATFORM" in
+        lin) cp "/usr/bin/xsel" "$SHARED_BIN_DIR/"
+             ensure-dependencies "$SHARED_BIN_DIR/xsel"
+             ;;
+    esac
 }
 
 main
