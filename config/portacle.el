@@ -14,7 +14,7 @@
   (concat portacle-root path))
 
 (defun portacle-app-path (app path)
-  (portacle-path (concat app "/" portacle-os "/" path)))
+  (portacle-path (concat portacle-os "/" app "/" path)))
 
 (defun portacle-fwrite (contents file &optional append)
   (write-region contents nil file append))

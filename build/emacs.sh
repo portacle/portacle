@@ -18,7 +18,6 @@ readonly CONFIGURE_OPTIONS=(--without-jpeg
 
 readonly PROGRAM=emacs
 source common.sh
-readonly SHARE_TARGET=$SCRIPT_DIR/../$PROGRAM/share/
 
 function prepare() {
     cd "$SOURCE_DIR"
@@ -30,9 +29,9 @@ function prepare() {
     ./autogen.sh \
         || eexit "Failed to generate configure. Maybe some dependencies are missing?"
     case "$PLATFORM" in
-        mac) ./configure --prefix="$INSTALL_TARGET" --with-ns --disable-ns-self-contained "${CONFIGURE_OPTIONS[@]}" \
+        mac) ./configure --prefix="$INSTALL_DIR" --with-ns --disable-ns-self-contained "${CONFIGURE_OPTIONS[@]}" \
                    || eexit "Configure failed. Maybe some dependencies are missing?" ;;
-        *)   ./configure --prefix="$INSTALL_TARGET" "${CONFIGURE_OPTIONS[@]}" \
+        *)   ./configure --prefix="$INSTALL_DIR" "${CONFIGURE_OPTIONS[@]}" \
                    || eexit "Configure failed. Maybe some dependencies are missing?" ;;
     esac
 }
@@ -45,11 +44,11 @@ function build() {
 
 function install() {
     cd "$SOURCE_DIR"
-    make install datadir="$SHARE_TARGET" \
+    make install datadir="$INSTALL_DIR/share/" \
         || eexit "The install failed. Please check the output for error messages."
 
     status 2 "Copying dependencies"
-    ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
+    ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 }
 
 main

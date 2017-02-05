@@ -1,2 +1,0 @@
-[http]
-        sslcainfo = /share/ssl/ca-bundle.crt

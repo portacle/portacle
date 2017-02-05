@@ -9,7 +9,7 @@ readonly ENABLED_FEATURES=":sb-thread :sb-safepoint :sb-thruption :sb-wtimer :sb
 
 readonly PROGRAM=sbcl
 source common.sh
-readonly INSTALL_SOURCES=$SCRIPT_DIR/../$PROGRAM/sources/
+readonly INSTALL_SOURCES=$INSTALL_DIR/share/src/
 
 function prepare() {
     cd "$SOURCE_DIR"
@@ -47,10 +47,10 @@ function build() {
 }
 
 function install() {
-    cd $SOURCE_DIR
+    cd "$SOURCE_DIR"
     unset SBCL_HOME
-    mkdir -p "$INSTALL_TARGET" &>/dev/null
-    INSTALL_ROOT="$INSTALL_TARGET" sh install.sh \
+    mkdir -p "$INSTALL_DIR" &>/dev/null
+    INSTALL_ROOT="$INSTALL_DIR" sh install.sh \
         || eexit "Failed to install SBCL."
     mkdir -p "$INSTALL_SOURCES" &>/dev/null
     ## Can't use -t because of apple.
@@ -68,7 +68,7 @@ function install() {
          -name "a.out" -delete
 
     status 2 "Copying dependencies"
-    ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
+    ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 }
 
 main
