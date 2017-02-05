@@ -1,12 +1,16 @@
 (load-library "iso-transl")
 (load-library "portacle")
 
-(when (locate-library "shinmera")
-  ;; Set up paths
-  (setq user-emacs-directory (portacle-path "all/emacsd/"))
-  (add-to-list 'load-path user-emacs-directory)
-  (cd portacle-root)
 
+;; Set up paths
+(setq user-emacs-directory (portacle-path "all/emacsd/"))
+(add-to-list 'load-path user-emacs-directory)
+(cd portacle-root)
+
+(unless (locate-library "shinmera")
+  (display-warning :warning "Basic Portacle scripts are not present."))
+
+(when (locate-library "shinmera")
   ;; Load contribs
   (require 'shinmera-general)
   (require 'shinmera-functions)
