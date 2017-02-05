@@ -34,7 +34,7 @@
   ;; Make sure SLIME knows about our SBCL
   (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
   (setq slime-lisp-implementations
-        `((sbcl ,(portacle-os-path "bin/sbcl"))))
+        `((sbcl (,(portacle-os-path "bin/sbcl")))))
 
   ;; Set the Magit executable explicitly
   (setenv "XDG_CONFIG_HOME" (portacle-path "config"))
