@@ -27,6 +27,10 @@ function install() {
     mkdir -p "$PORTACLE_DIR/all/ssl"
     ensure-installed "$PORTACLE_DIR/all/ssl/" "$SOURCE_DIR/ca-bundle.crt"
     ensure-installed "$PORTACLE_DIR/all/fonts/" "$SOURCE_DIR/fonts"/*
+
+    case "$PLATFORM" in
+        lin) cp "/lib64/ld-linux-x86-64.so.2" "$SHARED_LIB_DIR/";;
+    esac
 }
 
 function clean() {
