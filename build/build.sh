@@ -57,6 +57,7 @@ function upgrade() {
     download \
         && global \
         && launcher \
+        && busybox \
         && sbcl \
         && asdf \
         && quicklisp \
