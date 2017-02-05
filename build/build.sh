@@ -25,6 +25,10 @@ function global() {
     "$SOURCE_DIR/global.sh"
 }
 
+function launcher() {
+    "$SOURCE_DIR/launcher.sh"
+}
+
 function sbcl() {
     "$SOURCE_DIR/sbcl.sh"
 }
