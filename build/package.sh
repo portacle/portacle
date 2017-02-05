@@ -20,15 +20,15 @@ function prepare() {
 }
 
 function build() {
-    local files=("$PORTACLE_DIR/all/"
-                 "$PORTACLE_DIR/$PLATFORM/"
+    local files=("$PORTACLE_DIR/all"
+                 "$PORTACLE_DIR/$PLATFORM"
                  "$PORTACLE_DIR/.git"
                  "$PORTACLE_DIR/.gitignore"
                  "$PORTACLE_DIR/.portacle_root"
                  "$PORTACLE_DIR/portacle.svg")
     
     if system-has rsync; then
-        rsync -Havz --delete "${files[@]}" "$INSTALL_DIR"
+        rsync -Havz --delete "${files[@]}" "$INSTALL_DIR/"
     else
         rm -rf "$INSTALL_DIR"
         mkdir -p "$INSTALL_DIR"
