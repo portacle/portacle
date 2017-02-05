@@ -26,8 +26,8 @@
    (t (require 'shinmera-spell)))
 
   ;; Customise the PATH envvar
-  (add-to-path (portacle-app-path "bin"))
-  (add-to-path (portacle-app-path "lib"))
+  (add-to-path (portacle-os-path "bin"))
+  (add-to-path (portacle-os-path "lib"))
   (add-to-path (portacle-app-path "git" "bin/"))
   (add-to-path (portacle-app-path "git" "libexec/git-core/"))
 
