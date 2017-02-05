@@ -16,7 +16,7 @@ esac
 
 function build() {
     cd "$SOURCE_DIR"
-    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS all -j $MAXCPUS \
+    make DESTDIR="$PORTACLE_DIR" prefix="/$PLATFORM/git/" $MAKE_OPTIONS all -j $MAXCPUS \
         || eexit "The build failed. Please check the output for error messages."
 }
 
@@ -33,13 +33,13 @@ function win-copy-coreutils() {
 }
 
 function ensure-git-platform() {
+    mkdir -p "$INSTALL_DIR/share/ssl"
+    cp "$PORTACLE_DIR/all/ssl/ca-bundle.crt" "$INSTALL_DIR/share/ssl/ca-bundle.crt"
     case "$PLATFORM" in
         win) win-copy-coreutils "$SHARED_BIN_DIR/"
              ensure-installed "$SHARED_LIB_DIR/" "/mingw64/bin/libcurl-4.dll"
-             ensure-installed "$SHARED_DIR/$PLATFORM/share/" "/usr/lib/terminfo"
+             ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
-             mkdir -p "$INSTALL_TARGET/share/ssl"
-             cp "$SHARED_DIR/ssl/ca-bundle.crt" "$INSTALL_TARGET/share/ssl/ca-bundle.crt"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
         lin) ensure-installed "$SHARED_LIB_DIR/" "/usr/lib/libcurl.so"
@@ -51,14 +51,14 @@ function ensure-git-platform() {
 
 function install() {
     cd "$SOURCE_DIR"
-    make DESTDIR="$PORTACLE_DIR" prefix="/git/$PLATFORM/" $MAKE_OPTIONS install \
+    make DESTDIR="$PORTACLE_DIR" prefix="/$PLATFORM/git/" $MAKE_OPTIONS install \
         || eexit "The install failed. Please check the output for error messages."
 
     status 2 "Copying platform"
     ensure-git-platform
 
     status 2 "Copying dependencies"
-    ensure-dependencies $(find-binaries "$INSTALL_TARGET/")
+    ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 }
 
 main

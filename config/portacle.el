@@ -13,8 +13,11 @@
 (defun portacle-path (path)
   (concat portacle-root path))
 
+(defun portacle-os-path (path)
+  (portacle-path (concat portacle-os "/" path)))
+
 (defun portacle-app-path (app path)
-  (portacle-path (concat portacle-os "/" app "/" path)))
+  (portacle-os-path (concat app "/" path)))
 
 (defun portacle-fwrite (contents file &optional append)
   (write-region contents nil file append))
@@ -33,7 +36,7 @@
 
 (defun portacle-recompile (&optional force)
   (byte-recompile-directory (portacle-path "config/") 0 force)
-  (byte-recompile-directory (portacle-path "emacs/config/shinmera/") 0 force))
+  (byte-recompile-directory (portacle-path "all/emacsd/shinmera/") 0 force))
 
 (defun portacle-update ()
   (interactive)
@@ -44,7 +47,7 @@
       (insert "  --> Updating root via GIT\n")
       (portacle-pull-preserving-changes portacle-root)
       (insert "  --> Updating config via GIT\n")
-      (portacle-pull-preserving-changes (portacle-path "emacs/config/shinmera"))
+      (portacle-pull-preserving-changes (portacle-path "all/emacsd/"))
       (insert "  --> Recompiling ELISP sources\n")
       (portacle-recompile)
       (insert "  --> Updating dists via QL\n")
