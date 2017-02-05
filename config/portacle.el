@@ -36,7 +36,7 @@
 
 (defun portacle-recompile (&optional force)
   (byte-recompile-directory (portacle-path "config/") 0 force)
-  (byte-recompile-directory (portacle-path "all/emacsd/") 0 force))
+  (byte-recompile-directory (portacle-path "all/emacsd/shinmera/") 0 force))
 
 (defun portacle-update ()
   (interactive)
@@ -47,7 +47,7 @@
       (insert "  --> Updating root via GIT\n")
       (portacle-pull-preserving-changes portacle-root)
       (insert "  --> Updating config via GIT\n")
-      (portacle-pull-preserving-changes (portacle-path "all/emacsd/"))
+      (portacle-pull-preserving-changes (portacle-path "all/emacsd/shinmera/"))
       (insert "  --> Recompiling ELISP sources\n")
       (portacle-recompile)
       (insert "  --> Updating dists via QL\n")

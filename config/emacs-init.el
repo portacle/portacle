@@ -4,7 +4,7 @@
 
 ;; Set up paths
 (setq user-emacs-directory (portacle-path "all/emacsd/"))
-(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path (portacle-path "all/emacsd/shinmera/"))
 (cd portacle-root)
 
 (unless (locate-library "shinmera")

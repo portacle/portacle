@@ -7,7 +7,7 @@ readonly REPOSITORY=https://github.com/shinmera/.emacs
 
 PROGRAM=emacsd
 source common.sh
-INSTALL_TARGET=$PORTACLE_DIR/all/emacsd/
+INSTALL_DIR=$PORTACLE_DIR/all/emacsd/shinmera
 
 function install (){
     mkdir -p "$INSTALL_DIR" \
