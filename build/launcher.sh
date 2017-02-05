@@ -18,8 +18,8 @@ function install() {
     mkdir -p "$INSTALL_DIR"
     case "$PLATFORM" in
         win) cp "portacle.exe" "$INSTALL_DIR/portacle";;
-        lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/portacle" ;;
-        *) cp "portacle" "$INSTALL_DIR/portacle" ;;
+        lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/" ;;
+        *)   cp "portacle" "$INSTALL_DIR/" ;;
     esac
     cd "$SHARED_BIN_DIR"
     ln -frs "../$PROGRAM/portacle" "sbcl"
