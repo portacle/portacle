@@ -3,11 +3,11 @@
         autocrlf = input
         eol = lf
 [push]
-	default = simple
+        default = simple
 [branch]
-	autosetuprebase = always
+        autosetuprebase = always
 [pull]
-	rebase = true
+        rebase = true
 [user]
         name = Portacle-User
         email = user@portacle
