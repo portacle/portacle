@@ -18,14 +18,31 @@ function prepare() {
 
 function build() {
     cd "$SOURCE_DIR"
-    make -j $MAXCPUS \
-         || eexit "The build failed. Please check the output for error messages."
+
+    case "$PLATFORM" in
+        win) status 2 "Skipping build on Windows." ;;
+        *)   make -j $MAXCPUS \
+                 || eexit "The build failed. Please check the output for error messages." ;;
+    esac
 }
 
 function install() {
     cd "$SOURCE_DIR"
-    make CONFIG_PREFIX="$INSTALL_DIR" install\
-        || eexit "The install failed. Please check the output for error messages."
+
+    case "$PLATFORM" in
+        win) status 2 "Installing coreutils from MSYS instead."
+             ensure-installed "$SHARED_BIN_DIR/" \
+                              $(win-exes-for-package bash) \
+                              $(win-exes-for-package coreutils) \
+                              $(win-exes-for-package grep) \
+                              $(win-exes-for-package less) \
+                              $(win-exes-for-package sed) \
+                              $(win-exes-for-package msys2-runtime) \
+                              $(win-exes-for-package ncurses)
+             ensure-dependencies $(find-binaries "$SHARED_BIN_DIR/");;
+        *)   make CONFIG_PREFIX="$INSTALL_DIR" install\
+                 || eexit "The install failed. Please check the output for error messages." ;;
+    esac
 }
 
 main

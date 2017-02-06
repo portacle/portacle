@@ -20,26 +20,15 @@ function build() {
         || eexit "The build failed. Please check the output for error messages."
 }
 
-function win-copy-coreutils() {
-    ensure-installed "$1" $(win-exes-for-package bash) \
-                     $(win-exes-for-package coreutils) \
-                     $(win-exes-for-package openssh) \
-                     $(win-exes-for-package grep) \
-                     $(win-exes-for-package less) \
-                     $(win-exes-for-package sed) \
-                     $(win-exes-for-package msys2-runtime) \
-                     $(win-exes-for-package ncurses)
-    ensure-dependencies $(find-binaries "$1")
-}
-
 function ensure-git-platform() {
     mkdir -p "$INSTALL_DIR/share/ssl"
     cp "$PORTACLE_DIR/all/ssl/ca-bundle.crt" "$INSTALL_DIR/share/ssl/ca-bundle.crt"
     case "$PLATFORM" in
-        win) win-copy-coreutils "$SHARED_BIN_DIR/"
+        win) ensure-installed "$SHARED_BIN_DIR/" $(win-exes-for-package openssh)
+             ensure-dependencies $(win-exes-for-package openssh)
              ensure-installed "$SHARED_LIB_DIR/" "/mingw64/bin/libcurl-4.dll"
-             ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
+             ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
         lin) ensure-installed "$SHARED_LIB_DIR/" "/usr/lib/libcurl.so"
