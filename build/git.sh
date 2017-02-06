@@ -28,7 +28,6 @@ function ensure-git-platform() {
              ensure-dependencies $(win-exes-for-package openssh)
              ensure-installed "$SHARED_LIB_DIR/" "/mingw64/bin/libcurl-4.dll"
              ensure-dependencies "/mingw64/bin/libcurl-4.dll"
-             ensure-installed "$SHARED_DIR/" "$PORTACLE_DIR/all/ssl"
              ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
