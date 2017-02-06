@@ -24,21 +24,13 @@
   (os-case
    (windows-nt)
    (t (require 'shinmera-spell)))
-
-  ;; Customise the PATH envvar
-  (add-to-path (portacle-os-path "bin"))
-  (add-to-path (portacle-os-path "lib"))
-  (add-to-path (portacle-app-path "git" "bin/"))
-  (add-to-path (portacle-app-path "git" "libexec/git-core/"))
-
+  
   ;; Make sure SLIME knows about our SBCL
-  (setenv "SBCL_HOME" (portacle-app-path "sbcl" "lib/sbcl/"))
   (setq slime-lisp-implementations
-        `((sbcl (,(portacle-os-path "bin/sbcl")))))
+        `((sbcl (,(portacle-bin-path "sbcl")))))
 
   ;; Set the Magit executable explicitly
-  (setenv "XDG_CONFIG_HOME" (portacle-path "config"))
-  (setq magit-git-executable (portacle-os-path "bin/git"))
+  (setq magit-git-executable (portacle-bin-path "git"))
 
   ;; Customise graphic mode
   (when window-system

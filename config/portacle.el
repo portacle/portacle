@@ -16,6 +16,10 @@
 (defun portacle-os-path (path)
   (portacle-path (concat portacle-os "/" path)))
 
+(defun portacle-bin-path (bin)
+  (portacle-os-path (os-case (windows-nt (concat "bin/" bin ".exe"))
+                             (t (concat "bin/" bin)))))
+
 (defun portacle-app-path (app path)
   (portacle-os-path (concat app "/" path)))
 
