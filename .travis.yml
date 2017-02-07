@@ -14,8 +14,10 @@ addons:
   apt:
     packages:
       - sbcl
-      - build-essential
-      - autoconf automake autogen autopoint
+      - autoconf
+      - automake
+      - autogen
+      - autopoint
       - libncurses-dev
       - libx11-dev
       - libxpm-dev
@@ -26,6 +28,7 @@ addons:
       - libssl-dev
       - libtool
       - texinfo
+      - time
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
