@@ -1,4 +1,3 @@
-<img src="https://raw.githubusercontent.com/Shinmera/portacle/master/build/src/portacle.ico" alt="logo" width="128" align="right" />
 ## About Portacle
 Portacle is a portable Common Lisp environment. What this means is that it is a fully featured integrated development environment for use with Common Lisp that runs on all major platforms and can even be put onto a USB stick to carry around.
 
