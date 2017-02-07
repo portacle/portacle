@@ -14,12 +14,12 @@ function build() {
 }
 
 function install() {
-    cd "$SOURCE_DIR"
+    cd "$SOURCE_DIR/build"
     mkdir -p "$INSTALL_DIR"
     case "$PLATFORM" in
-        win) cp "portacle.exe" "$INSTALL_DIR/";;
-        lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/" ;;
-        *)   cp "portacle" "$INSTALL_DIR/" ;;
+        win) cp "portacle.exe" "fontreg.exe" "$INSTALL_DIR/" ;;
+        lin) cp "portacle" "fontreg" "ld-wrap.so" "$INSTALL_DIR/" ;;
+        mac) cp "portacle" "fontreg" "$INSTALL_DIR/" ;;
     esac
 
     case "$PLATFORM" in
