@@ -38,7 +38,7 @@ function build() {
 
     # Copy launcher
     case "$PLATFORM" in
-        win) cp -fv "$PORTACLE_DIR/win/launcher/portacle" "$INSTALL_DIR/" ;;
+        win) cp -fv "$PORTACLE_DIR/portacle.exe" "$INSTALL_DIR/" ;;
         lin) cp -fv "$PORTACLE_DIR/portacle.desktop" "$PORTACLE_DIR/portacle.run" "$INSTALL_DIR/";;
         mac) cp -Rfv "$PORTACLE_DIR/Portacle.app" "$INSTALL_DIR/" ;;
     esac
