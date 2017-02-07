@@ -16,7 +16,7 @@ W7ZCONF=$SCRIPT_DIR/src/7zsfx.conf
 
 function prepare() {
     mkdir -p "$INSTALL_DIR"
-    git gc --aggresive
+    git gc --aggressive
 }
 
 function build() {
