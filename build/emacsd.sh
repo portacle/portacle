@@ -20,8 +20,12 @@ function install (){
     status 2 "It will download the necessary libraries and compile them."
     status 2 "Please be patient, it should automatically close when it is done."
 
-    $PORTACLE_DIR/$PLATFORM/bin/emacs -f "portacle-recompile" -f "kill-emacs" \
-        || eexit "Failed to perform first-launch."
+    case "$PLATFORM" in
+        win) $PORTACLE_DIR/$PLATFORM/bin/emacs -f "portacle-recompile" -f "kill-emacs" \
+                   || eexit "Failed to perform first-launch." ;;
+        *)   $PORTACLE_DIR/$PLATFORM/bin/emacs -f "portacle-recompile" -f "kill-emacs" -nw \
+                 || eexit "Failed to perform first-launch." ;;
+    esac
 }
 
 main
