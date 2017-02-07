@@ -1,0 +1,36 @@
+language: generic
+
+sudo: false
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+      - sbcl
+      - build-essential
+      - autoconf automake autogen autopoint
+      - libncurses-dev
+      - libx11-dev
+      - libxpm-dev
+      - libgtk2.0-dev
+      - zlib1g-dev
+      - libpcre-dev
+      - libcurl4-gnutls-dev
+      - libssl-dev
+      - libtool
+      - texinfo
+
+before_install:
+  - [[ "$TRAVIS_OS_NAME" == "osx" ]] && brew update;
+  - [[ "$TRAVIS_OS_NAME" == "osx" ]] && brew install autoconf automake sbcl git gettext pcre;
+
+script:
+  - cd build
+  - ./build.sh
