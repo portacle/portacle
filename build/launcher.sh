@@ -21,15 +21,15 @@ function install() {
         lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/" ;;
         *)   cp "portacle" "$INSTALL_DIR/" ;;
     esac
-    cd "$SHARED_BIN_DIR"
 
     case "$PLATFORM" in
-        win) ln -f "../$PROGRAM/portacle.exe" "sbcl.exe"
-             ln -f "../$PROGRAM/portacle.exe" "git.exe"
-             ln -f "../$PROGRAM/portacle.exe" "emacs.exe" ;;
-        *)   ln -f "../$PROGRAM/portacle" "sbcl"
-             ln -f "../$PROGRAM/portacle" "git"
-             ln -f "../$PROGRAM/portacle" "emacs" ;;
+        win) ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/sbcl.exe"
+             ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/git.exe"
+             ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/emacs.exe"
+             ln -f "$INSTALL_DIR/portacle.exe" "$PORTACLE_DIR/portacle.exe" ;;
+        *)   ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/sbcl"
+             ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/git"
+             ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/emacs" ;;
     esac
 }
 
