@@ -21,8 +21,9 @@ function build() {
 
     case "$PLATFORM" in
         win) status 2 "Skipping build on Windows." ;;
-        *)   make -j $MAXCPUS \
-                 || eexit "The build failed. Please check the output for error messages." ;;
+        mac) status 2 "Skipping build on OS X." ;;
+        lin)   make -j $MAXCPUS \
+                   || eexit "The build failed. Please check the output for error messages." ;;
     esac
 }
 
@@ -39,9 +40,10 @@ function install() {
                               $(win-exes-for-package sed) \
                               $(win-exes-for-package msys2-runtime) \
                               $(win-exes-for-package ncurses)
-             ensure-dependencies $(find-binaries "$SHARED_BIN_DIR/");;
-        *)   make CONFIG_PREFIX="$INSTALL_DIR" install\
-                 || eexit "The install failed. Please check the output for error messages." ;;
+             ensure-dependencies $(find-binaries "$SHARED_BIN_DIR/") ;;
+        mac) status 2 "Skipping install, the OS provides the tools." ;;
+        lin) make CONFIG_PREFIX="$INSTALL_DIR" install\
+                   || eexit "The install failed. Please check the output for error messages." ;;
     esac
 }
 
