@@ -130,7 +130,10 @@ function stage-finished() {
 }
 
 function clean-fragments() {
-    sed -i'' "/$PROGRAM $TAG/d" "$FRAGMENT_FILE"
+    case "$PLATFORM" in
+        mac) gsed -i'' "/$PROGRAM $TAG/d" "$FRAGMENT_FILE" ;;
+        *)   sed -i'' "/$PROGRAM $TAG/d" "$FRAGMENT_FILE" ;;
+    esac
 }
 
 ## Ensure the given array of files is copied to the target directory
