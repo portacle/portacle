@@ -6,5 +6,5 @@ function mreadlink() {
 SCRIPT=$(dirname $(mreadlink "$0"))
 export ROOT=$(mreadlink "$SCRIPT/../../../")/
 
-"$ROOT/mac/bin/portacle"
+"$ROOT/mac/launcher/portacle"
 
