@@ -1,5 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="512px" height="512px" viewBox="0 0 512 512">
-<image x="0" y="0" width="512" height="512" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIAAQMAAADOtka5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABlBMVEX/tAD///+kWprFAAAAAWJLR0QB/wIt3gAAADZJREFUeNrtwQEBAAAAgiD/r25IQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfBuCAAABY3VQpAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wOC0wNlQxMToyMjoyOSswMDowMJkFYo8AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDgtMDZUMTE6MjI6MjkrMDA6MDDoWNozAAAAAElFTkSuQmCC" /><path fillRule="evenodd" d="M 194.76 303.17C 154.36 303.17 110.36 263.18 110.36 179.18 110.36 92.38 151.56 53.18 199.96 53.18 230.36 53.18 267.16 77.58 279.16 125.98 279.16 125.98 295.56 125.98 295.56 125.98 295.56 125.98 295.56 61.58 295.56 61.58 268.36 46.38 231.16 33.18 199.96 33.18 115.16 33.18 43.96 89.58 43.96 179.58 43.96 273.57 108.36 325.17 190.36 325.17 240.36 325.17 269.56 311.57 298.76 294.37 298.76 294.37 298.76 231.58 298.76 231.58 298.76 231.58 282.76 231.58 282.76 231.58 269.16 270.78 237.16 303.17 194.76 303.17Z" fill="rgb(255,255,255)"/><path fillRule="evenodd" d="M 460.58 491.09C 460.58 491.09 474.97 408.29 474.97 408.29 474.97 408.29 454.98 408.29 454.98 408.29 454.98 408.29 408.58 473.09 408.58 473.09 408.58 473.09 331.78 473.09 331.78 473.09 331.78 473.09 331.78 229.49 331.78 229.49 331.78 229.49 369.38 223.49 369.38 223.49 369.38 223.49 369.38 208.69 369.38 208.69 369.38 208.69 235.38 208.69 235.38 208.69 235.38 208.69 235.38 223.49 235.38 223.49 235.38 223.49 271.38 229.49 271.38 229.49 271.38 229.49 271.38 470.29 271.38 470.29 271.38 470.29 235.38 476.29 235.38 476.29 235.38 476.29 235.38 491.09 235.38 491.09 235.38 491.09 460.58 491.09 460.58 491.09Z" fill="rgb(255,255,255)"/><path fillRule="evenodd" d="M 538.95 550.92C 538.95 550.92-125.75 14.97-125.75 14.97-125.75 14.97-5.99-116.77-5.99-116.77-5.99-116.77 538.95 550.92 538.95 550.92Z" fill="rgb(255,179,0)" opacity="0.19"/><path fillRule="evenodd" d="M 520.98 526.97C 520.98 526.97-167.67 77.85-167.67 77.85-167.67 77.85-113.78-104.8-113.78-104.8-113.78-104.8 520.98 526.97 520.98 526.97Z" fill="rgb(255,179,0)" opacity="0.25"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46666"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.0 r"
+   sodipodi:docname="console.svg">
+  <title
+     id="title4504">Portacle</title>
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="perspective-envelope"
+       up_left_point="10,241.80763"
+       up_right_point="125.46666,241.80763"
+       down_left_point="0,268.26597"
+       down_right_point="135.46666,268.26597"
+       id="path-effect4615"
+       is_visible="true"
+       deform_type="perspective"
+       horizontal_mirror="false"
+       vertical_mirror="true"
+       overflow_perspective="false" />
+    <inkscape:path-effect
+       effect="perspective-envelope"
+       up_left_point="10,246.3506"
+       up_right_point="135.46833,246.3506"
+       down_left_point="10,272.81016"
+       down_right_point="135.46833,272.81016"
+       id="path-effect4613"
+       is_visible="true"
+       deform_type="perspective"
+       horizontal_mirror="true"
+       vertical_mirror="false"
+       overflow_perspective="false" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="280.61297"
+     inkscape:cy="212.11235"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1916"
+     inkscape:window-height="1161"
+     inkscape:window-x="1920"
+     inkscape:window-y="37"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Portacle</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicolas Hafner</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Shirakumo</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-161.53336)">
+    <g
+       id="g4819"
+       style="fill:#ffb452;fill-opacity:1">
+      <path
+         inkscape:path-effect="#path-effect4615"
+         inkscape:connector-curvature="0"
+         inkscape:original-d="m 0,241.80763 h 135.46666 v 26.45834 H 0 Z"
+         id="rect4610"
+         d="m 10,241.80763 c 0,0 115.46666,0 115.46666,0 0,0 10,26.45834 10,26.45834 0,0 -135.46666,0 -135.46666,0 0,0 10,-26.45834 10,-26.45834 z"
+         style="opacity:0.5;fill:#ffb452;fill-opacity:1;stroke:none;stroke-width:13.2200222;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         transform="translate(-1.0690751)"
+         id="text4597"
+         style="font-style:normal;font-weight:normal;font-size:16.4120903px;line-height:10.25755692px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffb452;fill-opacity:1;stroke:none;stroke-width:0.41030228px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         aria-label="CL&gt;">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4603"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffb452;fill-opacity:1"
+           d="m 48.141606,215.97428 2.757231,-9.68969 c -4.569126,-2.83601 -10.556257,-5.12058 -17.961393,-5.12058 -15.440495,0 -27.8086472,11.65915 -27.8086472,29.22665 0,14.65272 11.1864812,26.70576 27.8086472,26.70576 6.302243,0 14.495159,-2.5209 18.670395,-6.14469 l -3.151121,-8.74436 H 47.98405 c -4.096458,3.2299 -8.823141,4.88424 -14.88905,4.88424 -8.744362,0 -16.8585,-6.4598 -16.8585,-17.01606 0,-12.28937 6.774911,-18.90673 16.622166,-18.90673 6.223465,0 11.737928,2.28457 14.810271,4.80546 z" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4605"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffb452;fill-opacity:1"
+           d="M 69.739097,202.34568 H 59.104061 v 53.56907 h 31.432438 v -9.76848 H 69.739097 Z" />
+        <path
+           sodipodi:nodetypes="ccccccc"
+           inkscape:connector-curvature="0"
+           id="path4607"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.50617939px;fill:#ffb452;fill-opacity:1"
+           d="m 119.59599,229.41282 -18.25707,26.23235 h 12.82893 l 18.30817,-26.23235 -18.30817,-26.5246 h -12.82893 z" />
+      </g>
+    </g>
+  </g>
+</svg>
