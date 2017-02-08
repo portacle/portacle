@@ -70,14 +70,16 @@ function install() {
                 || eexit "Could not create package."
             ;;
         dmg)
-            mkdir -p "$PACKAGE_DIR/tmp/portacle"
-            rsync -az "$INSTALL_DIR/" "$PACKAGE_DIR/tmp/portacle/"
-            cp "$INSTALL_DIR/Portacle.app/Contents/Resources/.DS_Store" "$PACKAGE_DIR/tmp/"
-            hdiutil makehybrid -hfs -hfs-volume-name "Portacle" -hfs-openfolder "$PACKAGE_DIR/tmp" "$PACKAGE_DIR/tmp" -o "$package.tmp.dmg" \
+            local tmpdir="$PORTACLE_DIR/$PROGRAM/tmp/"
+            mkdir -p "$tmpdir/portacle"
+            rsync -az "$INSTALL_DIR/" "$tmpdir/portacle/"
+            cp "$INSTALL_DIR/Portacle.app/Contents/Resources/.DS_Store" "$tmpdir/"
+            hdiutil makehybrid -hfs -hfs-volume-name "Portacle" -hfs-openfolder "$tmpdir" "$tmpdir" -o "$package.tmp.dmg" \
                 || eexit "Could not create package. (Failed to bundle)"
             hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package.dmg" \
                 || eexit "Could not create package. (Failed to compress)"
-            rm -rf "$PACKAGE_DIR/tmp/portacle"
+            rm -rf "$PACKAGE_DIR/tmp/portacle" "$package.tmp.dmg"
+            ;;
         xz)
             XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package.tar.xz" "${files[@]}" \
                 || eexit "Could not create package."
