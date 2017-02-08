@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1"
+MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1 NO_GETTEXT=1"
 
 ###
 
@@ -16,6 +16,11 @@ esac
 
 function build() {
     cd "$SOURCE_DIR"
+
+    case "$PLATFORM" in
+        mac) MAKE_OPTIONS="CFLAGS=-I/usr/local/opt/openssl/include  LDFLAGS=-L/usr/local/opt/openssl/lib $MAKE_OPTIONS" ;;
+    esac
+    
     make DESTDIR="$PORTACLE_DIR" prefix="/$PLATFORM/git/" $MAKE_OPTIONS all -j $MAXCPUS \
         || eexit "The build failed. Please check the output for error messages."
 }
