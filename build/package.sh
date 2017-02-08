@@ -78,7 +78,7 @@ function install() {
                 || eexit "Could not create package. (Failed to bundle)"
             hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package.dmg" \
                 || eexit "Could not create package. (Failed to compress)"
-            rm -rf "$PACKAGE_DIR/tmp/portacle" "$package.tmp.dmg"
+            rm -rf "$tmpdir" "$package.tmp.dmg"
             ;;
         xz)
             XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package.tar.xz" "${files[@]}" \
