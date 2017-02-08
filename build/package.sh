@@ -11,8 +11,13 @@ readonly PROGRAM=package
 source common.sh
 PACKAGE_FILE=${PACKAGE_FILE:-$TAG/$PLATFORM-portacle}
 INSTALL_DIR=$PORTACLE_DIR/$PROGRAM/portacle
-PACKAGE_FORMAT=$([[ $PLATFORM = "win" ]] && echo "sfx" || echo "xz")
 W7ZCONF=$SCRIPT_DIR/src/7zsfx.conf
+
+case "$PLATFORM" in
+    win) PACKAGE_FORMAT=${PACKAGE_FORMAT:-sfx} ;;
+    lin) PACKAGE_FORMAT=${PACKAGE_FORMAT:-xz} ;;
+    mac) PACKAGE_FORMAT=${PACKAGE_FORMAT:-dmg} ;;
+esac
 
 function prepare() {
     mkdir -p "$INSTALL_DIR"
@@ -64,6 +69,15 @@ function install() {
             zip -ry9 "$package.zip" "${files[@]}" \
                 || eexit "Could not create package."
             ;;
+        dmg)
+            mkdir -p "$PACKAGE_DIR/tmp/portacle"
+            rsync -az "$INSTALL_DIR/" "$PACKAGE_DIR/tmp/portacle/"
+            cp "$INSTALL_DIR/Portacle.app/Contents/Resources/.DS_Store" "$PACKAGE_DIR/tmp/"
+            hdiutil makehybrid -hfs -hfs-volume-name "Portacle" -hfs-openfolder "$PACKAGE_DIR/tmp" "$PACKAGE_DIR/tmp" -o "$package.tmp.dmg" \
+                || eexit "Could not create package. (Failed to bundle)"
+            hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package.dmg" \
+                || eexit "Could not create package. (Failed to compress)"
+            rm -rf "$PACKAGE_DIR/tmp/portacle"
         xz)
             XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package.tar.xz" "${files[@]}" \
                 || eexit "Could not create package."
