@@ -105,34 +105,34 @@
      transform="translate(0,-161.53336)">
     <g
        id="g4819"
-       style="fill:#ffb452;fill-opacity:1">
+       style="fill:#ffbb00;fill-opacity:1">
       <path
          inkscape:path-effect="#path-effect4615"
          inkscape:connector-curvature="0"
          inkscape:original-d="m 0,241.80763 h 135.46666 v 26.45834 H 0 Z"
          id="rect4610"
          d="m 10,241.80763 c 0,0 115.46666,0 115.46666,0 0,0 10,26.45834 10,26.45834 0,0 -135.46666,0 -135.46666,0 0,0 10,-26.45834 10,-26.45834 z"
-         style="opacity:0.5;fill:#ffb452;fill-opacity:1;stroke:none;stroke-width:13.2200222;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="opacity:0.5;fill:#ffbb00;fill-opacity:1;stroke:none;stroke-width:13.2200222;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <g
          transform="translate(-1.0690751)"
          id="text4597"
-         style="font-style:normal;font-weight:normal;font-size:16.4120903px;line-height:10.25755692px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffb452;fill-opacity:1;stroke:none;stroke-width:0.41030228px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;font-size:16.4120903px;line-height:10.25755692px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffbb00;fill-opacity:1;stroke:none;stroke-width:0.41030228px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          aria-label="CL&gt;">
         <path
            inkscape:connector-curvature="0"
            id="path4603"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffb452;fill-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffbb00;fill-opacity:1"
            d="m 48.141606,215.97428 2.757231,-9.68969 c -4.569126,-2.83601 -10.556257,-5.12058 -17.961393,-5.12058 -15.440495,0 -27.8086472,11.65915 -27.8086472,29.22665 0,14.65272 11.1864812,26.70576 27.8086472,26.70576 6.302243,0 14.495159,-2.5209 18.670395,-6.14469 l -3.151121,-8.74436 H 47.98405 c -4.096458,3.2299 -8.823141,4.88424 -14.88905,4.88424 -8.744362,0 -16.8585,-6.4598 -16.8585,-17.01606 0,-12.28937 6.774911,-18.90673 16.622166,-18.90673 6.223465,0 11.737928,2.28457 14.810271,4.80546 z" />
         <path
            inkscape:connector-curvature="0"
            id="path4605"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffb452;fill-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.41030228px;fill:#ffbb00;fill-opacity:1"
            d="M 69.739097,202.34568 H 59.104061 v 53.56907 h 31.432438 v -9.76848 H 69.739097 Z" />
         <path
            sodipodi:nodetypes="ccccccc"
            inkscape:connector-curvature="0"
            id="path4607"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.50617939px;fill:#ffb452;fill-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:78.77803802px;font-family:'Concourse T6';-inkscape-font-specification:'Concourse T6';stroke-width:0.50617939px;fill:#ffbb00;fill-opacity:1"
            d="m 119.59599,229.41282 -18.25707,26.23235 h 12.82893 l 18.30817,-26.23235 -18.30817,-26.5246 h -12.82893 z" />
       </g>
     </g>
