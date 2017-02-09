@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1 NO_GETTEXT=1"
+MAKE_OPTIONS="USE_LIBPCRE=1 NO_PERL=1 NO_SVN_TESTS=1 NO_PYTHON=1 NO_TCLTK=1 NO_INSTALL_HARDLINKS=1"
 
 ###
 
@@ -17,8 +17,13 @@ esac
 function build() {
     cd "$SOURCE_DIR"
 
+    # Windows requires gettext (vsnprintf broken error otherwise)
+    # Mac OS X doesn't build with gettext
+    # Linux can do without
     case "$PLATFORM" in
-        mac) MAKE_OPTIONS="CFLAGS=-I/usr/local/opt/openssl/include  LDFLAGS=-L/usr/local/opt/openssl/lib $MAKE_OPTIONS" ;;
+        win) ;;
+        mac) MAKE_OPTIONS="NO_GETTEXT=1 CFLAGS=-I/usr/local/opt/openssl/include LDFLAGS=-L/usr/local/opt/openssl/lib $MAKE_OPTIONS" ;;
+        lin) MAKE_OPTIONS="NO_GETTEXT=1" ;;
     esac
     
     make DESTDIR="$PORTACLE_DIR" prefix="/$PLATFORM/git/" $MAKE_OPTIONS all -j $MAXCPUS \
