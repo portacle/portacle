@@ -4,7 +4,6 @@ readonly TAG=
 readonly REPOSITORY=
 readonly SSL_CA=https://curl.haxx.se/ca/cacert-2016-04-20.pem
 readonly NOTO_DL=https://noto-website.storage.googleapis.com/pkgs
-readonly INCONSOLATA_DL=https://github.com/google/fonts/blob/master/ofl/inconsolata
 
 ###
 
@@ -13,11 +12,11 @@ source common.sh
 
 function download() {
     mkdir -p "$SOURCE_DIR/fonts"
-    curl -o "$SOURCE_DIR/noto.zip" "$NOTO_DL/NotoSans-hinted.zip"
-    unzip "$SOURCE_DIR/noto.zip" -d "$SOURCE_DIR/fonts/"
-    curl -o "$SOURCE_DIR/fonts/Inconsolata-Bold.ttf" "$INCONSOLATA_DL/Inconsolata-Bold.ttf"
-    curl -o "$SOURCE_DIR/fonts/Inconsolata-Regular.ttf" "$INCONSOLATA_DL/Inconsolata-Regular.ttf"
     curl -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA"
+    curl -o "$SOURCE_DIR/noto-sans.zip" "$NOTO_DL/NotoSans-hinted.zip"
+    curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoMono-hinted.zip"
+    unzip "$SOURCE_DIR/noto-sans.zip" -d "$SOURCE_DIR/fonts/"
+    unzip "$SOURCE_DIR/noto-mono.zip" -d "$SOURCE_DIR/fonts/"
 }
 
 function install() {
