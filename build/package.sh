@@ -41,6 +41,8 @@ function build() {
         cp -Rfva "${files[@]}" "$INSTALL_DIR"
     fi
 
+    mkdir -p "$INSTALL_DIR/projects"
+
     # Copy launcher
     case "$PLATFORM" in
         win) cp -fv "$PORTACLE_DIR/portacle.exe" "$INSTALL_DIR/" ;;
