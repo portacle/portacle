@@ -15,8 +15,8 @@ function download() {
     curl -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA"
     curl -o "$SOURCE_DIR/noto-sans.zip" "$NOTO_DL/NotoSans-hinted.zip"
     curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoMono-hinted.zip"
-    unzip "$SOURCE_DIR/noto-sans.zip" -d "$SOURCE_DIR/fonts/"
-    unzip "$SOURCE_DIR/noto-mono.zip" -d "$SOURCE_DIR/fonts/"
+    unzip -o "$SOURCE_DIR/noto-sans.zip" -d "$SOURCE_DIR/fonts/"
+    unzip -o "$SOURCE_DIR/noto-mono.zip" -d "$SOURCE_DIR/fonts/"
 }
 
 function install() {
