@@ -71,23 +71,23 @@ Here's a more complicated, imaginary chord just to see what it would denote:
 
 Press Control, Meta/Command/Alt, and t at the same time, then press d, then press Meta/Command/Alt and a at the same time, then press the Home key, then press Control and l at the same time, then press Return.
 
-Simple enough, right? We'll use this keychord notation from here on out.
+Simple enough, right? We'll use this keychord notation from here on out. In order to make it easier to distinguish a keychord within a line of text, I will enclose them in brackets like so: 「C-x b」.
 
 * 　ＢＡＳＩＣ　ＮＡＶＩＧＡＴＩＯＮ
 
 Let's get through some basic keychords to navigate around in Portacle. Try them out to see for yourself what they do. Seeing it in effect probably explains it much better than I could hope to in words. You don't need to memorise all of the chords that are listed here either, you'll pick up on the ones you need as you go along.
 
 - C-h k
-  Help on Keychords. After pressing this chord, you can press another, and a little buffer will pop up telling you what chord you pressed and what it does. If you forget what a chord does, this is a good way to get a quick reminder. You can press q in the help buffer to close it again.
+  Help on Keychords. After pressing this chord, you can press another, and a little buffer will pop up telling you what chord you pressed and what it does. If you forget what a chord does, this is a good way to get a quick reminder. You can press 「q」 in the help buffer to close it again.
 
 - C-h m
   Help on Modes. After pressing this chord you'll get a large help buffer that lists all the active modes in the current buffer and what kind of chords they provide. Useful if you forget a keychord.
 
 - C-x b
-  Buffer switching. You've used this before! After hitting the keychord it will ask you for a the name of a buffer to switch to. It will suggest names in the minibuffer, and you only have to type as much of the name until shows the one you want after your cursor. You can also use the arrow keys to cycle through the suggestions. Once you have the one your want, simply hit RET to switch to it. Usually the one you were on before will be the first suggestion when you're switching again, so you can switch back and forth quite quick with just C-x b RET. You can also specify a buffer name that does not yet exist yet, which will open a new buffer with the given name.
+  Buffer switching. You've used this before! After hitting the keychord it will ask you for a the name of a buffer to switch to. It will suggest names in the minibuffer, and you only have to type as much of the name until shows the one you want after your cursor. You can also use the arrow keys to cycle through the suggestions. Once you have the one your want, simply hit 「RET」 to switch to it. Usually the one you were on before will be the first suggestion when you're switching again, so you can switch back and forth quite quick with just 「C-x b RET」. You can also specify a buffer name that does not yet exist yet, which will open a new buffer with the given name.
 
 - C-x k
-  Kill (close) a buffer. Just like C-x b you get to tell it a buffer name, in this case defaulting to the current one. Hitting RET then performs the actual killing and switches the window to the next buffer in line.
+  Kill (close) a buffer. Just like 「C-x b」 you get to tell it a buffer name, in this case defaulting to the current one. Hitting RET then performs the actual killing and switches the window to the next buffer in line.
 
 - C-x o
   Other window. Essentially cycles between the open windows.
@@ -108,19 +108,19 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   Usually aborts whatever you started doing. This is very useful if you accidentally started typing a chord you don't actually wanted to start, or are in some other kind of situation that you'd like to get out of.
 
 - C-s
-  Search in the current buffer. After hitting C-s you can start typing for the thing you want to look for. Hitting C-s again will jump to the next match. Hitting RET will end the search at the current position. If you press C-g the cursor will jump back to where it started and the search is aborted.
+  Search in the current buffer. After hitting 「C-s」 you can start typing for the thing you want to look for. Hitting 「C-s」 again will jump to the next match. Hitting 「RET」 will end the search at the current position. If you press 「C-g」 the cursor will jump back to where it started and the search is aborted.
 
 - C-j
-  This acts as RET in situations where RET does something different by default. More precisely this means either inserting a newline or being the "yes, I'm absolutely sure I want to confirm" chord.
+  This acts as 「RET」 in situations where 「RET」 does something different by default. More precisely this means either inserting a newline or being the "yes, I'm absolutely sure I want to confirm" chord.
 
 - C-x C-f
-  Open a file in a new buffer. You'll get to navigate to the file you want in the minibuffer. Once you've chosen the file you want, simply press RET to open it if it exists, or C-j to create a new file if it does not yet exist. The auto-completion can sometimes try a bit too hard to find the right file for you. If it's interfering with you wanting to find the file on your own, then simply press C-f again and it will stop auto-completion.
+  Open a file in a new buffer. You'll get to navigate to the file you want in the minibuffer. Once you've chosen the file you want, simply press 「RET」 to open it if it exists, or 「C-j」 to create a new file if it does not yet exist. The auto-completion can sometimes try a bit too hard to find the right file for you. If it's interfering with you wanting to find the file on your own, then simply press 「C-f」 again and it will stop auto-completion.
 
 - C-x C-s
   Saves the current file to disk. If you've made some changes and would like to save, this is it.
 
 - C-x C-w
-  Save the current buffer to a new file on disk. The file choosing works just like in C-x C-f.
+  Save the current buffer to a new file on disk. The file choosing works just like in 「C-x C-f」.
 
 - C-x C-v
   Switches the current buffer to a different file. Useful for when the file changed on disk but was not reloaded in Portacle.
@@ -132,7 +132,7 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   Close Portacle altogether.
 
 - C-SPC
-  Start marking a region. If you press C-SPC again, you stop marking. You can also press C-g to abort as usual.
+  Start marking a region. If you press 「C-SPC」 again, you stop marking. You can also press 「C-g」 to abort as usual.
 
 - C-q
   Expands the selected region smartly. This is aware of the current mode and attempts to grow the selected region in an appropriate way for it. This allows you to very quickly select text.
@@ -168,10 +168,10 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   Move to the end of the buffer.
 
 - C-M-<pgup>
-  Create a new cursor for the next region matching the currently selected region above your topmost cursor. If nothing is currently selected, it simply creates a cursor on the next line. Pretty much all commands that work with a single cursor also work with multiple ones, including cutting, pasting, etc. Press C-g to get rid of the extra cursors.
+  Create a new cursor for the next region matching the currently selected region above your topmost cursor. If nothing is currently selected, it simply creates a cursor on the next line. Pretty much all commands that work with a single cursor also work with multiple ones, including cutting, pasting, etc. Press 「C-g」 to get rid of the extra cursors.
 
 - C-M-<pgdn>
-  The same as C-M-<pgup>, but going downwards.
+  The same as 「C-M-<pgup>」, but going downwards.
 
 - C-M-m a
   Create new cursors for all occurrences of the currently selected region.
@@ -186,7 +186,7 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   Jump forward by a token. This should be semantically aware and jump however much is appropriate for the content in your buffer.
 
 - C-M-b
-  Jump backward by a token. See C-M-f.
+  Jump backward by a token. See 「C-M-f」.
 
 * 　ＣＯＭＭＯＮ　ＬＩＳＰ　ＩＮＴＥＲＡＣＴＩＯＮ
 
@@ -199,13 +199,13 @@ These commands are specific to lisp buffers. They'll only work in buffers in the
   Compile and load the entire file in this buffer.
 
 - C-c RET
-  Macroexpands the expression at the current point once. In the buffer that appears you'll be able to further expand inner expressions by pressing C-c RET on them again. q closes the buffer as usual.
+  Macroexpands the expression at the current point once. In the buffer that appears you'll be able to further expand inner expressions by pressing 「C-c RET」 on them again. 「q」 closes the buffer as usual.
 
 - M-.
   Jump to the definition of the symbol your cursor is currently on. This is extremely useful in order to learn how a system works and how it is implemented. Use it often.
 
 - M-,
-  Jump back to your previous location before you hit M-.
+  Jump back to your previous location before you hit 「M-.」.
 
 - C-<right>
   "Slurp" in the expression on the right. This means that if your cursor is currently within a list and there is an element outside to the right of the list, pressing this will pull the element onto the end of the list.
@@ -287,25 +287,27 @@ Using remotes, it also allows you to very easily synchronise your work with othe
 
 Magit allows you to manage you Git repositories easily and quickly. To run Magit, use M-x magit-status . This will present you with an overview of the repository next to the directory your buffer is currently in, or will ask you for a path if the buffer isn't in a repository.
 
-- Staging: from here on out you can see changes that have been made, which you can stage by hitting s on the entry. You can also stage everything at once by hitting s on the section title. By hitting tab on an entry you can expand it and see the actual diff of the change. If there are multiple hunks you can also stage individual ones by hitting s with the cursor on the appropriate one. Analogously if you want to unstage, simply use u instead of s .
+- Staging: from here on out you can see changes that have been made, which you can stage by hitting 「s」 on the entry. You can also stage everything at once by hitting 「s」 on the section title. By hitting 「TAB」 on an entry you can expand it and see the actual diff of the change. If there are multiple hunks you can also stage individual ones by hitting s with the cursor on the appropriate one. Analogously if you want to unstage, simply use 「u」.
 
-- Committing: once all your changes have been staged, you can hit c c which will perform a commit. It should open up a new buffer that lets you enter a commit message. In case you realise you messed up, you can avoid the commit from there with C-x k. Once you're sure your commit message is all nice and pretty, hit C-c C-c. If you should want to add changes to the previous commit because you forgot to include some files, simply stage them and press c a . This will also allow you to edit your commit message, should you have messed up with that.
+- Committing: once all your changes have been staged, you can hit 「c c」 which will perform a commit. It should open up a new buffer that lets you enter a commit message. In case you realise you messed up, you can avoid the commit from there with 「C-x k」. Once you're sure your commit message is all nice and pretty, hit 「C-c C-c」. If you should want to add changes to the previous commit because you forgot to include some files, simply stage them and press 「c a」. This will also allow you to edit your commit message, should you have messed up with that.
 
-- Pushing: if your repository has a remote server that you can synchronise with, you can push your new commits to it with P p . It might ask you for the branch to use if you do this for the first time on an uninitialised repository. If git complains about unmerged changes, make sure to pull first.
+- Pushing: if your repository has a remote server that you can synchronise with, you can push your new commits to it with 「P p」. It might ask you for the branch to use if you do this for the first time on an uninitialised repository. If git complains about unmerged changes, make sure to pull first.
 
-- Pulling: in order to fetch and merge in commits from the remote server, use F p . You can only do this if you have no changed files that aren't staged yet. Since merging commits in can also result in conflicts, you should always make sure to commit all of your changes before you pull.
+- Pulling: in order to fetch and merge in commits from the remote server, use 「F p」. You can only do this if you have no changed files that aren't staged yet. Since merging commits in can also result in conflicts, you should always make sure to commit all of your changes before you pull.
 
-- Branching: if you need to check out another branch, you can do so with b b . Creating a new branch and switching to it is simply b c . And finally, deleting branches is done by b k .
+- Branching: if you need to check out another branch, you can do so with 「b b」. Creating a new branch and switching to it is simply 「b c」. And finally, deleting branches is done by 「b k」.
 
-- Remotes: when you first create a repository you might want to configure a remote server for it. You can do this in Magit as well. To do this, press M a . It will then ask for a name followed by the address. You can also remove, rename, or update remotes by M k, M r, and M u respectively.
+- Remotes: when you first create a repository you might want to configure a remote server for it. You can do this in Magit as well. To do this, press 「M a」. It will then ask for a name followed by the address. You can also remove, rename, or update remotes by 「M k」, 「M r」, and 「M u」 respectively.
 
-- Browsing: if you want to view the log of all the commits in your repository, use l l . This will bring up magit's log window. By hitting return on any entry, you can view the changes associated with the commit.
+- Browsing: if you want to view the log of all the commits in your repository, use 「l l」. This will bring up magit's log window. By hitting return on any entry, you can view the changes associated with the commit.
 
-- Cloning: if you need to clone a repository, you can use M-x magit-clone . It'll ask you for the remote URL and a location to save the repository to.
+- Cloning: if you need to clone a repository, you can use 「M-x magit-clone」 . It'll ask you for the remote URL and a location to save the repository to.
+
+Note that most commands have a prefix character like M, b, c, etc. followed by a command character. When you press the first character, a help popup should show that provides you with options and all the possible commands you can use for that prefix. It is a rather elegant system to show you what you can do and allows you to find your bearings again should you have forgotten how to do something.
 
 * 　ＭＡＮＡＧＩＮＧ　ＰＲＯＪＥＣＴＳ
 
-Portacle includes some convenience functions to manage projects for you. You can execute them through M-x as usual.
+Portacle includes some convenience functions to manage projects for you. You can execute them through 「M-x」 as usual.
 
 - create-project
   This creates a new directory in the projects/ directory and populates it with a project skeleton. The files that will be copied and adapted can be found in the config/skeleton/ directory. If you'd like to change what the default project skeleton looks like, this is where you can do that.
@@ -318,9 +320,9 @@ Portacle includes some convenience functions to manage projects for you. You can
 
 * 　ＭＡＮＡＧＩＮＧ　ＰＯＲＴＡＣＬＥ
 
-Some things like Git require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use M-x portacle-configure . It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
+Some things like Git require some information about you to operate properly. Portacle sets some default values for that, but you will probably want to use your own information instead. To do this use 「M-x portacle-configure」. It will prompt you for the info in the minibuffer. After you've answered the prompts, it'll automatically save everything in the appropriate locations.
 
-If you would like to update Portacle's configurations to the latest versions, you can simply use M-x portacle-update . This will however not update binary files like Git, emacs, and sbcl themselves. However, those should only very seldom change or require a full upgrade.
+If you would like to update Portacle's configurations to the latest versions, you can simply use 「M-x portacle-update」. This will however not update binary files like Git, emacs, and sbcl themselves. However, those should only very seldom change or require a full upgrade.
 
 * 　ＣＵＳＴＯＭＩＳＩＮＧ
 
@@ -328,13 +330,35 @@ Portacle's editor, Emacs, allows you to modify it through code. Lisp code, even.
 
 In order to customise the editor, you'll want to edit the file config/user.el in the Portacle directory. If it doesn't exist yet, just create it. On next launch, it should be run automatically and your changes should apply.
 
-The most common task you probably want to perform is assign a keychord to a function that you otherwise have to perform through M-x. In order to do that, you can use define-my-key. As an example, here's how to add a keychord for the Magit-status command:
+The most common task you probably want to perform is assign a keychord to a function that you otherwise have to perform through 「M-x」. In order to do that, you can use define-my-key. As an example, here's how to add a keychord for the Magit-status command:
 
     (define-my-key "C-?" 'Magit-status)
 
-To see that the keychord works, you can either save the file and restart Portacle, or you can load the change in directly by pressing C-M-x with the cursor on the expression. Remember to use C-h k and C-h m to see what a keychord already does or what kinds of actions are available in a buffer.
+To see that the keychord works, you can either save the file and restart Portacle, or you can load the change in directly by pressing 「C-M-x」 with the cursor on the expression. Remember to use 「C-h k」 and 「C-h m」 to see what a keychord already does or what kinds of actions are available in a buffer.
 
 Since Elisp is a full programming language with a big standard library provided by Emacs, going into more depth than this would easily blow the scale on this brief section here. Usually if you have something you'd like to do in Elisp or need some kind of functionality, chances are someone else has already solved it for you. Just give it a Google.
+
+* 　ＥＭＡＣＳ　ＰＡＣＫＡＧＥＳ
+
+Emacs has a swath of packages available that provide all sorts of additional functionality as a form of plugin. This allows you to extend the editor easily with code made by other people. If you need support for an additional programming language, or have come across a nifty feature somewhere on the web that is available through a package, you can install it directly within Emacs itself.
+
+  M-x package-list-packages
+
+This should open up a new buffer that lists all available packages from the sources Emacs knows about and will let you manage them as you see fit. Remember that you can use C-s to search. The following commands are useful to manage the packages:
+
+- U
+  Mark all packages that can be upgraded for upgrading.
+
+- i
+  Mark the current package line for installation.
+
+- d
+  Mark the current package line for deletion.
+
+- x
+  Execute all the changes that have been marked. This will upgrade, install, and delete the packages as you requested. It will also ask you for confirmation in the minibuffer and might open up a new buffer with compilation notes. You can close that buffer with the usual q exit shortcut.
+
+Usually you will not need to restart in order for the changes by new packages to take effect.
 
 * 　ＦＵＲＴＨＥＲ　ＲＥＡＤＩＮＧ ＆　ＲＥＳＯＵＲＣＥＳ
 
