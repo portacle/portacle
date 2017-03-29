@@ -25,7 +25,7 @@ Before we get started we need to lay down some terms so that we can actually tal
   Portacle has its own way of denoting key press combinations, usually called keychords. We'll go into depth on how those are denoted and how you're supposed to read them later. Just keep in mind that pretty much everything you can do or even might want to do can be done by pressing the right combination of keys-- the right chord.
 
 - Minibuffer
-  At the very bottom of Portacle should be a singular, currently empty line. This isn't merely a waste of space, it's where the minibuffer is located. It displays status information and helps you out when need to perform commands or press keychords. You might have already seen it pop up and show things when you switched the buffer to this one for the first time.
+  At the very bottom of Portacle should be a singular, currently empty line. This isn't merely a waste of space, it's where the minibuffer is located. It displays status information and helps you out when you perform commands or press keychords. You might have already seen it pop up and show things when you switched the buffer to this one for the first time.
 
 - Cursor
   The cursor is the coloured rectangle in the buffer. It indicates where you would be writing or performing any kind of command at the moment. If it is filled and blinking, then it means the buffer it belongs to is currently active. The cursor in inactive buffers is merely an outline.
@@ -56,7 +56,7 @@ Everything else is either a singular letter, which corresponds to the according 
 
 Next we need to define in which order keys should be pressed. Some keys need to be held at the same time, while others should happen one after the other. If two or more keys should be held down at the same time, they are connected by a hyphen. If they should be pressed one after the other, they are connected by a space, which is omitted if it is simply a word you should type out. Let's look at an example.
 
-  C-x b *scratch* RET
+  C-x b repl RET
 
 This means the following: Hold Control pressed and press x. Release both. Press b and release it. Type "repl". Press Return.
 Before you try it out though, let's look at this one too:
@@ -84,7 +84,7 @@ Let's get through some basic keychords to navigate around in Portacle. Try them 
   Help on Modes. After pressing this chord you'll get a large help buffer that lists all the active modes in the current buffer and what kind of chords they provide. Useful if you forget a keychord.
 
 - C-x b
-  Buffer switching. You've used this before! After hitting the keychord it will ask you for a the name of a buffer to switch to. It will suggest names in the minibuffer, and you only have to type as much of the name until shows the one you want after your cursor. You can also use the arrow keys to cycle through the suggestions. Once you have the one your want, simply hit 「RET」 to switch to it. Usually the one you were on before will be the first suggestion when you're switching again, so you can switch back and forth quite quick with just 「C-x b RET」. You can also specify a buffer name that does not yet exist yet, which will open a new buffer with the given name.
+  Buffer switching. You've used this before! After hitting the keychord it will ask you for the name of a buffer to switch to. It will suggest names in the minibuffer, and you only have to type as much of the name until shows the one you want after your cursor. You can also use the arrow keys to cycle through the suggestions. Once you have the one your want, simply hit 「RET」 to switch to it. Usually the one you were on before will be the first suggestion when you're switching again, so you can switch back and forth quite quick with just 「C-x b RET」. You can also specify a buffer name that does not yet exist yet, which will open a new buffer with the given name.
 
 - C-x k
   Kill (close) a buffer. Just like 「C-x b」 you get to tell it a buffer name, in this case defaulting to the current one. Hitting RET then performs the actual killing and switches the window to the next buffer in line.
