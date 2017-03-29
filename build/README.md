@@ -15,7 +15,7 @@ Install the build prerequisites:
 1. SBCL, download and install <https://sourceforge.net/projects/sbcl/files/sbcl/1.3.5/sbcl-1.3.5-x86-64-windows-binary.msi/download>
 2. MSYS2, download and install <http://repo.msys2.org/distrib/x86_64/msys2-x86_64-20160205.exe>
 3. 7Zip, download and install <http://www.7-zip.org/a/7z1604-x64.exe>
-4. 7ZipSFX, download and extract into `C:\Program Files\7-zip` <http://www.7zsfx.info/files/7zsd_extra_150_2712.7z>
+4. 7ZipSFX, download and extract into `C:\Program Files\7-zip` <http://web.archive.org/web/20160311162325/http://7zsfx.info/files/7zsd_extra_160_2712.7z>
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
