@@ -29,6 +29,24 @@
   (setq slime-lisp-implementations
         `((sbcl (,(portacle-bin-path "sbcl")))))
 
+  ;; Make sure SLIME stores the FASLs within Portacle
+  ;; @Override
+  (defun slime-init-command (port-filename _coding-system)
+    "Return a string to initialize Lisp."
+    (let ((loader (if (file-name-absolute-p slime-backend)
+                      slime-backend
+                      (concat slime-path slime-backend))))
+      ;; Return a single form to avoid problems with buffered input.
+      (format "%S\n\n"
+              `(progn
+                 (load ,(slime-to-lisp-filename (expand-file-name loader))
+                       :verbose t)
+                 (setf (symbol-value (read-from-string "swank-loader:*fasl-directory*"))
+                       ,(slime-to-lisp-filename (portacle-app-path "asdf" "cache/swank/")))
+                 (funcall (read-from-string "swank-loader:init"))
+                 (funcall (read-from-string "swank:start-server")
+                          ,(slime-to-lisp-filename port-filename))))))
+
   ;; Set the Magit executable explicitly
   (setq magit-git-executable (portacle-bin-path "git"))
 
