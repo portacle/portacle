@@ -11,6 +11,6 @@
     <key>CFBundleIconFile</key>
     <string>portacle</string>
     <key>CFBundleExecutable</key>
-    <string>portacle.sh</string>
+    <string>portacle</string>
 </dict>
 </plist>
