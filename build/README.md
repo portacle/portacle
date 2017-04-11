@@ -30,6 +30,7 @@ Install the build prerequisites:
 1. XCode and the XCode command line developer tools
 2. MacPorts, Homebrew, or Fink
 3. From one of those package managers, install `autoconf automake sbcl git gettext pcre openssl libtool`, making sure they are in your `PATH`.
+4. With brew, you need to link gettext: `brew link gettext --force`
 
 Proceed with the `General Procedure` section.
 
