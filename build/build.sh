@@ -57,6 +57,11 @@ function git() {
     "$SOURCE_DIR/git.sh"
 }
 
+function hunspell() {
+    "$SOURCE_DIR/hunspell.sh"
+    "$SOURCE_DIR/dictionaries.sh"
+}
+
 function package() {
     "$SOURCE_DIR/package.sh"
 }
@@ -71,7 +76,8 @@ function upgrade() {
         && quicklisp \
         && emacs \
         && emacsd \
-        && git
+        && git \
+        && hunspell
 }
 
 function refresh() {
