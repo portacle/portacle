@@ -2,7 +2,6 @@
 
 readonly TAG=v1.6.1
 readonly REPOSITORY=https://github.com/hunspell/hunspell
-readonly CONFIGURE_OPTIONS=()
 
 ###
 
@@ -11,8 +10,10 @@ source common.sh
 
 function prepare() {
     cd "$SOURCE_DIR"
-    autoreconf -vfi
-    ./configure --prefix="$INSTALL_DIR" "${CONFIGURE_OPTIONS[@]}"
+    autoreconf -vfi \
+        || eexit "Failed to generate configure. Maybe some dependencies are missing?"
+    ./configure --prefix="$INSTALL_DIR" \
+        || eexit "Configure failed. Maybe some dependencies are missing?"
 }
 
 function build() {
