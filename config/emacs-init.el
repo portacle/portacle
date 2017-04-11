@@ -21,9 +21,11 @@
   (require 'shinmera-magit)
   (require 'shinmera-lisp)
   (require 'shinmera-startup)
-  (os-case
-   (windows-nt)
-   (t (require 'shinmera-spell)))
+  (require 'shinmera-spell)
+
+  ;; Fix Spellchecker
+  (setq ispell-program-name
+        (portacle-bin-path "hunspell"))
   
   ;; Make sure SLIME knows about our SBCL
   (setq slime-lisp-implementations
