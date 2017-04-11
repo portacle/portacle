@@ -11,7 +11,7 @@ readonly PROGRAM=package
 source common.sh
 PACKAGE_FILE=${PACKAGE_FILE:-$TAG/$PLATFORM-portacle}
 INSTALL_DIR=$PORTACLE_DIR/$PROGRAM/portacle
-W7ZCONF=$SCRIPT_DIR/src/7zsfx.conf
+SOURCE_DIR=$SCRIPT_DIR/src/
 
 case "$PLATFORM" in
     win) PACKAGE_FORMAT=${PACKAGE_FORMAT:-sfx} ;;
@@ -43,11 +43,20 @@ function build() {
 
     mkdir -p "$INSTALL_DIR/projects"
 
-    # Copy launcher
+    # Create launcher
     case "$PLATFORM" in
-        win) cp -fv "$PORTACLE_DIR/portacle.exe" "$INSTALL_DIR/" ;;
-        lin) cp -fv "$PORTACLE_DIR/portacle.desktop" "$PORTACLE_DIR/portacle.run" "$INSTALL_DIR/";;
-        mac) cp -Rfv "$PORTACLE_DIR/Portacle.app" "$INSTALL_DIR/" ;;
+        win) cp -fv "$SHARED_BIN_DIR/portacle.exe" "$INSTALL_DIR/"
+             ;;
+        lin) cp -fv "$SOURCE_DIR/portacle.desktop" "$INSTALL_DIR/"
+             cp -fv "$SOURCE_DIR/portacle.run" "$INSTALL_DIR/"
+             cp -fv "$SOURCE_DIR/portacle.svg" "$INSTALL_DIR/"
+             ;;
+        mac) mkdir -p "$INSTALL_DIR/Portacle.app/Contents/MacOS/"
+             mkdir -p "$INSTALL_DIR/Portacle.app/Contents/Resources/"
+             cp -fv "$SOURCE_DIR/Info.plist" "$INSTALL_DIR/Portacle.app/Contents/"
+             cp -fv "$SOURCE_DIR/portacle.icns" "$INSTALL_DIR/Portacle.app/Contents/Resources/"
+             cp -fv "$SHARED_BIN_DIR/portacle" "$INSTALL_DIR/Portacle.app/Contents/MacOS/portacle"
+             ;;
     esac
 }
 
@@ -61,7 +70,7 @@ function install() {
         sfx)
             local winfile=$(to-win-path "$package")
             local winfiles=($(to-win-path "$files"))
-            local winconfig=$(to-win-path "$W7ZCONF")
+            local winconfig=$(to-win-path "$SOURCE_DIR/7zsfx.conf")
             "$W7Z/7z.exe" a "$winfile.7z" -t7z -m0=LZMA2 -mx9 "-mmt$MAXCPUS" -aoa -r -snh -snl -ssw -y -- "${winfiles[@]}" \
                 || eexit "Could not create package."
             cat "$W7Z/$W7ZSFX" "$W7ZCONF" "$package.7z" > "$package.exe"

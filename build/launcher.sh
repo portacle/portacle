@@ -22,15 +22,14 @@ function install() {
         mac) cp "portacle" "fontreg" "$INSTALL_DIR/" ;;
     esac
 
+    local postfix=""
     case "$PLATFORM" in
-        win) ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/sbcl.exe"
-             ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/git.exe"
-             ln -f "$INSTALL_DIR/portacle.exe" "$SHARED_BIN_DIR/emacs.exe"
-             ln -f "$INSTALL_DIR/portacle.exe" "$PORTACLE_DIR/portacle.exe" ;;
-        *)   ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/sbcl"
-             ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/git"
-             ln -f "$INSTALL_DIR/portacle" "$SHARED_BIN_DIR/emacs" ;;
+        win) postfix=".exe" ;;
     esac
+    ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/sbcl${postfix}"
+    ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/git${postfix}"
+    ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/emacs${postfix}"
+    ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/portacle${postfix}"
 }
 
 main
