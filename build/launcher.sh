@@ -16,6 +16,8 @@ function build() {
 function install() {
     cd "$SOURCE_DIR/build"
     mkdir -p "$INSTALL_DIR"
+    mkdir -p "$SHARED_BIN_DIR"
+    
     case "$PLATFORM" in
         win) cp "portacle.exe" "$INSTALL_DIR/" ;;
         lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/" ;;
