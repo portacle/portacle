@@ -28,10 +28,10 @@ function build() {
     local files=("$PORTACLE_DIR/$PLATFORM"
                  "$PORTACLE_DIR/all"
                  "$PORTACLE_DIR/config"
+                 "$PORTACLE_DIR/projects"
                  "$PORTACLE_DIR/.git"
                  "$PORTACLE_DIR/.gitignore"
-                 "$PORTACLE_DIR/.portacle_root"
-                 "$PORTACLE_DIR/portacle.svg")
+                 "$PORTACLE_DIR/.portacle_root")
     
     if system-has rsync; then
         rsync -Havz --delete "${files[@]}" "$INSTALL_DIR/"
@@ -40,8 +40,6 @@ function build() {
         mkdir -p "$INSTALL_DIR"
         cp -Rfva "${files[@]}" "$INSTALL_DIR"
     fi
-
-    mkdir -p "$INSTALL_DIR/projects"
 
     # Create launcher
     case "$PLATFORM" in
