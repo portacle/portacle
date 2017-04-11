@@ -11,9 +11,15 @@ INSTALL_DIR="$SHARED_DIR"
 
 function prepare() {
     cd "$SOURCE_DIR"
-    make defconfig
-    echo -e "CONFIG_INSTALL_NO_USR=y\n$(cat .config)" > .config
-    echo -e "CONFIG_STATIC=y\n$(cat .config)" > .config
+
+    case "$PLATFORM" in
+        win) status 2 "Skipping prepare on Windows." ;;
+        mac) status 2 "Skipping prepare on OS X." ;;
+        lin) make defconfig
+             echo -e "CONFIG_INSTALL_NO_USR=y\n$(cat .config)" > .config
+             echo -e "CONFIG_STATIC=y\n$(cat .config)" > .config
+             ;;
+    esac
 }
 
 function build() {
@@ -22,7 +28,7 @@ function build() {
     case "$PLATFORM" in
         win) status 2 "Skipping build on Windows." ;;
         mac) status 2 "Skipping build on OS X." ;;
-        lin)   make -j $MAXCPUS \
+        lin) make -j $MAXCPUS \
                    || eexit "The build failed. Please check the output for error messages." ;;
     esac
 }
