@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=3.1.7.5
+readonly TAG=3.2.1
 readonly REPOSITORY=https://gitlab.common-lisp.net/asdf/asdf.git
 
 ###
