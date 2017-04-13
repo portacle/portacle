@@ -68,10 +68,9 @@ function install() {
         sfx)
             local winfile=$(to-win-path "$package")
             local winfiles=($(to-win-path "$files"))
-            local winconfig=$(to-win-path "$SOURCE_DIR/7zsfx.conf")
             "$W7Z/7z.exe" a "$winfile.7z" -t7z -m0=LZMA2 -mx9 "-mmt$MAXCPUS" -aoa -r -snh -snl -ssw -y -- "${winfiles[@]}" \
                 || eexit "Could not create package."
-            cat "$W7Z/$W7ZSFX" "$W7ZCONF" "$package.7z" > "$package.exe"
+            cat "$W7Z/$W7ZSFX" "$SOURCE_DIR/7zsfx.conf" "$package.7z" > "$package.exe"
             rm "$winfile.7z"
             ;;
         zip)
