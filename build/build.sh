@@ -58,17 +58,16 @@ function git() {
 }
 
 function hunspell() {
-    "$SOURCE_DIR/hunspell.sh"
-    "$SOURCE_DIR/dictionaries.sh"
+    "$SOURCE_DIR/hunspell.sh" \
+        && "$SOURCE_DIR/dictionaries.sh"
 }
 
 function package() {
     "$SOURCE_DIR/package.sh"
 }
 
-function upgrade() {
-    download \
-        && global \
+function build() {
+    global \
         && launcher \
         && busybox \
         && sbcl \
@@ -80,10 +79,17 @@ function upgrade() {
         && hunspell
 }
 
+function upgrade() {
+    ## Download and then rerun self in case of changes.
+    download \
+        && "$SCRIPT_DIR/build.sh" build
+}
+
 function refresh() {
+    ## Upgrade might cause changes, rerun self.
     clean \
         && upgrade \
-        && package
+        && "$SCRIPT_DIR/build.sh" package
 }
 
 main
