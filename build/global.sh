@@ -34,6 +34,8 @@ function install() {
     case "$PLATFORM" in
         lin) cp -fv "/lib64/ld-linux-x86-64.so.2" "$SHARED_LIB_DIR/" \
                    || eexit "Failed to copy ld-linux.so" ;;
+        win) cp -fv "/usr/bin/gzip" "$SHARED_BIN_DIR/" \
+                   || eexit "Failed to copy gzip" ;;
     esac
 
     mkdir -p "$PORTACLE_DIR/all/ssl"
