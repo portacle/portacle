@@ -56,8 +56,15 @@ If you need a completely fresh start that will *delete everything that is not in
 Each component being built has its own build script that you can run individually as well. They all accept the name of a stage to run, usually one of: `clean`, `download`, `prepare`, `build`, or `install`, defaulting to running all of them in that sequence. The components are:
 
 * `asdf` -- The de-facto standard Common Lisp build system. Bundled because SBCL's internal one is not always new enough.
+* `busybox` -- A self-contained distribution of coreutils used on Linux as an independent base.
+* `dictionaries` -- Dictionary files for use by the spellchecker.
 * `emacs` -- Emacs is a long-standing, massively extensible editor ideal for editing Lisp code.
 * `emacsd` -- Since Emacs is extensible, we need some sensible configuration for it.
 * `git` -- Developing anything without version control is madness. Besides it's an easy way to access other people's projects and update Portacle itself.
+* `global` -- Files required in general, or minor parts that don't fit anywhere else in specific.
+* `hunspell` -- A cross-platform spell checker utility.
+* `launcher` -- The Portacle launcher binary, responsible for preparing the runtime environment and launching other applications.
 * `quicklisp` -- The de-facto standard Common Lisp package manager. Bundled because getting by without it would be much less than simple.
 * `sbcl` -- The best and most simple to build open source Common Lisp implementation.
+
+The other scripts, `build`, `common`, and `package` are integral parts of the build system. The first is responsible for allowing a more convenient interface to building. The second contains all sorts of general functions and parts required by the various scripts. The third handles the packaging process and knows how to bundle things together for the various formats required for deployment.
