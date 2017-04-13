@@ -2,8 +2,7 @@
 
 readonly TAG=v1.6.1
 readonly REPOSITORY=https://github.com/hunspell/hunspell
-readonly CONFIGURE_OPTIONS=(--with-included-gettext
-                            --without-ui
+readonly CONFIGURE_OPTIONS=(--without-ui
                             --without-readline)
 
 ###
