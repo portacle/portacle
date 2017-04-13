@@ -28,7 +28,6 @@ function build() {
     local files=("$PORTACLE_DIR/$PLATFORM"
                  "$PORTACLE_DIR/all"
                  "$PORTACLE_DIR/config"
-                 "$PORTACLE_DIR/projects"
                  "$PORTACLE_DIR/.git"
                  "$PORTACLE_DIR/.gitignore"
                  "$PORTACLE_DIR/.portacle_root")
@@ -40,6 +39,10 @@ function build() {
         mkdir -p "$INSTALL_DIR"
         cp -Rfva "${files[@]}" "$INSTALL_DIR"
     fi
+
+    # Create projects
+    mkdir -p "$INSTALL_DIR/projects/"
+    cp -fv "$SOURCE_DIR/projects.md" "$INSTALL_DIR/projects/README.md"
 
     # Create launcher
     case "$PLATFORM" in
