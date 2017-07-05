@@ -1,13 +1,13 @@
 #!/bin/bash
 
 readonly TAG=
-readonly REPOSITORY=https://github.com/shinmera/.emacs
+readonly REPOSITORY=https://github.com/shinmera/portacle-config
 
 ###
 
 PROGRAM=emacsd
 source common.sh
-INSTALL_DIR=$PORTACLE_DIR/all/emacsd/shinmera
+INSTALL_DIR=$PORTACLE_DIR/all/emacsd/portacle
 
 function install (){
     mkdir -p "$INSTALL_DIR" \
