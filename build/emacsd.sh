@@ -25,7 +25,7 @@ function install (){
                    || eexit "Failed to perform first-launch." ;;
         mac) script -q /dev/null $PORTACLE_DIR/$PLATFORM/bin/emacs -f "portacle-recompile" -f "kill-emacs" -nw \
                    || eexit "Failed to perform first-launch." ;;
-        lin) script -c "$PORTACLE_DIR/$PLATFORM/bin/emacs -f portacle-recompile -f kill-emacs -nw" /dev/null \
+        lin) script -e -c "$PORTACLE_DIR/$PLATFORM/bin/emacs -f portacle-recompile -f kill-emacs -nw" /dev/null \
                    || eexit "Failed to perform first-launch." ;;
     esac
 }
