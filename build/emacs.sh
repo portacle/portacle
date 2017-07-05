@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=emacs-25.1
+readonly TAG=emacs-25.2
 readonly REPOSITORY=git://git.savannah.gnu.org/emacs.git
 readonly CONFIGURE_OPTIONS=(--without-jpeg
                             --without-tiff
@@ -21,10 +21,6 @@ source common.sh
 
 function prepare() {
     cd "$SOURCE_DIR"
-    case "$TAG" in
-        emacs-24*) git am < "$SCRIPT_DIR/src/fix-mingw64.patch" \
-                         || eexit "Failed to apply mingw patch." ;;
-    esac
     
     ./autogen.sh \
         || eexit "Failed to generate configure. Maybe some dependencies are missing?"
