@@ -207,9 +207,10 @@ function download() {
         cd "$SOURCE_DIR"
         git reset --hard HEAD
         git clean -fdx
-        git checkout master
-        git pull \
+        git fetch origin master\
             || eexit "Failed to download source."
+        git checkout origin/master\
+            || eexit "Failed to check out master source."
     elif [ -n "$TAG" ]; then
         git clone "$REPOSITORY" "$SOURCE_DIR" --branch="$TAG" --depth=1 \
             || eexit "Failed to download source."
