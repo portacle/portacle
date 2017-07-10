@@ -19,9 +19,9 @@ function install() {
     mkdir -p "$SHARED_BIN_DIR"
     
     case "$PLATFORM" in
-        win) cp "portacle.exe" "$INSTALL_DIR/" ;;
-        lin) cp "portacle" "ld-wrap.so" "$INSTALL_DIR/" ;;
-        mac) cp "portacle" "$INSTALL_DIR/" ;;
+        win) cp "portacle.exe" "credentials.exe" "$INSTALL_DIR/" ;;
+        lin) cp "portacle" "credentials" "ld-wrap.so" "$INSTALL_DIR/" ;;
+        mac) cp "portacle" "credentials" "$INSTALL_DIR/" ;;
     esac
 
     local postfix=""
