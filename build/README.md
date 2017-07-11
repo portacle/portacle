@@ -1,11 +1,11 @@
 ## Linux
 Install the build prerequisites:
 
-1. SBCL, GIT, time
+1. SBCL, GIT, time, xsel, texinfo
 2. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
-3. Development files for `ncurses x11 xpm gtk2.0 zlib pcre curl`.
+3. Development files for `ncurses x11 xpm gtk2 zlib pcre curl4 ssl gcrypt glfw3`.
 
-For Debian based systems, simply run: `apt-get install sbcl git time build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool texinfo`
+For Debian based systems, simply run: `apt-get install sbcl git time build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool texinfo xsel`
 
 Proceed with the `General Procedure` section.
 
