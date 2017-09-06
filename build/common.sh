@@ -221,8 +221,8 @@ function download() {
         git checkout tags/$TAG \
             || eexit "Failed to checkout desired tag."
     else
-        git checkout HEAD \
-            || eexit "Failed to checkout HEAD."
+        git checkout origin/master \
+            || eexit "Failed to update to latest."
     fi
     finish-stage download
 }
