@@ -209,8 +209,6 @@ function download() {
         git clean -fdx
         git fetch origin master\
             || eexit "Failed to download source."
-        git checkout origin/master\
-            || eexit "Failed to check out master source."
     elif [ -n "$TAG" ]; then
         git clone "$REPOSITORY" "$SOURCE_DIR" --branch="$TAG" --depth=1 \
             || eexit "Failed to download source."
@@ -220,8 +218,11 @@ function download() {
     fi
     cd "$SOURCE_DIR"
     if [ -n "$TAG" ]; then
-       git checkout tags/$TAG \
-           || eexit "Failed to checkout desired tag."
+        git checkout tags/$TAG \
+            || eexit "Failed to checkout desired tag."
+    else
+        git checkout HEAD \
+            || eexit "Failed to checkout HEAD."
     fi
     finish-stage download
 }
