@@ -71,9 +71,9 @@ function system-has() {
 }
 
 function contains() {
-  local e
-  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
-  return 1
+    local e
+    for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+    return 1
 }
 
 function win-exes-for-package(){
@@ -252,11 +252,11 @@ function clean-installed() {
 function main() {
     info
     if [ ! -z "$FORCE" ]; then
-       clean-fragments
+        clean-fragments
     fi
     
     for TARGET in "${TARGETS[@]}"; do
-            status 1 "${TARGET}ing $PROGRAM"
+        status 1 "${TARGET}ing $PROGRAM"
         if stage-finished "$TARGET"; then
             status 2 "skipping $TARGET, already completed"
         else
