@@ -39,7 +39,7 @@ Note that the `Portacle.app` in the source folder cannot be launched outside of 
 ## General Procedure
 Using the appropriate terminal, simply run:
 
-    git clone https://github.com/Shinmera/portacle
+    git clone https://github.com/portacle/portacle
     cd portacle/build
     ./build.sh
     
