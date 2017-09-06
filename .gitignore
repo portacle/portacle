@@ -10,4 +10,5 @@ win/
 mac/
 all/
 ## Other stuff
+config/*
 projects/*
