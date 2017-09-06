@@ -9,7 +9,7 @@ Specifically, if you encounter an issue you should:
 * What operating system you are on, and which version it is at
 * Supply all possible output or information that describes the problem
 
-While [filing an issue](https://github.com/Shinmera/portacle/issues) is a great way to help out in the case of real bugs in the software, if you're just confused about something and aren't sure whether it is or isn't a bug, you can also try asking for help on IRC: irc.freenode.org/#shirakumo
+While [filing an issue](https://github.com/portacle/portacle/issues) is a great way to help out in the case of real bugs in the software, if you're just confused about something and aren't sure whether it is or isn't a bug, you can also try asking for help on IRC: irc.freenode.org/#shirakumo
 
 ## Policy on New Components
 Portacle is intended to provide a somewhat minimal, but still complete enough development environment for novices and average users. Thus, if you have an additional component you would like to add to Portacle, consider the following points.
@@ -23,14 +23,16 @@ Portacle is intended to provide a somewhat minimal, but still complete enough de
 If the answer to any of those questions is "No," it is virtually guaranteed that I will reject any requests to add the component, even if you do all the legwork of integrating it into the build system.
 
 ## Accompanying Documentation
-Portacle includes a lengthy [help file](https://github.com/Shinmera/portacle/blob/master/config/help.txt), which is supposed to give a primer on how to use it and the general concepts of the Emacs IDE. I believe that documentation of this kind can always use improvements and additions, so I welcome any and all to correct, clarify, and extend this document to be more useful to beginners.
+Portacle includes a lengthy [help file](https://github.com/portacle/config/blob/master/help.txt), which is supposed to give a primer on how to use it and the general concepts of the Emacs IDE. I believe that documentation of this kind can always use improvements and additions, so I welcome any and all to correct, clarify, and extend this document to be more useful to beginners.
 
 ## How to Develop Portacle
 The development of Portacle consists primarily of the maintenance of a couple of shell scripts in the [build/](build/) directory. These scripts are responsible for automatically assembling a full Portacle distribution that is ready for shipment. However, it is also plausible that they, too, are fallible in some form, so testing of the build process is also appreciated.
 
-Aside from the build scripts, Portacle also includes a launcher application that is responsible for preparing the necessary environment and starting up the various applications that are shipped in the bundle. For portability reasons, the launcher is written in C. If you intend on developing it, or want to add a new component to Portacle, see [portacle-launcher](https://github.com/Shinmera/portacle-launcher).
+Aside from the build scripts, Portacle also includes a launcher application that is responsible for preparing the necessary environment and starting up the various applications that are shipped in the bundle. For portability reasons, the launcher is written in C. If you intend on developing it, or want to add a new component to Portacle, see [launcher](https://github.com/portacle/launcher).
 
-Finally, Portacle includes a set of elisp configuration files that are responsible for creating a more enjoyable Emacs setup that works within the Portacle distribution. These files are located in the [portacle-config](https://github.com/Shinmera/portacle-config) repository.
+Portacle includes a set of elisp configuration files that are responsible for creating a more enjoyable Emacs setup that works within the Portacle distribution. These files are located in the [emacsd](https://github.com/portacle/emacsd) repository.
+
+Finally, there's a few minor startup and configuration scripts and helper files to seal the deal. Thse files are located in the [config](https://github.com/portacle/config) repository.
 
 Before starting to work on things, you should first try to build Portacle on your system. See the readme in the build directory for instructions on how to get started. It is highly recommended that you do builds within a clean virtual machine as to avoid accidentally developing Portacle in a way that is too specific to your system.
 
