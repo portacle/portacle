@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readonly TAG=
-readonly REPOSITORY=https://github.com/shinmera/portacle-emacsd
+readonly REPOSITORY=https://github.com/portacle/emacsd.git
 
 ###
 
