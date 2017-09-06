@@ -25,6 +25,10 @@ function global() {
     "$SOURCE_DIR/global.sh"
 }
 
+function config() {
+    "$SOURCE_DIR/config.sh"
+}
+
 function launcher() {
     "$SOURCE_DIR/launcher.sh"
 }
@@ -68,6 +72,7 @@ function package() {
 
 function build() {
     global \
+        && config \
         && launcher \
         && busybox \
         && sbcl \
