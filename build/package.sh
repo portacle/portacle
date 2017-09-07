@@ -21,7 +21,6 @@ esac
 
 function prepare() {
     mkdir -p "$INSTALL_DIR"
-    git gc --aggressive
 }
 
 function build() {
