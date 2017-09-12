@@ -66,6 +66,10 @@ function hunspell() {
         && "$SOURCE_DIR/dictionaries.sh"
 }
 
+function ag() {
+    "$SOURCE_DIR/ag.sh"
+}
+
 function package() {
     "$SOURCE_DIR/package.sh"
 }
@@ -81,7 +85,8 @@ function build() {
         && emacs \
         && emacsd \
         && git \
-        && hunspell
+        && hunspell \
+        && ag
 }
 
 function upgrade() {
