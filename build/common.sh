@@ -56,7 +56,7 @@ esac
 function nonlocal-ldd() {
     case "$PLATFORM" in
         win) ldd "$1"      | awk '{print $3}' | grep -E '^/[^/]{2,}/' ;;
-        mac) otool -L "$1" | awk '{print $1}' | grep -E '/opt/local/lib|/usr/local/lib' ;;
+        mac) otool -L "$1" | awk '{print $1}' | grep -E '/usr/local/' ;;
         lin) ldd "$1"      | awk '{print $3}' | grep -E '^/' ;;
     esac
 }
