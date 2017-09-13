@@ -38,6 +38,7 @@ function install() {
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/emacs${postfix}"
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/emacsclient${postfix}"
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/hunspell${postfix}"
+    ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/ag${postfix}"
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/portacle${postfix}"
 }
 
