@@ -29,6 +29,9 @@ function install() {
     make install \
         || eexit "The install failed. Please check the output for error messages."
 
+    status 2 "Copying dependencies"
+    ensure-dependencies $(find-binaries "$INSTALL_DIR/")
+
     case "$PLATFORM" in
         ## Bloody dylib shit
         mac) local files=(analyze chmorph hunspell hunzip)
@@ -40,9 +43,6 @@ function install() {
              done
              ;;
     esac
-
-    status 2 "Copying dependencies"
-    ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 }
 
 main
