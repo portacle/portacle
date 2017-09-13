@@ -20,7 +20,7 @@ function build() {
     cd "$SOURCE_DIR"
     local makeopts=""
     
-    case "$OS" in
+    case "$PLATFORM" in
         win) makeopts="-f Makefile.w32" ;;
     esac
     
@@ -32,6 +32,17 @@ function install() {
     cd "$SOURCE_DIR"
     make install \
         || eexit "The install failed. Please check the output for error messages."
+
+    case "$PLATFORM" in
+        ## Bloody dylib shit
+        mac) status 2 "Fixing dylib entries for ag"
+             local deps=$(otool -L "$INSTALL_DIR/bin/ag" | grep "/usr/local/" | awk '{print $1}')
+             for dep in "${deps[@]}"; do
+                 local filename=$(basename "$dep")
+                 install_name_tool -change "$dep" "@loader_path/../lib/$filename" "$INSTALL_DIR/bin/ag"
+             done
+             ;;
+    esac
 
     status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_DIR/")
