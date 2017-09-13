@@ -2,7 +2,7 @@
 
 readonly TAG=2.1.0
 readonly REPOSITORY=https://github.com/ggreer/the_silver_searcher
-readonly CONFIGURE_OPTIONS=()
+readonly CONFIGURE_OPTIONS=("")
 
 ###
 
