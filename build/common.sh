@@ -166,8 +166,9 @@ function find-binaries() {
 
 function mac-fixup-dependencies() {
     status 2 "Fixing dylib entries for $1"
-    local deps=( $(otool -L "$1" | grep "/usr/local/" | awk '{print $1}') )
-    for dep in "${deps[@]}"; do
+    local grep="${1:-/usr/local/}"
+    local deps=( $(otool -L "$1" | grep "$grep" | awk '{print $1}') )
+    for dep in "${deps[@]+${deps[@]}}"; do
         local filename=$(basename "$dep")
         install_name_tool -change "$dep" "@loader_path/../lib/$filename" "$1"
     done

@@ -36,7 +36,7 @@ function install() {
         ## Bloody dylib shit
         mac) local files=(analyze chmorph hunspell hunzip)
              for file in "${files[@]}"; do
-                 mac-fixup-dependencies "$INSTALL_DIR/bin/$file";
+                 mac-fixup-dependencies "$INSTALL_DIR/bin/$file" "/usr/local/|libhunspell";
              done
              ;;
     esac
