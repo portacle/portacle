@@ -164,6 +164,15 @@ function find-binaries() {
     esac
 }
 
+function mac-fixup-dependencies() {
+    status 2 "Fixing dylib entries for $1"
+    local deps=( $(otool -L "$1" | grep "/usr/local/" | awk '{print $1}') )
+    for dep in "${deps[@]}"; do
+        local filename=$(basename "$dep")
+        install_name_tool -change "$dep" "@loader_path/../lib/$filename" "$1"
+    done
+}
+
 ## This does not need explanation
 function eecho() {
     echo $@ >&2

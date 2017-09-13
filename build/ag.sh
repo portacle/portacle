@@ -37,14 +37,7 @@ function install() {
     ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 
     case "$PLATFORM" in
-        ## Bloody dylib shit
-        mac) status 2 "Fixing dylib entries for ag"
-             local deps=( $(otool -L "$INSTALL_DIR/bin/ag" | grep "/usr/local/" | awk '{print $1}') )
-             for dep in "${deps[@]}"; do
-                 local filename=$(basename "$dep")
-                 install_name_tool -change "$dep" "@loader_path/../lib/$filename" "$INSTALL_DIR/bin/ag"
-             done
-             ;;
+        mac) mac-fixup-dependencies "$INSTALL_DIR/bin/ag" ;;
     esac
 }
 

@@ -35,11 +35,8 @@ function install() {
     case "$PLATFORM" in
         ## Bloody dylib shit
         mac) local files=(analyze chmorph hunspell hunzip)
-             local path=$(otool -L "$INSTALL_DIR/bin/hunspell" | grep libhunspell | awk '{print $1}')
-             local filename=$(basename "$path")
              for file in "${files[@]}"; do
-                 status 2 "Fixing dylib entries for $file"
-                 install_name_tool -change "$path" "@loader_path/../lib/$filename" "$INSTALL_DIR/bin/$file"
+                 mac-fixup-dependencies "$INSTALL_DIR/bin/$file";
              done
              ;;
     esac
