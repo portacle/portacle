@@ -169,7 +169,7 @@ function mac-fixup-dependencies() {
     local grep="${2:-/usr/local/}"
     while IFS= read -r dep; do
         local filename=$(basename "$dep")
-        install_name_tool -change "$dep" "@loader_path/../lib/$filename" "$1"
+        install_name_tool -change "$dep" "@loader_path/../../lib/$filename" "$1"
     done < <(otool -L "$1" | grep -E "$grep" | awk '{print $1}')
 }
 
