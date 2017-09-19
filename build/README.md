@@ -3,9 +3,9 @@ Install the build prerequisites:
 
 1. SBCL, GIT, time, xsel, texinfo, curl
 2. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
-3. Development files for `ncurses x11 xpm gtk2 zlib pcre curl4 ssl gcrypt glfw3`.
+3. Development files for `ncurses x11 xpm gtk2 zlib pcre curl4 ssl gcrypt glfw3 liblzma`.
 
-For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool texinfo xsel`
+For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel`
 
 Proceed with the `General Procedure` section.
 
@@ -29,7 +29,7 @@ Install the build prerequisites:
 
 1. XCode and the XCode command line developer tools
 2. MacPorts, Homebrew, or Fink
-3. From one of those package managers, install `autoconf automake sbcl git gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz`, making sure they are in your `PATH`.
+3. From one of those package managers, install `autoconf automake sbcl git gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz liblzma`, making sure they are in your `PATH`.
 4. With brew, you need to link gettext: `brew link gettext --force`
 
 Proceed with the `General Procedure` section.
