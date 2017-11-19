@@ -12,6 +12,7 @@ readonly CONFIGURE_OPTIONS=(--without-jpeg
                             --without-makeinfo
                             --without-gconf
                             --without-dbus
+                            --without-xml2
                             --with-x-toolkit=gtk2)
 
 ###
