@@ -3,13 +3,13 @@ set -uo pipefail
 
 ## Determine the OS type
 case "$OSTYPE" in
-    linux-gnu) OS="lin" ;;
-    darwin*)   OS="mac" ;;
-    cygwin)    OS="win" ;;
-    msys)      OS="win" ;;
-    win32)     OS="win" ;;
-    freebsd)   OS="bsd" ;;
-    *)         OS="any" ;;
+    linux*)  OS="lin" ;;
+    darwin*) OS="mac" ;;
+    cygwin)  OS="win" ;;
+    msys)    OS="win" ;;
+    win32)   OS="win" ;;
+    freebsd) OS="bsd" ;;
+    *)       OS="any" ;;
 esac
 
 ## Use autodetect if unspecified
