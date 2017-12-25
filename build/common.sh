@@ -12,8 +12,16 @@ case "$OSTYPE" in
     *)       OS="any" ;;
 esac
 
+case `uname -m` in
+    x86_64) OSA="64" ;;
+    arm64)  OSA="64" ;;
+    i?86)   OSA="32" ;;
+    arm*)   OSA="32" ;;
+esac
+
 ## Use autodetect if unspecified
 PLATFORM=${PLATFORM:-$OS}
+ARCH=${ARCH:-$OSA}
 
 ## OS X' readlink does not support -f, substitute our own
 function mreadlink() {
