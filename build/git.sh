@@ -23,7 +23,7 @@ function build() {
     case "$PLATFORM" in
         win) ;;
         mac) MAKE_OPTIONS="NO_GETTEXT=1 CFLAGS=-I/usr/local/opt/openssl/include LDFLAGS=-L/usr/local/opt/openssl/lib $MAKE_OPTIONS" ;;
-        lin) MAKE_OPTIONS="NO_GETTEXT=1" ;;
+        lin) MAKE_OPTIONS="NO_GETTEXT=1 $MAKE_OPTIONS" ;;
     esac
     
     make DESTDIR="$PORTACLE_DIR" prefix="/$PLATFORM/git/" $MAKE_OPTIONS all -j $MAXCPUS \
