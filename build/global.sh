@@ -33,9 +33,9 @@ function install() {
     
     case "$PLATFORM" in
         lin) case "$ARCH" in
-                 64) cp -fv "/lib64/ld-linux-*.so.*" "$SHARED_LIB_DIR/ld-linux.so" \
+                 64) cp -fv /lib64/ld-linux-*.so.* "$SHARED_LIB_DIR/ld-linux.so" \
                            || eexit "Failed to copy ld-linux.so" ;;
-                 32) cp -fv "/lib/ld-linux-*.so.*" "$SHARED_LIB_DIR/ld-linux.so" \
+                 32) cp -fv /lib/ld-linux-*.so.* "$SHARED_LIB_DIR/ld-linux.so" \
                            || eexit "Failed to copy ld-linux.so" ;;
              esac ;;
         win) cp -fv "/usr/bin/gzip" "$SHARED_BIN_DIR/" \
