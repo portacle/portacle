@@ -41,8 +41,8 @@ function ensure-git-platform() {
              ensure-installed "$SHARED_DIR/share/" "/usr/lib/terminfo"
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
-        lin) ensure-installed "$SHARED_LIB_DIR/" "/usr/lib/libcurl.so" /lib/libnss_*.so.2 /lib64/libnss_*.so.2 /lib/*-linux-*/libnss_*.so.2
-             ensure-dependencies "/usr/lib/libcurl.so" /lib/libnss_*.so /lib64/libnss_*.so /lib/*-linux-*/libnss_*.so
+        lin) ensure-shared-libraries "$SHARED_LIB_DIR/" "libcurl" "libnss_"
+             ensure-dependencies "$SHARED_LIB_DIR/libcurl.so" $SHARED_LIB_DIR/libnss_*
              ensure-dependencies "/usr/bin/ssh"
              ;;
     esac

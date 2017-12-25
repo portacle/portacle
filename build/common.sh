@@ -157,6 +157,19 @@ function ensure-installed() {
     done
 }
 
+function find-shared-library() {
+    ldconfig -p | grep "$1" | awk -F" => " '{print $2}'
+}
+
+function ensure-shared-libraries() {
+    local target=$1
+    local files=( "${@:2}" )
+    for file in "${files[@]+${files[@]}}"; do
+        local realfiles=( $(find-shared-library "$file") )
+        ensure-installed "$target" "${realfiles[@]}"
+    done
+}
+
 function ensure-dependencies() {
     mkdir -p "$SHARED_LIB_DIR/"
     for file in "$@"; do
