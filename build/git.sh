@@ -42,7 +42,7 @@ function ensure-git-platform() {
              mkdir -p "$PORTACLE_DIR/tmp"
              ;;
         lin) ensure-shared-libraries "$SHARED_LIB_DIR/" "libcurl" "libnss_"
-             ensure-dependencies "$SHARED_LIB_DIR/libcurl.so" $SHARED_LIB_DIR/libnss_*
+             ensure-dependencies $SHARED_LIB_DIR/libcurl.so* $SHARED_LIB_DIR/libnss_*
              ensure-dependencies "/usr/bin/ssh"
              ;;
     esac
