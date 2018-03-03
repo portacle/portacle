@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=version-2016-01-21
+readonly TAG=version-2017-03-06
 readonly REPOSITORY=https://github.com/quicklisp/quicklisp-client.git
 
 ###
