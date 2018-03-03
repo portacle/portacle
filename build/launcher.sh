@@ -40,7 +40,6 @@ function install() {
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/hunspell${postfix}"
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/ag${postfix}"
     ln -f "$INSTALL_DIR/portacle${postfix}" "$SHARED_BIN_DIR/portacle${postfix}"
-    chmod +x "$SHARED_BIN_DIR/*"
 }
 
 main
