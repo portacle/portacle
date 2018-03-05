@@ -158,7 +158,7 @@ function ensure-installed() {
 }
 
 function find-shared-library() {
-    ldconfig -p | grep "$1" | awk -F" => " '{print $2}'
+    ldconfig -p | grep "$1.*$(uname -m)" | awk -F" => " '{print $2}'
 }
 
 function ensure-shared-libraries() {
