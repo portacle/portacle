@@ -1,6 +1,7 @@
 language: generic
 
 sudo: false
+dist: trusty
 
 os:
   - linux
@@ -12,6 +13,8 @@ compiler:
 
 addons:
   apt:
+    sources:
+      - sourceline: 'ppa:keithw/glfw3'
     packages:
       - sbcl
       - time
@@ -36,9 +39,14 @@ addons:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install autoconf automake sbcl gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz liblzma; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade openssl automake libgcrypt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install autoconf automake sbcl gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link gettext --force; fi
 
 script:
   - cd build
+  - ./sbcl.sh download
+  - cd sbcl
+  - git apply ../src/sbcl-disable-frlock-test.diff
+  - cd ..
   - ./build.sh

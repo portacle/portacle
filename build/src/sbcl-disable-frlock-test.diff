@@ -1,0 +1,18 @@
+diff --git a/contrib/sb-concurrency/tests/test-frlock.lisp b/contrib/sb-concurrency/tests/test-frlock.lisp
+index db4bd54b5..b54090030 100644
+--- a/contrib/sb-concurrency/tests/test-frlock.lisp
++++ b/contrib/sb-concurrency/tests/test-frlock.lisp
+@@ -84,13 +84,3 @@
+                 (setf run! t)
+                 nil))))
+       (values (cdr w-e!) (cdr r-e!))))
+-
+-#+sb-thread
+-(deftest* (frlock.1)
+-    (handler-case
+-        (sb-ext:with-timeout 10
+-          (test-frlocks #+win32 :outer-write-pause #+win32 t ))
+-      (sb-ext:timeout (c)
+-        (error "~A" c)))
+-  nil
+-  nil)
