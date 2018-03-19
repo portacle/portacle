@@ -1,11 +1,18 @@
 language: generic
 
-sudo: false
-dist: trusty
-
-os:
-  - linux
-  - osx
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      dist: trusty
+    - os: osx # OS X 10.13
+      osx_image: xcode9.3beta
+    - os: osx # OS X 10.12
+      osx_image: xcode9.2
+    - os: osx # OS X 10.11
+      osx_image: xcode8
+    - os: osx # OS X 10.10
+      osx_image: xcode6.4
 
 compiler:
   - gcc
