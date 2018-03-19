@@ -11,8 +11,6 @@ matrix:
       osx_image: xcode9.2
     - os: osx # OS X 10.11
       osx_image: xcode8
-    - os: osx # OS X 10.10
-      osx_image: xcode6.4
 
 compiler:
   - gcc
@@ -46,8 +44,20 @@ addons:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade openssl automake libgcrypt; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install autoconf automake sbcl gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz; fi
+  ## Holy shit I hate brew.
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list autoconf &>/dev/null && brew upgrade autoconf || brew install autoconf; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list automake &>/dev/null && brew upgrade automake || brew install automake; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list automake &>/dev/null && brew upgrade automake || brew install automake; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list gettext &>/dev/null && brew upgrade gettext || brew install gettext; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list glfw &>/dev/null && brew upgrade glfw || brew install glfw; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list gnu-sed &>/dev/null && brew upgrade gnu-sed || brew install gnu-sed; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list libgcrypt &>/dev/null && brew upgrade libgcrypt || brew install libgcrypt; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list libtool &>/dev/null && brew upgrade libtool || brew install libtool; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list openssl &>/dev/null && brew upgrade openssl || brew install openssl; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list pcre &>/dev/null && brew upgrade pcre || brew install pcre; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list pkg-config &>/dev/null && brew upgrade pkg-config || brew install pkg-config; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list sbcl &>/dev/null && brew upgrade sbcl || brew install sbcl; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list xz &>/dev/null && brew upgrade xz || brew install xz; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link gettext --force; fi
 
 script:
