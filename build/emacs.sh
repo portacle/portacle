@@ -48,6 +48,10 @@ function install() {
     status 2 "Copying dependencies"
     ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 
+    cp $SCRIPT_DIR/config/site-start.el                            \
+       $INSTALL_DIR/share/emacs/site-lisp/site-start.el            \
+        || eexit "Couldn't copy site file to correct site-lisp dir"
+
     case "$PLATFORM" in
         lin) cp "/usr/bin/xsel" "$SHARED_BIN_DIR/"
              ensure-dependencies "$SHARED_BIN_DIR/xsel"

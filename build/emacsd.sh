@@ -20,7 +20,7 @@ function install (){
     status 2 "Now launching emacs for the first time init."
     status 2 "It will download the necessary libraries and compile them."
     status 2 "Please be patient, it should automatically close when it is done."
-
+    export ROOT=$PORTACLE_DIR ## so that site-start.el finds other modules.
     case "$PLATFORM" in
         win) $PORTACLE_DIR/$PLATFORM/bin/emacs -f "portacle-recompile" -f "kill-emacs" \
                    || eexit "Failed to perform first-launch." ;;
