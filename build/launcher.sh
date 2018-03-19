@@ -17,11 +17,13 @@ function install() {
     cd "$SOURCE_DIR/build"
     mkdir -p "$INSTALL_DIR"
     mkdir -p "$SHARED_BIN_DIR"
+    mkdir -p "$SHARED_LIB_DIR"
     
     case "$PLATFORM" in
         win) cp "portacle.exe" "credentials" "$INSTALL_DIR/"
              ensure-dependencies "credentials" ;;
         lin) cp "portacle" "credentials" "ld-wrap.so" "$INSTALL_DIR/"
+             cp "libnss_mymachines.so.2" "libnss_myhostname.so.2" "libnss_resolve.so.2" "$SHARED_LIB_DIR/"
              ensure-dependencies "credentials" ;;
         mac) cp "portacle" "credentials" "$INSTALL_DIR/"
              ensure-dependencies "credentials" ;;
