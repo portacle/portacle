@@ -44,13 +44,14 @@ addons:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  ## Holy shit I hate brew.
+  # Install deps in a needlessly convoluted manner because brew sucks balls
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list autoconf &>/dev/null && brew upgrade autoconf || brew install autoconf; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list automake &>/dev/null && brew upgrade automake || brew install automake; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list automake &>/dev/null && brew upgrade automake || brew install automake; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list gettext &>/dev/null && brew upgrade gettext || brew install gettext; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list glfw &>/dev/null && brew upgrade glfw || brew install glfw; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list gnu-sed &>/dev/null && brew upgrade gnu-sed || brew install gnu-sed; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list gnutls &>/dev/null && brew upgrade gnutls || brew install gnutls; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list libgcrypt &>/dev/null && brew upgrade libgcrypt || brew install libgcrypt; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list libtool &>/dev/null && brew upgrade libtool || brew install libtool; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list openssl &>/dev/null && brew upgrade openssl || brew install openssl; fi
@@ -58,6 +59,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list pkg-config &>/dev/null && brew upgrade pkg-config || brew install pkg-config; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list sbcl &>/dev/null && brew upgrade sbcl || brew install sbcl; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew list xz &>/dev/null && brew upgrade xz || brew install xz; fi
+  # OS X gettext sucks
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link gettext --force; fi
 
 script:
