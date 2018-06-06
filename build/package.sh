@@ -64,6 +64,7 @@ function install() {
 
     mkdir -p $(dirname "$package")
     cd $(dirname "$INSTALL_DIR")
+    status 1 "Creating package $package"
     case "$PACKAGE_FORMAT" in
         sfx)
             local winfile=$(to-win-path "$package")
