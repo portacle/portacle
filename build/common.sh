@@ -198,7 +198,8 @@ function mac-fixup-dependencies() {
     chmod +w "$1"
     local grep="${2:-/usr/local/}"
     while IFS= read -r dep; do
-        local relpath=$(relativepath "$dep" $(dirname "$1"))
+        local filename=$(basename "$dep")
+        local relpath=$(relativepath "$SHARED_LIB_DIR/$filename" $(dirname "$1"))
         install_name_tool -change "$dep" "@loader_path/$relpath" "$1"
     done < <(otool -L "$1" | grep -E "$grep" | awk '{print $1}')
 }
