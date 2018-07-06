@@ -188,6 +188,7 @@ function find-binaries() {
 
 function mac-fixup-dependencies() {
     status 2 "Fixing dylib entries for $1"
+    chmod +w "$1"
     local grep="${2:-/usr/local/}"
     while IFS= read -r dep; do
         local filename=$(basename "$dep")
