@@ -38,6 +38,7 @@ function install() {
              for file in "${files[@]}"; do
                  mac-fixup-dependencies "$INSTALL_DIR/bin/$file" "/usr/local/|libhunspell";
              done
+             mac-fixup-lib-dependencies
              ;;
     esac
 }

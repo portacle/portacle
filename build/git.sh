@@ -45,6 +45,8 @@ function ensure-git-platform() {
              ensure-dependencies $SHARED_LIB_DIR/libcurl.so*
              ensure-dependencies "/usr/bin/ssh"
              ;;
+        mac) mac-fixup-lib-dependencies
+             ;;
     esac
 }
 

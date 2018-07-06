@@ -37,7 +37,9 @@ function install() {
     ensure-dependencies $(find-binaries "$INSTALL_DIR/")
 
     case "$PLATFORM" in
-        mac) mac-fixup-dependencies "$INSTALL_DIR/bin/ag" ;;
+        mac) mac-fixup-dependencies "$INSTALL_DIR/bin/ag"
+             mac-fixup-lib-dependencies
+             ;;
     esac
 }
 

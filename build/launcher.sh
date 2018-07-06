@@ -26,7 +26,10 @@ function install() {
              cp "libnss_mymachines.so.2" "libnss_myhostname.so.2" "libnss_resolve.so.2" "$SHARED_LIB_DIR/"
              ensure-dependencies "credentials" ;;
         mac) cp "portacle" "credentials" "$INSTALL_DIR/"
-             ensure-dependencies "credentials" ;;
+             ensure-dependencies "credentials"
+             mac-fixup-dependencies "$INSTALL_DIR/portacle"
+             mac-fixup-dependencies "$INSTALL_DIR/credentials"
+             mac-fixup-lib-dependencies ;;
     esac
 
     local postfix=""

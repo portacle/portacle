@@ -106,15 +106,15 @@ function from-win-path() {
 
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
-    local deps=( $(nonlocal-ldd $1) )
-    local fulldeps=( "${deps[@]+${deps[@]}}" "${@:2}" )
+    local deps=( $(nonlocal-ldd "$1") )
+    local fulldeps=( "$1" )
     for dep in "${deps[@]+${deps[@]}}"; do
         if ! contains "$dep" "${fulldeps[@]}"; then
-            local newdeps=$(compute-dependencies "$dep")
-            fulldeps=( "${fulldeps[@]}" "${newdeps[@]}" )
+            local newdeps=( $(compute-dependencies "$dep") )
+            fulldeps=( "${fulldeps[@]}" "${newdeps[@]+${newdeps[@]}}" )
         fi
     done
-    uniquify "${fulldeps[@]+${fulldeps[@]}}"
+    uniquify "${fulldeps[@]}"
 }
 
 function ucp() {
@@ -173,7 +173,8 @@ function ensure-shared-libraries() {
 function ensure-dependencies() {
     mkdir -p "$SHARED_LIB_DIR/"
     for file in "$@"; do
-        ensure-installed "$SHARED_LIB_DIR/" $(compute-dependencies "$file")
+        local deps=( $(compute-dependencies "$file") )
+        ensure-installed "$SHARED_LIB_DIR/" "${deps[@]:1}"
     done
 }
 
@@ -192,6 +193,12 @@ function mac-fixup-dependencies() {
         local filename=$(basename "$dep")
         install_name_tool -change "$dep" "@loader_path/../../lib/$filename" "$1"
     done < <(otool -L "$1" | grep -E "$grep" | awk '{print $1}')
+}
+
+function mac-fixup-lib-dependencies() {
+    for file in "$SHARED_LIB_DIR/"*; do
+        mac-fixup-dependencies "$file"
+    done
 }
 
 ## This does not need explanation
