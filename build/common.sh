@@ -26,14 +26,14 @@ ARCH=${ARCH:-$OSA}
 ## OS X' readlink does not support -f, substitute our own
 function mreadlink() {
     case "$PLATFORM" in 
-        mac) python -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' $1 ;;
-        *)   readlink -f $1 ;;
+        mac) python -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$1" ;;
+        *)   readlink -f "$1" ;;
     esac
 }
 
 function relativepath() {
     case "$PLATFORM" in
-        mac) python -c "import os,sys; print(os.path.relpath(*(sys.argv[1:])))" "$1" "$2" ;;
+        mac) python -c "import os,sys; print(os.path.relpath(os.path.realpath(sys.argv[1]), os.path.realpath(sys.argv[2])))" "$1" "$2" ;;
         *)   realpath --relative-to="$2" "$1" ;;
     esac
 }
@@ -198,7 +198,7 @@ function mac-fixup-dependencies() {
     chmod +w "$1"
     local grep="${2:-/usr/local/}"
     while IFS= read -r dep; do
-        local relpath=$(relativepath $(dirname "$1") "$dep")
+        local relpath=$(relativepath "$dep" $(dirname "$1"))
         install_name_tool -change "$dep" "@loader_path/$relpath" "$1"
     done < <(otool -L "$1" | grep -E "$grep" | awk '{print $1}')
 }
