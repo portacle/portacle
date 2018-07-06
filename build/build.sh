@@ -15,6 +15,9 @@ INSTALL_TARGET="$PORTACLE_DIR"
 function clean() {
     "$(which git)" clean -ffxd
     "$(which git)" reset --hard HEAD
+    rm -r "$PORTACLE_DIR/all"
+    rm -r "$PORTACLE_DIR/config"
+    rm -r "$PORTACLE_DIR/$PLATFORM"
 }
 
 function download() {
