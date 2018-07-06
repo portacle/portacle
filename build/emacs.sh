@@ -52,6 +52,8 @@ function install() {
         lin) cp "/usr/bin/xsel" "$SHARED_BIN_DIR/"
              ensure-dependencies "$SHARED_BIN_DIR/xsel"
              ;;
+        mac) mac-fixup-dependencies "$INSTALL_DIR/bin/$TAG"
+             ;;
     esac
 }
 
