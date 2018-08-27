@@ -60,6 +60,7 @@ function build() {
 
 function install() {
     local package="$PORTACLE_DIR/$PROGRAM/$PACKAGE_FILE"
+    local signature="$package.sig"
     local files=$(basename "$INSTALL_DIR")
 
     mkdir -p $(dirname "$package")
@@ -67,33 +68,38 @@ function install() {
     status 1 "Creating package $package"
     case "$PACKAGE_FORMAT" in
         sfx)
+            package="$package.exe"
             local winfile=$(to-win-path "$package")
             local winfiles=($(to-win-path "$files"))
             "$W7Z/7z.exe" a "$winfile.7z" -t7z -m0=LZMA2 -mx9 "-mmt$MAXCPUS" -aoa -r -snh -snl -ssw -y -- "${winfiles[@]}" \
                 || eexit "Could not create package."
-            cat "$W7Z/$W7ZSFX" "$SOURCE_DIR/7zsfx.conf" "$package.7z" > "$package.exe"
+            cat "$W7Z/$W7ZSFX" "$SOURCE_DIR/7zsfx.conf" "$package.7z" > "$package"
             rm "$winfile.7z"
             ;;
         zip)
-            zip -ry9 "$package.zip" "${files[@]}" \
+            package="$package.zip"
+            zip -ry9 "$package" "${files[@]}" \
                 || eexit "Could not create package."
             ;;
         dmg)
+            package="$package.dmg"
             local tmpdir="$PORTACLE_DIR/$PROGRAM/tmp/"
             mkdir -p "$tmpdir/portacle"
             rsync -az "$INSTALL_DIR/" "$tmpdir/portacle/"
             cp "$INSTALL_DIR/Portacle.app/Contents/Resources/.DS_Store" "$tmpdir/"
             hdiutil makehybrid -hfs -hfs-volume-name "Portacle" -hfs-openfolder "$tmpdir" "$tmpdir" -o "$package.tmp.dmg" \
                 || eexit "Could not create package. (Failed to bundle)"
-            hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package.dmg" \
+            hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package" \
                 || eexit "Could not create package. (Failed to compress)"
             rm -rf "$tmpdir" "$package.tmp.dmg"
             ;;
         xz)
-            XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package.tar.xz" "${files[@]}" \
+            package="$package.tar.xz"
+            XZ_DEFAULTS="-T $MAXCPUS" tar -cJf "$package" "${files[@]}" \
                 || eexit "Could not create package."
             ;;
     esac
+    gpg --output "$signature" --detach-sig "$package"
 }
 
 main
