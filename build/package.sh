@@ -4,6 +4,7 @@ readonly TAG=${PACKAGE_VERSION:-$(git describe --tags)}
 readonly REPOSITORY=
 readonly W7Z="/c/Program Files/7-zip/"
 readonly W7ZSFX="7zsd_LZMA2.sfx"
+readonly SIGN_KEY="9F5D99D8BAE57852AD4610028291D87D2FA7E888"
 
 ##
 
@@ -58,6 +59,13 @@ function build() {
     esac
 }
 
+function sign() {
+    local package="$1"
+    local signature="$2"
+    
+    gpg --output "$signature" -u "$SIGN_KEY" --detach-sig "$package"
+}
+
 function install() {
     local package="$PORTACLE_DIR/$PROGRAM/$PACKAGE_FILE"
     local signature="$package.sig"
@@ -99,7 +107,9 @@ function install() {
                 || eexit "Could not create package."
             ;;
     esac
-    gpg --output "$signature" --detach-sig "$package"
+    if gpg --list-secret-keys "$SIGN_KEY"; then
+        sign "$package" "$signature"
+    fi
 }
 
 main
