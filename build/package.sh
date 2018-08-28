@@ -63,7 +63,7 @@ function sign() {
     local package="$1"
     local signature="$2"
     
-    gpg --output "$signature" -u "$SIGN_KEY" --detach-sig "$package"
+    gpg --armor --output "$signature" -u "$SIGN_KEY" --detach-sig "$package"
 }
 
 function install() {
