@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 SCRIPT=$(dirname $(readlink -f "$0"))
 export ROOT="$SCRIPT/"
 ## Fix the icon
