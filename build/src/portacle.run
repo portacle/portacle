@@ -1,5 +1,5 @@
 #!/bin/sh
-SCRIPT=$(dirname $(readlink -f "$0"))
+SCRIPT="`dirname "$(readlink -f $0)"`"
 export ROOT="$SCRIPT/"
 ## Fix the icon
 sed -i "s,Icon=.*,Icon=$ROOT/portacle.svg,g" "$ROOT/portacle.desktop"
