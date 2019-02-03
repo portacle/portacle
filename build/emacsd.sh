@@ -12,6 +12,7 @@ INSTALL_DIR=$PORTACLE_DIR/all/emacsd/portacle
 function install (){
     mkdir -p "$INSTALL_DIR" \
         || eexit "Failed to create $INSTALL_DIR"
+    rm -Rf "$INSTALL_DIR"
     cp -Rf "$SOURCE_DIR/." "$INSTALL_DIR" \
         || eexit "Failed to copy sources to $INSTALL_DIR"
     ## We don't remove the .git directory so that you can update easily.
