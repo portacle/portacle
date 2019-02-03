@@ -5,7 +5,7 @@ readonly REPOSITORY=
 readonly SSL_CA=https://curl.haxx.se/ca/cacert-2016-04-20.pem
 readonly NOTO_DL=https://noto-website.storage.googleapis.com/pkgs
 readonly ICON_FONTS=("material-design-icons.ttf" "weathericons.ttf" "octicons.ttf" "fontawesome.ttf" "file-icons.ttf" "all-the-icons.ttf")
-readonly ICON_FONTS_DL=https://github.com/domtronn/all-the-icons.el/raw/master/fonts/
+readonly ICON_FONTS_DL=https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts/
 
 ###
 
