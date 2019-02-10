@@ -113,13 +113,18 @@ function from-win-path() {
 
 ## Compute the full dependency list for the given input file
 function compute-dependencies() {
-    local deps=( $(nonlocal-ldd "$1") )
     local fulldeps=( "$1" )
-    for dep in "${deps[@]+${deps[@]}}"; do
-        if ! contains "$dep" "${fulldeps[@]}"; then
-            local newdeps=( $(compute-dependencies "$dep") )
-            fulldeps=( "${fulldeps[@]}" "${newdeps[@]+${newdeps[@]}}" )
-        fi
+    local i=0
+    while (("$i" < "${#fulldeps[@]}")); do
+        local current="${fulldeps[$i]}"
+        local deps=( $(nonlocal-ldd "$current") )
+        local dep
+        for dep in "${deps[@]+${deps[@]}}"; do
+            if ! contains "$dep" "${fulldeps[@]}"; then
+                fulldeps+=( "$dep" )
+            fi
+        done
+        i=$((i+1))
     done
     uniquify "${fulldeps[@]}"
 }
