@@ -3,9 +3,10 @@
 readonly TAG=
 readonly REPOSITORY=
 readonly SSL_CA=https://curl.haxx.se/ca/cacert-2016-04-20.pem
-readonly NOTO_DL=https://noto-website.storage.googleapis.com/pkgs
+readonly NOTO_FONTS=("NotoSans-hinted.zip" "NotoMono-hinted.zip" "NotoEmoji-unhinted.zip")
+readonly NOTO_FONTS_DL=https://noto-website.storage.googleapis.com/pkgs
 readonly ICON_FONTS=("material-design-icons.ttf" "weathericons.ttf" "octicons.ttf" "fontawesome.ttf" "file-icons.ttf" "all-the-icons.ttf")
-readonly ICON_FONTS_DL=https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts/
+readonly ICON_FONTS_DL=https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts
 
 ###
 
@@ -14,25 +15,23 @@ source common.sh
 
 function download() {
     mkdir -p "$SOURCE_DIR/fonts"
-    curl -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA" \
+    curl -f -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA" \
         || eexit "Failed to download SSL certificate bundle."
-    curl -o "$SOURCE_DIR/noto-sans.zip" "$NOTO_DL/NotoSans-hinted.zip" \
-        || eexit "Failed to download Noto font."
-    curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoMono-hinted.zip" \
-        || eexit "Failed to download Noto font."
-    curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoEmoji-unhinted.zip" \
-        || eexit "Failed to download Noto font."
+    for font in "${NOTO_FONTS[@]+${NOTO_FONTS[@]}}"; do
+        curl -f -o "$SOURCE_DIR/$font" "$NOTO_FONTS_DL/$font" \
+             || eexit "Failed to download $font."
+    done
     for font in "${ICON_FONTS[@]+${ICON_FONTS[@]}}"; do
-        curl -o "$SOURCE_DIR/fonts/$font" "$ICON_FONTS_DL/$font" \
+        curl -f -o "$SOURCE_DIR/fonts/$font" "$ICON_FONTS_DL/$font" \
              || eexit "Failed to download $font."
     done
 }
 
 function prepare() {
-    unzip -o "$SOURCE_DIR/noto-sans.zip" -d "$SOURCE_DIR/fonts/" \
-        || eexit "Failed to extract Noto font."
-    unzip -o "$SOURCE_DIR/noto-mono.zip" -d "$SOURCE_DIR/fonts/" \
-        || eexit "Failed to extract Noto font."
+    for font in "${NOTO_FONTS[@]+${NOTO_FONTS[@]}}"; do
+        unzip -o "$SOURCE_DIR/$font" -d "$SOURCE_DIR/fonts/" \
+            || eexit "Failed to extract Noto font."
+    done
 }
 
 function install() {
