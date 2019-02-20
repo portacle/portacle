@@ -20,6 +20,8 @@ function download() {
         || eexit "Failed to download Noto font."
     curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoMono-hinted.zip" \
         || eexit "Failed to download Noto font."
+    curl -o "$SOURCE_DIR/noto-mono.zip" "$NOTO_DL/NotoEmoji-unhinted.zip" \
+        || eexit "Failed to download Noto font."
     for font in "${ICON_FONTS[@]+${ICON_FONTS[@]}}"; do
         curl -o "$SOURCE_DIR/fonts/$font" "$ICON_FONTS_DL/$font" \
              || eexit "Failed to download $font."
