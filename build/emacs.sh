@@ -42,6 +42,9 @@ function build() {
 
 function install() {
     cd "$SOURCE_DIR"
+    # Ensure we clear out previous install
+    rm -R "$INSTALL_DIR/"
+    
     make install datadir="$INSTALL_DIR/share/" \
         || eexit "The install failed. Please check the output for error messages."
 
