@@ -17,7 +17,8 @@ function clean() {
     "$(which git)" reset --hard HEAD
     rm -rf "$PORTACLE_DIR/all"
     rm -rf "$PORTACLE_DIR/config"
-    rm -r "$PORTACLE_DIR/$PLATFORM"
+    rm -rf "$PORTACLE_DIR/$PLATFORM"
+    rm -rf "$PORTACLE_DIR/package/portacle"
 }
 
 function download() {
