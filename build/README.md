@@ -3,9 +3,9 @@ Install the build prerequisites:
 
 1. SBCL, GIT, time, xsel, texinfo, curl
 2. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
-3. Development files for `ncurses x11 xpm gtk2 zlib pcre curl4 ssl gcrypt glfw3 liblzma`.
+3. Development files for `ncurses x11 xpm gtk2 zlib pcre pcre2 curl4 ssl gcrypt glfw3 liblzma`.
 
-For Debian based systems, simply run: `apt-get install sbcl git gpg time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel`
+For Debian based systems, simply run: `apt-get install sbcl git gpg time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre2-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel`
 
 Proceed with the `General Procedure` section.
 
@@ -19,7 +19,7 @@ Install the build prerequisites:
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
-6. Install these packages: `pacman -S unzip git gpg curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw`
+6. Install these packages: `pacman -S unzip git gpg curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre2 mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw`
 7. Launch the MinGW64 shell (not the MSYS shell!)
 
 Proceed with the `General Procedure` section.

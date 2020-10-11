@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=emacs-26.3
+readonly TAG=emacs-27.1
 readonly REPOSITORY=git://git.savannah.gnu.org/emacs.git
 readonly CONFIGURE_OPTIONS=(--without-jpeg
                             --without-tiff
