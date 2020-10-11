@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=sbcl-2.0.0
+readonly TAG=sbcl-2.0.8
 readonly REPOSITORY=https://github.com/sbcl/sbcl.git
 readonly DISABLED_FEATURES=":largefile :sb-ldb"
 readonly ENABLED_FEATURES=":sb-thread :sb-core-compression"
