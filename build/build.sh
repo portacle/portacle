@@ -13,6 +13,14 @@ SOURCE_DIR="$SCRIPT_DIR"
 INSTALL_TARGET="$PORTACLE_DIR"
 
 function clean() {
+    status 1 "WARNING: Deleting all build files and resetting everything to as it is on git HEAD!"
+    status 1 "         If this is not what you want, press Ctrl+C now!"
+    sleep 1; status 2 "5"
+    sleep 1; status 2 "4"
+    sleep 1; status 2 "3"
+    sleep 1; status 2 "2"
+    sleep 1; status 2 "1"
+    sleep 1;
     "$(which git)" clean -ffxd
     "$(which git)" reset --hard HEAD
     rm -rf "$PORTACLE_DIR/all"
