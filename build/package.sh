@@ -5,6 +5,7 @@ readonly REPOSITORY=
 readonly W7Z="/c/Program Files/7-zip/"
 readonly W7ZSFX="7zsd_LZMA2.sfx"
 readonly SIGN_KEY="9F5D99D8BAE57852AD4610028291D87D2FA7E888"
+readonly CERT_CN="49U6SFW62Y"
 
 ##
 
@@ -22,6 +23,23 @@ esac
 
 function prepare() {
     mkdir -p "$INSTALL_DIR"
+}
+
+function sign() {
+    local package="$1"
+    local signature="$2"
+    
+    gpg --armor --output "$signature" -u "$SIGN_KEY" --detach-sig "$package"
+}
+
+function certify() {
+    local root="$1"
+    local cn="$2"
+
+    local exes=( $(find "$root/mac/" -perm +111 -type f) )
+    local libs=( $(find "$root/mac/" -name '*.dylib' ) )
+    local files=("${exes[@]}" "${libs[@]}")
+    codesign -s "$cn" "${files[@]}"
 }
 
 function build() {
@@ -57,13 +75,17 @@ function build() {
              cp -fv "$SHARED_BIN_DIR/portacle" "$INSTALL_DIR/Portacle.app/Contents/MacOS/portacle"
              ;;
     esac
-}
 
-function sign() {
-    local package="$1"
-    local signature="$2"
-    
-    gpg --armor --output "$signature" -u "$SIGN_KEY" --detach-sig "$package"
+    case "$PLATFORM" in
+        mac)
+            if security find-identity -p codesigning -v | grep "$CERT_CN"; then
+                status 2 "Signing all binaries..."
+                certify "$INSTALL_DIR" "$CERT_CN"
+            else
+                status 2 "Failed to find codesiging certificate, skipping."
+            fi
+            ;;
+    esac
 }
 
 function install() {
