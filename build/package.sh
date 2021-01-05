@@ -37,7 +37,7 @@ function certify() {
     local libs=( $(find "$INSTALL_DIR/mac/" -name '*.dylib' ) )
     local files=("${exes[@]}" "${libs[@]}")
     codesign -s "$CERT_CN" --timestamp "${files[@]}"
-    codesign -s "$CERT_CN" --timestamp "$root/portacle.app"
+    codesign -s "$CERT_CN" --timestamp "$INSTALL_DIR/Portacle.app"
 }
 
 function build() {
