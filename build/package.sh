@@ -33,13 +33,11 @@ function sign() {
 }
 
 function certify() {
-    local root="$1"
-    local cn="$2"
-
-    local exes=( $(find "$root/mac/" -perm +111 -type f) )
-    local libs=( $(find "$root/mac/" -name '*.dylib' ) )
+    local exes=( $(find "$INSTALL_DIR/mac/" -perm +111 -type f) )
+    local libs=( $(find "$INSTALL_DIR/mac/" -name '*.dylib' ) )
     local files=("${exes[@]}" "${libs[@]}")
-    codesign -s "$cn" "${files[@]}"
+    codesign -s "$CERT_CN" --timestamp "${files[@]}"
+    codesign -s "$CERT_CN" --timestamp "$root/portacle.app"
 }
 
 function build() {
@@ -80,7 +78,7 @@ function build() {
         mac)
             if security find-identity -p codesigning -v | grep "$CERT_CN"; then
                 status 2 "Signing all binaries..."
-                certify "$INSTALL_DIR" "$CERT_CN"
+                certify
             else
                 status 2 "Failed to find codesiging certificate, skipping."
             fi
