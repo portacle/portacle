@@ -40,7 +40,7 @@ function certify() {
     codesign -s "$CERT_CN" \
              --force \
              --deep \
-             --options runtime \
+             --options runtime,library \
              --timestamp \
              --entitlements "$SOURCE_DIR/entitlements.plist" \
              "${files[@]}" "$INSTALL_DIR/Portacle.app"
