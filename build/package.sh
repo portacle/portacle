@@ -6,6 +6,7 @@ readonly W7Z="/c/Program Files/7-zip/"
 readonly W7ZSFX="7zsd_LZMA2.sfx"
 readonly SIGN_KEY="9F5D99D8BAE57852AD4610028291D87D2FA7E888"
 readonly CERT_CN="49U6SFW62Y"
+readonly NOTAR_EMAIL="shirakumo@tymoon.eu"
 
 ##
 
@@ -36,8 +37,39 @@ function certify() {
     local exes=( $(find "$INSTALL_DIR/mac/" -perm +111 -type f) )
     local libs=( $(find "$INSTALL_DIR/mac/" -name '*.dylib' ) )
     local files=("${exes[@]}" "${libs[@]}")
-    codesign -s "$CERT_CN" --timestamp "${files[@]}"
-    codesign -s "$CERT_CN" --timestamp "$INSTALL_DIR/Portacle.app"
+    codesign -s "$CERT_CN" \
+             --force \
+             --deep \
+             --options runtime \
+             --timestamp \
+             --entitlements "$SOURCE_DIR/entitlements.plist" \
+             "${files[@]}" "$INSTALL_DIR/Portacle.app"
+}
+
+function notarize() {
+    local package="$1"
+
+    xcrun altool --notarize-app \
+          --file "$package" \
+          --primary-bundle-id "org.shirakumo.portacle" \
+          --username "$NOTAR_EMAIL" \
+          --password "@keychain:AC_PASSWORD" \
+          --asc-provider "$CERT_CN"
+}
+
+function check-notarization() {
+    local ticket="$1"
+
+    xcrun altool \
+          --username "$NOTAR_EMAIL" \
+          --password "@keychain:AC_PASSWORD" \
+          --notarization-info "$ticket"
+}
+
+function staple() {
+    local package "$1"
+    
+    xcrun stapler staple "$package"
 }
 
 function build() {
@@ -80,7 +112,7 @@ function build() {
                 status 2 "Signing all binaries..."
                 certify
             else
-                status 2 "Failed to find codesiging certificate, skipping."
+                status 2 "Failed to find codesiging certificate, skipping certification."
             fi
             ;;
     esac
@@ -120,6 +152,12 @@ function install() {
             hdiutil convert -format UDZO  -imagekey zlib-level=9 "$package.tmp.dmg" -o "$package" \
                 || eexit "Could not create package. (Failed to compress)"
             rm -rf "$tmpdir" "$package.tmp.dmg"
+            if security find-identity -p codesigning -v | grep "$CERT_CN"; then
+                status 2 "Submitting for notarisation..."
+                notarize "$package"
+            else
+                status 2 "Failed to find codesigning certificate, skipping notarisation."
+            fi
             ;;
         xz)
             package="$package.tar.xz"
