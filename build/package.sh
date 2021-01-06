@@ -49,16 +49,24 @@ function certify() {
 function notarize() {
     local package="$1"
 
-    xcrun altool --notarize-app \
-          --file "$package" \
-          --primary-bundle-id "org.shirakumo.portacle" \
-          --username "$NOTAR_EMAIL" \
-          --password "@keychain:AC_PASSWORD" \
-          --asc-provider "$CERT_CN"
+    local ticket=$(xcrun altool --notarize-app \
+                         --file "$package" \
+                         --primary-bundle-id "org.shirakumo.portacle" \
+                         --username "$NOTAR_EMAIL" \
+                         --password "@keychain:AC_PASSWORD" \
+                         --asc-provider "$CERT_CN"
+                    | grep "RequestUUID"
+                    | awk '{print $3}')
+    [ -z "$ticket" ] \
+        && eexit "Failed to notarize app."
+    echo "$ticket" > $SCRIPT_DIR/.notarization-ticket
+    status 2 "Notarization started under ticket $ticket"
 }
 
 function check-notarization() {
-    local ticket="$1"
+    local ticket=$(cat $SCRIPT_DIR/.notarization-ticket)
+    [ -z "$ticket" ] \
+        && eexit "No notarization ID known."
 
     xcrun altool \
           --username "$NOTAR_EMAIL" \
@@ -67,7 +75,7 @@ function check-notarization() {
 }
 
 function staple() {
-    local package "$1"
+    local package="$PORTACLE_DIR/$PROGRAM/$PACKAGE_FILE.dmg"
     
     xcrun stapler staple "$package"
 }
