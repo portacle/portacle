@@ -49,14 +49,13 @@ function certify() {
 function notarize() {
     local package="$1"
 
-    local ticket=$(xcrun altool --notarize-app \
+    local result=$(xcrun altool --notarize-app \
                          --file "$package" \
                          --primary-bundle-id "org.shirakumo.portacle" \
                          --username "$NOTAR_EMAIL" \
                          --password "@keychain:AC_PASSWORD" \
-                         --asc-provider "$CERT_CN"
-                    | grep "RequestUUID"
-                    | awk '{print $3}')
+                         --asc-provider "$CERT_CN")
+    local ticket=$(echo "$result" | grep "RequestUUID" | awk '{print $3}')
     [ -z "$ticket" ] \
         && eexit "Failed to notarize app."
     echo "$ticket" > $SCRIPT_DIR/.notarization-ticket
