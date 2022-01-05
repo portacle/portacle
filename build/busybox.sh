@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=1_25_1
+readonly TAG=1_35_0
 readonly REPOSITORY=git://busybox.net/busybox.git
 
 ###

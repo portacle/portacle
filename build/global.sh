@@ -2,7 +2,7 @@
 
 readonly TAG=
 readonly REPOSITORY=
-readonly SSL_CA=https://curl.haxx.se/ca/cacert-2016-04-20.pem
+readonly SSL_CA=https://curl.se/ca/cacert-2021-10-26.pem
 readonly NOTO_FONTS=("NotoSans-hinted.zip" "NotoMono-hinted.zip" "NotoEmoji-unhinted.zip")
 readonly NOTO_FONTS_DL=https://noto-website.storage.googleapis.com/pkgs
 readonly ICON_FONTS=("material-design-icons.ttf" "weathericons.ttf" "octicons.ttf" "fontawesome.ttf" "file-icons.ttf" "all-the-icons.ttf")

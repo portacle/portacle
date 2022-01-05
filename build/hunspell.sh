@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=v1.6.1
+readonly TAG=v1.7.0
 readonly REPOSITORY=https://github.com/hunspell/hunspell
 readonly CONFIGURE_OPTIONS=(--without-ui
                             --without-readline)
