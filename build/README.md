@@ -5,7 +5,7 @@ Install the build prerequisites:
 2. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
 3. Development files for `ncurses x11 xpm gtk2 zlib pcre pcre2 curl4 ssl gcrypt glfw3 liblzma`.
 
-For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre2-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel libzstd1-dev libgnutls-dev golang`
+For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre2-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel libzstd1-dev libgnutls-dev libglu1-mesa-dev golang`
 
 Proceed with the `General Procedure` section.
 
