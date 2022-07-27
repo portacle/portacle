@@ -60,6 +60,8 @@ function install() {
         || eexit "Failed to copy SBCL sources."
     cp -R "$SOURCE_DIR/contrib" "$INSTALL_SOURCES" \
         || eexit "Failed to copy SBCL contribs."
+    find "$INSTALL_DIR" \
+         -name "*.old" -delete
     find "$INSTALL_SOURCES" \
          -name "*.fasl" -or \
          -name "*.o" -or \
