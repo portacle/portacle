@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=v3.0.2
+readonly TAG=v3.2.0
 readonly REPOSITORY=https://github.com/git-lfs/git-lfs.git
 
 ###
