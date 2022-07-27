@@ -119,7 +119,9 @@ function build() {
                 status 2 "Signing all binaries..."
                 certify
             else
-                status 2 "Failed to find codesiging certificate, skipping certification."
+                ensure-installed "$PORTACLE_DIR/all/" "$SOURCE_DIR/portacle.cer"
+                ensure-installed "$PORTACLE_DIR/" "$SOURCE_DIR/mac-fixup.sh"
+                status 2 "Failed to find codesiging certificate, copying self-signed certificate..."
             fi
             ;;
     esac
