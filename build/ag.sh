@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=2.2.0
+readonly TAG=
 readonly REPOSITORY=https://github.com/ggreer/the_silver_searcher
 readonly CONFIGURE_OPTIONS=("")
 
@@ -24,7 +24,7 @@ function build() {
         win) makeopts="-f Makefile.w32" ;;
     esac
     
-    make -j $MAXCPUS $makeopts \
+    make -j $MAXCPUS $makeopts CFLAGS="-fcommon -D_GNU_SOURCE -lpthread" \
         || eexit "The build failed. Please check the output for error messages."
 }
 
