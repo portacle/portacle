@@ -3,7 +3,13 @@
 readonly TAG=cp-5.3-4
 readonly REPOSITORY=https://anongit.freedesktop.org/git/libreoffice/dictionaries.git
 readonly DICTIONARIES=(en/en_GB
-                       en/en_US)
+                       en/en_US
+                       fr_FR/fr
+                       it_IT/it_IT
+                       es/es_ANY
+                       pt_BR/pt_BR
+                       pt_PT/pt_PT
+                       de/de_DE)
 
 ###
 
