@@ -7,7 +7,7 @@ if security find-identity -p codesigning -v | grep "$CERT_NAME"; then
     security add-trusted-cert -d -r trustRoot -k "$HOME/Library/Keychains/login.keychain" "$SCRIPT_DIR/all/portacle.cer"
 fi
 
-function clear{
+function clear() {
     $(xattr -cr "$1")
     $(codesign -s "$CERT_NAME" "$1")
 }
