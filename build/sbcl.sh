@@ -42,7 +42,7 @@ function build() {
     cd "$SOURCE_DIR"
     export CFLAGS="${CFLAGS} -fno-omit-frame-pointer -D_GNU_SOURCE"
     
-    sh make.sh \
+    sh make.sh --dynamic-space-size=4Gb \
         || eexit "Failed to build SBCL."
 }
 
