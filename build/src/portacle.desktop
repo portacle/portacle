@@ -7,3 +7,7 @@ Exec=bash -c 'cd $(dirname %k) && ./portacle.run'
 Icon=portacle.png
 Terminal=false
 Categories=Development;Common Lisp;Lisp;Text Editor
+GenericName=IDE
+Keywords=Text Editor;Development;Editor;Lisp;Common Lisp
+X-MultipleArgs=false
+StartupNotify=true
