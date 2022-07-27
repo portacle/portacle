@@ -26,14 +26,14 @@ ARCH=${ARCH:-$OSA}
 ## OS X' readlink does not support -f, substitute our own
 function mreadlink() {
     case "$PLATFORM" in 
-        mac) python -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$1" ;;
+        mac) python3 -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$1" ;;
         *)   readlink -f "$1" ;;
     esac
 }
 
 function relativepath() {
     case "$PLATFORM" in
-        mac) python -c "import os,sys; print(os.path.relpath(os.path.realpath(sys.argv[1]), os.path.realpath(sys.argv[2])))" "$1" "$2" ;;
+        mac) python3 -c "import os,sys; print(os.path.relpath(os.path.realpath(sys.argv[1]), os.path.realpath(sys.argv[2])))" "$1" "$2" ;;
         *)   realpath --relative-to="$2" "$1" ;;
     esac
 }
