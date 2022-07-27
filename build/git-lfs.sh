@@ -7,7 +7,6 @@ readonly REPOSITORY=https://github.com/git-lfs/git-lfs.git
 
 readonly PROGRAM=git-lfs
 source common.sh
-INSTALL_DIR=$PORTACLE_DIR
 
 function build(){
     cd "$SOURCE_DIR"
@@ -16,6 +15,8 @@ function build(){
 }
 
 function install(){
-    make install \
-         || eexit "The install failed. Please check the output for error messages."
+    mkdir -p "$SHARED_BIN_DIR/"
+    cp "$SOURCE_DIR/bin/git-lfs" "$SHARED_BIN_DIR/"
 }
+
+main
