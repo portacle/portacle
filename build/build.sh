@@ -68,6 +68,10 @@ function emacsd() {
     "$SOURCE_DIR/emacsd.sh"
 }
 
+function gpg() {
+    "$SOURCE_DIR/gpg.sh"
+}
+
 function git() {
     "$SOURCE_DIR/git.sh"
 }

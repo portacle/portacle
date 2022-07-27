@@ -5,7 +5,7 @@ Install the build prerequisites:
 2. Your distribution's basis build stuff (`base-devel`, `build-essential`, etc).
 3. Development files for `ncurses x11 xpm gtk2 zlib pcre pcre2 curl4 ssl gcrypt glfw3 liblzma`.
 
-For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre2-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel libzstd1-dev libgnutls-dev libglu1-mesa-dev golang`
+For Debian based systems, simply run: `apt-get install sbcl git time curl build-essential autoconf automake autogen autopoint libncurses-dev libx11-dev libxpm-dev libgtk2.0-dev zlib1g-dev libpcre2-dev libcurl4-gnutls-dev libssl-dev libgcrypt-dev libglfw3-dev libtool liblzma-dev texinfo xsel libzstd1-dev libgnutls-dev libglu1-mesa-dev golang libassuan-dev libksba-dev`
 
 Proceed with the `General Procedure` section.
 
@@ -19,7 +19,7 @@ Install the build prerequisites:
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
-6. Install these packages: `pacman -S unzip git curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre2 mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw mingw-w64-x86_64-go mingw-w64-x86_64-autotools`
+6. Install these packages: `pacman -S unzip git curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre2 mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw mingw-w64-x86_64-go mingw-w64-x86_64-autotools mingw-w64-x86_64-libassuan mingw-w64-x86_64-libksba mingw-w64-x86_64-npth`
 7. Launch the MinGW64 shell (not the MSYS shell!)
 
 Proceed with the `General Procedure` section.
@@ -29,7 +29,7 @@ Install the build prerequisites:
 
 1. XCode and the XCode command line developer tools
 2. MacPorts, Homebrew, or Fink
-3. From one of those package managers, install `autoconf automake sbcl git gpg gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz automake gnutls pcre2`, making sure they are in your `PATH`.
+3. From one of those package managers, install `autoconf automake sbcl git gpg gettext pcre openssl libtool gnu-sed glfw libgcrypt pkg-config xz automake gnutls pcre2 libassuan`, making sure they are in your `PATH`.
 4. With brew, you need to link gettext: `brew link gettext --force`
 
 Proceed with the `General Procedure` section.
