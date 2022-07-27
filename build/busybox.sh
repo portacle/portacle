@@ -44,6 +44,7 @@ function install() {
                               $(win-exes-for-package grep) \
                               $(win-exes-for-package less) \
                               $(win-exes-for-package sed) \
+                              $(win-exes-for-package diff) \
                               $(win-exes-for-package msys2-runtime) \
                               $(win-exes-for-package ncurses)
              ensure-dependencies $(find-binaries "$SHARED_BIN_DIR/") ;;
