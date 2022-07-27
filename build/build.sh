@@ -1,6 +1,4 @@
 #!/bin/bash
-cd $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
 readonly TAG=$(git describe --tags)
 readonly REPOSITORY=https://github.com/Shinmera/portacle
 
