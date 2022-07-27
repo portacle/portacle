@@ -19,7 +19,7 @@ Install the build prerequisites:
 3. Open the MSYS shell and run `pacman -Sy pacman`
 4. Reopen the shell and run `pacman -Syu`
 5. Reopen the shell and run `pacman -Su`
-6. Install these packages: `pacman -S unzip git gpg curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre2 mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw`
+6. Install these packages: `pacman -S unzip git curl base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-xpm-nox mingw-w64-x86_64-pcre2 mingw-w64-x86_64-curl mingw-w64-x86_64-gnutls mingw-w64-x86_64-iconv mingw-w64-x86_64-libgcrypt mingw-w64-x86_64-glfw mingw-w64-x86_64-go mingw-w64-x86_64-autotools`
 7. Launch the MinGW64 shell (not the MSYS shell!)
 
 Proceed with the `General Procedure` section.
