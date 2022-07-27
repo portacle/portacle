@@ -5,8 +5,8 @@ readonly REPOSITORY=
 readonly W7Z="/c/Program Files/7-zip/"
 readonly W7ZSFX="7zsd_LZMA2.sfx"
 readonly SIGN_KEY="9F5D99D8BAE57852AD4610028291D87D2FA7E888"
-readonly CERT_CN="49U6SFW62Y"
 readonly NOTAR_EMAIL="shirakumo@tymoon.eu"
+CERT_CN="49U6SFW62Y"
 
 ##
 
@@ -36,7 +36,7 @@ function sign() {
 function certify() {
     local exes=( $(find "$INSTALL_DIR/mac/" -perm +111 -type f) )
     local libs=( $(find "$INSTALL_DIR/mac/" -name '*.dylib' ) )
-    local files=("${exes[@]}" "${libs[@]}")
+    local files=("${exes[@]}" "${libs[@]}" "$INSTALL_DIR/mac/sbcl/lib/sbcl/sbcl.core")
     codesign -s "$CERT_CN" \
              --force \
              --deep \
@@ -120,6 +120,8 @@ function build() {
                 certify
             else
                 status 2 "Failed to find codesiging certificate, copying self-signed certificate..."
+                security add-trusted-cert -d -r trustRoot -k "$HOME/Library/Keychains/login.keychain" "$SOURCE_DIR/portacle.cer"
+                CERT_CN="portacle" certify
                 cp -fv "$SOURCE_DIR/portacle.cer" "$INSTALL_DIR/all/"
                 cp -fv "$SOURCE_DIR/mac-fixup.sh" "$INSTALL_DIR/"
             fi
