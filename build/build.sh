@@ -73,6 +73,10 @@ function git() {
     "$SOURCE_DIR/git.sh"
 }
 
+function git-lfs() {
+    "$SOURCE_DIR/git-lfs.sh"
+}
+
 function hunspell() {
     "$SOURCE_DIR/hunspell.sh" \
         && "$SOURCE_DIR/dictionaries.sh"
@@ -97,6 +101,7 @@ function build() {
         && emacs \
         && emacsd \
         && git \
+        && git-lfs \
         && hunspell \
         && ag
 }
