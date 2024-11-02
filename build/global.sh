@@ -3,8 +3,6 @@
 readonly TAG=
 readonly REPOSITORY=
 readonly SSL_CA=https://curl.se/ca/cacert-2022-07-19.pem
-readonly NOTO_FONTS=("NotoSans-hinted.zip" "NotoMono-hinted.zip" "NotoEmoji-unhinted.zip")
-readonly NOTO_FONTS_DL=https://noto-website.storage.googleapis.com/pkgs
 readonly ICON_FONTS=("material-design-icons.ttf" "weathericons.ttf" "octicons.ttf" "fontawesome.ttf" "file-icons.ttf" "all-the-icons.ttf")
 readonly ICON_FONTS_DL=https://raw.githubusercontent.com/domtronn/all-the-icons.el/master/fonts
 
@@ -13,14 +11,12 @@ readonly ICON_FONTS_DL=https://raw.githubusercontent.com/domtronn/all-the-icons.
 readonly PROGRAM=global
 source common.sh
 
+readonly NOTO_FONTS_DIR="$SCRIPT_DIR/src/noto-fonts/"
+
 function download() {
     mkdir -p "$SOURCE_DIR/fonts"
     curl -f -o "$SOURCE_DIR/ca-bundle.crt" "$SSL_CA" \
         || eexit "Failed to download SSL certificate bundle."
-    for font in "${NOTO_FONTS[@]+${NOTO_FONTS[@]}}"; do
-        curl -f -o "$SOURCE_DIR/$font" "$NOTO_FONTS_DL/$font" \
-             || eexit "Failed to download $font."
-    done
     for font in "${ICON_FONTS[@]+${ICON_FONTS[@]}}"; do
         curl -f -o "$SOURCE_DIR/fonts/$font" "$ICON_FONTS_DL/$font" \
              || eexit "Failed to download $font."
@@ -28,10 +24,8 @@ function download() {
 }
 
 function prepare() {
-    for font in "${NOTO_FONTS[@]+${NOTO_FONTS[@]}}"; do
-        unzip -o "$SOURCE_DIR/$font" -d "$SOURCE_DIR/fonts/" \
-            || eexit "Failed to extract Noto font."
-    done
+    cp "$NOTO_FONTS_DIR"* --target-directory="$SOURCE_DIR/fonts/" \
+        || eexit "Failed to copy Noto fonts files."
 }
 
 function install() {
