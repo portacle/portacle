@@ -11,7 +11,7 @@ case "$PLATFORM" in
     win) readonly REPOSITORY=https://github.com/git-for-windows/git
          readonly TAG=v2.37.1.windows.1;;
     *)   readonly REPOSITORY=https://github.com/git/git
-         readonly TAG=v2.37.1;;
+         readonly TAG=v2.48.1;;
 esac
 
 function build() {
