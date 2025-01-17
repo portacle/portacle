@@ -1,21 +1,13 @@
 #!/bin/bash
 
-readonly TAG=emacs-28.1
+readonly TAG=emacs-29.4
 readonly REPOSITORY=git://git.savannah.gnu.org/emacs.git
-readonly CONFIGURE_OPTIONS=(--without-jpeg
-                            --without-tiff
-                            --without-gif
-                            --without-png
-                            --without-rsvg
-                            --without-imagemagick
-                            --without-sound
-                            --without-makeinfo
-                            --without-gconf
-                            --without-dbus
-                            --without-xml2
-                            --without-makeinfo
-                            --with-x-toolkit=gtk2)
-
+readonly CONFIGURE_OPTIONS=(--with-x-toolkit=lucid
+                            --with-native-compilation=aot
+                            --with-json
+                            --with-tree-sitter
+                            CFLAGS='-O2 -pipe -march=native')
+                            
 ###
 
 readonly PROGRAM=emacs
